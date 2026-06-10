@@ -3,20 +3,18 @@ import prisma from '../config/prisma.js';
 
 export const requireAuth = async (req, res, next) => {
   try {
-    const authHeader = req.headers.authorization;
+    const token = req.cookies.accessToken;
 
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    if (!token) {
       return res.status(401).json({ status: 'error', message: 'Unauthorized: No token provided' });
     }
-
-    const token = authHeader.split(' ')[1];
 
     try {
       const decoded = verifyAccessToken(token);
 
       const user = await prisma.user.findUnique({
         where: { id: decoded.userId },
-        select: { id: true, email: true, role: true, isActive: true },
+        select: { id: true, email: true, role: true, isActive: true, tokenVersion: true, isEmailVerified: true },
       });
 
       if (!user) {
@@ -25,6 +23,10 @@ export const requireAuth = async (req, res, next) => {
 
       if (!user.isActive) {
         return res.status(401).json({ status: 'error', message: 'Unauthorized: User is inactive' });
+      }
+
+      if (user.tokenVersion !== decoded.tokenVersion) {
+        return res.status(401).json({ status: 'error', message: 'Unauthorized: Token revoked' });
       }
 
       req.user = user;

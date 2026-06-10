@@ -10,6 +10,7 @@ const envSchema = z.object({
   JWT_REFRESH_SECRET: z.string().default('fallback_refresh_secret'),
   JWT_ACCESS_EXPIRES_IN: z.string().default('15m'),
   JWT_REFRESH_EXPIRES_IN: z.string().default('7d'),
+  CLIENT_URL: z.string().default('http://localhost:5173'),
   // Add other environment variables here
 });
 
