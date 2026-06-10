@@ -1,0 +1,14 @@
+node_modules
+npm-debug.log
+Dockerfile
+.dockerignore
+.git
+.gitignore
+.env
+.env.*
+eslint.config.js
+.prettier*
+.lintstagedrc
+README.md
+dist
+coverage
