@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: xeno-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: xeno_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: xeno-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/xeno_db?schema=public
+      - JWT_ACCESS_SECRET=super-secret-jwt-access-key-minimum-32-characters
+      - JWT_REFRESH_SECRET=super-secret-jwt-refresh-key-minimum-32-characters
+      - SMTP_HOST=maildev
+      - SMTP_PORT=1025
+      - SMTP_USER=""
+      - SMTP_PASS=""
+      - SMTP_FROM=noreply@xeno-saas.com
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+
+  maildev:
+    image: maildev/maildev:latest
+    container_name: xeno-maildev
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+
+volumes:
+  pgdata:
