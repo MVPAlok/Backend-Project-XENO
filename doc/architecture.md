@@ -1,12 +1,12 @@
-# System Architecture — Enterprise Authentication Foundation
+# System Architecture — XENO AI CRM Platform
 
-This document details the architectural specifications, component boundaries, and security patterns implemented in the XENO Authentication and User Management subsystem.
+This document details the architectural specifications, component boundaries, and security patterns implemented in the XENO AI CRM backend platform.
 
 ---
 
 ## 1. Directory Blueprint & Layered Architecture
 
-The project is structured under a strict Layered Architecture to enforce separation of concerns, improve testability, and decouple the HTTP layer from business transactions and database access.
+The project enforces a strict Separation of Concerns (SoC). The core authentication engine resides under standard layered directories, while workspace-specific business systems reside in self-contained feature modules under `src/modules/`.
 
 ```
 src/
@@ -15,24 +15,45 @@ src/
 ├── config/                  # Configuration loaders and database client instantiations
 │   ├── env.js               # Strict environment variables loader using Zod parsing
 │   └── database.js          # Prisma Client singleton
-├── controllers/             # HTTP Controllers (express request mapping and client auditing)
+├── controllers/             # Layered HTTP Controllers (auth engine)
 │   └── auth.controller.js
-├── services/                # Business logic services (transactions, token generation, email alerts)
+├── services/                # Layered business logic services (auth engine)
 │   ├── auth.service.js
 │   └── email.service.js
-├── repositories/            # Database access layer (Prisma query encapsulation)
+├── repositories/            # Layered database access (auth engine)
 │   ├── user.repository.js
 │   ├── session.repository.js
 │   ├── token.repository.js
 │   └── audit-log.repository.js
-├── routes/                  # API routes routing declarations
+├── routes/                  # Layered API route declarations (auth engine)
 │   └── auth.routes.js
 ├── middlewares/             # Express middlewares (security guards, rate limiters, error captures)
 │   ├── auth.middleware.js
 │   ├── error.middleware.js
 │   ├── rate-limit.middleware.js
 │   └── validation.middleware.js
-├── schemas/                 # Zod validation schema templates
+├── modules/                 # Feature Module Directory (Workspace, Imports, Customers, Orders)
+│   ├── workspace/           # Workspace & Membership Module
+│   │   ├── workspace.controller.js
+│   │   ├── workspace.middleware.js
+│   │   ├── workspace.repository.js
+│   │   ├── workspace.routes.js
+│   │   ├── workspace.service.js
+│   │   └── workspace.validation.js
+│   ├── imports/             # CSV Data Ingestion Module
+│   │   ├── import.controller.js
+│   │   ├── import.repository.js
+│   │   ├── import.routes.js
+│   │   ├── import.service.js
+│   │   ├── import.validation.js
+│   │   └── utils/           # Parser, cleaners, and formatters
+│   ├── customers/           # Customer Management Domain Module
+│   │   ├── customer.repository.js
+│   │   └── customer.service.js
+│   └── orders/              # Order Management Domain Module
+│       ├── order.repository.js
+│       └── order.service.js
+├── schemas/                 # Zod validation schema templates (auth engine)
 │   └── auth.schema.js
 ├── utils/                   # Shared utility logic
 │   ├── crypto.js            # Bcrypt, SHA-256 hashing, timing-safe compares, random generator
@@ -47,10 +68,10 @@ src/
 | Layer | Responsibility | Inputs / Outputs |
 | :--- | :--- | :--- |
 | **Routing** | Directs HTTP verbs and routes to validation chains and controllers. | Request URL $\rightarrow$ Controller |
-| **Middlewares** | Intercepts requests for rate-limiting, JWT parsing, role authorization, and validation. | Request $\rightarrow$ Sanitized Request |
-| **Controllers** | Extracts HTTP properties (body, headers, query, client IP, User-Agent) and passes them to services. Handles HTTP response status codes. | HTTP Req $\rightarrow$ JSON Response |
-| **Services** | Core transactional business actions. Interacts with repositories, generates JWTs, and fires background emails. | DTO Object $\rightarrow$ Domain Models |
-| **Repositories** | Prisma query wrappers mapping PostgreSQL records to JS structures. Encapsulates soft-delete and relation joins. | DTO/IDs $\rightarrow$ DB Record |
+| **Middlewares** | Intercepts requests for rate-limiting, JWT parsing, workspace authorization, and validation. | Request $\rightarrow$ Sanitized Request |
+| **Controllers** | Extracts HTTP properties (body, headers, query, client IP, User-Agent) and passes them to services. | HTTP Req $\rightarrow$ JSON Response |
+| **Services** | Core transactional business actions, validation routines, parser orchestrations. | DTO Object $\rightarrow$ Domain Models |
+| **Repositories** | Prisma query wrappers mapping PostgreSQL records to JS structures. | DTO/IDs $\rightarrow$ DB Record |
 | **Prisma DB** | Relational mapping, schema synchronization, and database index configurations. | Prisma client $\rightarrow$ PostgreSQL |
 
 ---
@@ -61,27 +82,81 @@ The PostgreSQL database is managed via Prisma ORM, utilizing structural enums an
 
 ```mermaid
 erDiagram
+    users ||--o{ workspace_members : membership
+    users ||--o{ import_jobs : uploads
+    workspaces ||--o{ workspace_members : belongs_to
+    workspaces ||--o{ import_jobs : contains
+    workspaces ||--o{ customers : owns
+    workspaces ||--o{ orders : contains
+    customers ||--o{ orders : places
+
     users {
         uuid id PK
         string email UK
         string passwordHash
         string firstName
         string lastName
-        string avatarUrl
         boolean isEmailVerified
         UserStatus status
         Role role
         datetime deletedAt
         datetime createdAt
         datetime updatedAt
-        string refreshTokenHash UK
-        datetime sessionExpiry
-        string emailVerificationToken UK
-        datetime emailVerificationExpiry
-        string passwordResetToken UK
-        datetime passwordResetExpiry
-        datetime lastLoginAt
-        string lastLoginIp
+    }
+    workspaces {
+        uuid id PK
+        string name
+        string slug UK
+        string description
+        datetime createdAt
+        datetime updatedAt
+    }
+    workspace_members {
+        uuid id PK
+        uuid userId FK
+        uuid workspaceId FK
+        WorkspaceRole role
+        datetime joinedAt
+    }
+    import_jobs {
+        uuid id PK
+        uuid workspaceId FK
+        uuid uploadedBy FK
+        string type
+        string fileName
+        ImportStatus status
+        int totalRows
+        int processedRows
+        int successfulRows
+        int failedRows
+        string errorMessage
+        datetime createdAt
+        datetime completedAt
+    }
+    customers {
+        uuid id PK
+        uuid workspaceId FK
+        string externalId
+        string firstName
+        string lastName
+        string email
+        string phone
+        string gender
+        datetime dateOfBirth
+        datetime createdAt
+        datetime updatedAt
+        datetime deletedAt
+    }
+    orders {
+        uuid id PK
+        uuid workspaceId FK
+        uuid customerId FK
+        string externalOrderId
+        decimal amount
+        string currency
+        datetime purchaseDate
+        datetime createdAt
+        datetime updatedAt
     }
 ```
 
@@ -89,16 +164,28 @@ erDiagram
 
 #### User
 - **UUID Keys**: Auto-generated Version 4 UUIDs.
-- **Case-Insensitive Uniqueness**: Handled by lowercasing the email at Zod validation and service boundaries before writing to PostgreSQL.
-- **Soft Delete Support**: Flagged via the `deletedAt` DateTime timestamp. If populated, the record is excluded from all search queries, and status is marked `DELETED`.
+- **Case-Insensitive Uniqueness**: Handled by lowercasing the email at validation boundaries.
+- **Soft Delete Support**: Flagged via the `deletedAt` DateTime timestamp.
 
-#### Session & Token Fields
-- **Refresh Token Isolation**: Only the SHA-256 hash of the refresh token is stored on the `refreshTokenHash` field. In-transit refresh tokens never exist in plaintext within the database.
-- **Revocation State**: A session is revoked by setting `refreshTokenHash` and `sessionExpiry` to `null`.
-- **Single Session Limitation**: A user can only be logged into one device at a time.
-- **Verification & Reset Tokens**: Managed directly via `emailVerificationToken` and `passwordResetToken` fields, validated against their respective expiry columns.
+#### Workspace & WorkspaceMember
+- **Tenant Isolation**: Serves as the primary security partition for all customer data, orders, and imports.
+- **Role Control**: Memberships hold roles (`OWNER`, `ADMIN`, `MEMBER`) mapping administrative scopes.
+- **Workspace-Scoped Uniqueness**: Prevent duplicate users per workspace via a composite unique constraint on `(userId, workspaceId)`.
+
+#### ImportJob
+- **State Machine tracking**: Transitions from `PENDING` $\rightarrow$ `PROCESSING` $\rightarrow$ `COMPLETED` or `FAILED`.
+- **Metrics logging**: Stores processed, successful, and failed counts for user auditing.
+
+#### Customer
+- **Identifiers**: Multiple potential links via email or phone. 
+- **Workspace-Scoped Uniqueness**: Composite unique keys on `(workspaceId, email)` and `(workspaceId, phone)` ensure brands keep clean independent records.
+
+#### Order
+- **Transactional Idempotency**: Handled using composite unique constraint on `(workspaceId, externalOrderId)`.
+- **Decimal Amount**: Leverages exact Decimal columns to eliminate floating-point rounding errors.
 
 ---
+
 
 ## 3. Cryptography & Security Engineering
 

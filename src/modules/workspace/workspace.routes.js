@@ -5,10 +5,15 @@ import { createWorkspaceSchema, workspaceIdParamSchema } from './workspace.valid
 import { requireWorkspaceMember } from './workspace.middleware.js';
 import * as controller from './workspace.controller.js';
 
+import importRoutes from '../imports/import.routes.js';
+
 const router = Router();
 
 // All workspace routes require authentication
 router.use(requireAuth);
+
+// Nest import routes
+router.use('/:workspaceId/imports', validate(workspaceIdParamSchema), requireWorkspaceMember, importRoutes);
 
 // Create workspace
 router.post(

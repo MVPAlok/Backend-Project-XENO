@@ -557,3 +557,179 @@ Retrieves details for a specific workspace. Requires the authenticated user to b
 }
 ```
 
+---
+
+## 13. Import Customers CSV
+
+Uploads a CSV file of customer data for ingestion. Integrates duplicate checks and standardizations.
+
+- **Method**: `POST`
+- **Path**: `/workspaces/:workspaceId/imports/customers`
+- **Authentication**: `Private` (Requires valid Access JWT Bearer Token & Workspace Membership)
+- **Content-Type**: `multipart/form-data`
+- **Payload Constraints**:
+  - `file`: CSV file, maximum size of **10MB**.
+
+#### Example Request
+```http
+POST /workspaces/e6de27a4-d9bc-4df1-85b2-32a51241512f/imports/customers HTTP/1.1
+Host: api.xeno.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="customers.csv"
+Content-Type: text/csv
+
+first_name,last_name,email,phone,gender,dob
+John,Doe,john.doe@example.com,+1234567890,male,1990-01-01
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+```
+
+### Response Specs
+
+#### Success Response
+- **Status**: `200 OK` or `201 Created`
+- **Body**:
+```json
+{
+  "jobId": "b182cb05-3e28-4e08-9df2-ebae1c9448fd",
+  "status": "COMPLETED",
+  "type": "customers",
+  "fileName": "customers.csv",
+  "totalRows": 1,
+  "processedRows": 1,
+  "successfulRows": 1,
+  "failedRows": 0,
+  "errors": []
+}
+```
+
+#### Error Response: Invalid File Size or Type
+- **Status**: `400 Bad Request`
+- **Body**:
+```json
+{
+  "type": "about:blank",
+  "title": "Bad Request / Validation Error",
+  "status": 400,
+  "detail": "File size exceeds 10 MB limit.",
+  "instance": "/workspaces/e6de27a4-d9bc-4df1-85b2-32a51241512f/imports/customers"
+}
+```
+
+---
+
+## 14. Import Orders CSV
+
+Uploads a CSV file of order data for ingestion. Links orders to existing customer profiles.
+
+- **Method**: `POST`
+- **Path**: `/workspaces/:workspaceId/imports/orders`
+- **Authentication**: `Private` (Requires valid Access JWT Bearer Token & Workspace Membership)
+- **Content-Type**: `multipart/form-data`
+- **Payload Constraints**:
+  - `file`: CSV file, maximum size of **10MB**.
+
+#### Example Request
+```http
+POST /workspaces/e6de27a4-d9bc-4df1-85b2-32a51241512f/imports/orders HTTP/1.1
+Host: api.xeno.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="orders.csv"
+Content-Type: text/csv
+
+order_id,email,phone,amount,currency,date
+order_1001,john.doe@example.com,,1500.50,INR,2026-06-13T10:00:00Z
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+```
+
+### Response Specs
+
+#### Success Response
+- **Status**: `200 OK` or `201 Created`
+- **Body**:
+```json
+{
+  "jobId": "7df4a852-c0e8-46cb-a311-53676839be9b",
+  "status": "COMPLETED",
+  "type": "orders",
+  "fileName": "orders.csv",
+  "totalRows": 1,
+  "processedRows": 1,
+  "successfulRows": 1,
+  "failedRows": 0,
+  "errors": []
+}
+```
+
+---
+
+## 15. List Import Jobs History
+
+Retrieves the execution log and metric summary of all import jobs run in this workspace.
+
+- **Method**: `GET`
+- **Path**: `/workspaces/:workspaceId/imports`
+- **Authentication**: `Private` (Requires valid Access JWT Bearer Token & Workspace Membership)
+
+### Response Specs
+
+#### Success Response
+- **Status**: `200 OK`
+- **Body**:
+```json
+[
+  {
+    "id": "b182cb05-3e28-4e08-9df2-ebae1c9448fd",
+    "type": "customers",
+    "fileName": "customers.csv",
+    "status": "COMPLETED",
+    "totalRows": 1,
+    "processedRows": 1,
+    "successfulRows": 1,
+    "failedRows": 0,
+    "errorMessage": null,
+    "createdAt": "2026-06-13T10:00:00.000Z",
+    "completedAt": "2026-06-13T10:01:00.000Z"
+  }
+]
+```
+
+---
+
+## 16. Retrieve Import Job Details
+
+Retrieves details and status of a specific import job.
+
+- **Method**: `GET`
+- **Path**: `/workspaces/:workspaceId/imports/:importId`
+- **Authentication**: `Private` (Requires valid Access JWT Bearer Token & Workspace Membership)
+
+### Response Specs
+
+#### Success Response
+- **Status**: `200 OK`
+- **Body**:
+```json
+{
+  "id": "b182cb05-3e28-4e08-9df2-ebae1c9448fd",
+  "workspaceId": "e6de27a4-d9bc-4df1-85b2-32a51241512f",
+  "uploadedBy": "a67e42d2-8b43-4a11-bc66-3d234a921d7b",
+  "type": "customers",
+  "fileName": "customers.csv",
+  "status": "COMPLETED",
+  "totalRows": 1,
+  "processedRows": 1,
+  "successfulRows": 1,
+  "failedRows": 0,
+  "errorMessage": null,
+  "createdAt": "2026-06-13T10:00:00.000Z",
+  "completedAt": "2026-06-13T10:01:00.000Z"
+}
+```
+
+
