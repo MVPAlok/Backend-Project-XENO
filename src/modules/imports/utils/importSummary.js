@@ -15,7 +15,13 @@ export function buildImportSummary(job) {
     failedRows: job.failedRows,
     errorMessage: job.errorMessage,
     createdAt: job.createdAt,
-    completedAt: job.completedAt
+    completedAt: job.completedAt,
+    previewData: job.previewData,
+    detectedMappings: job.detectedMappings,
+    conflictSummary: job.conflictSummary,
+    resolutionStrategy: job.resolutionStrategy,
+    confirmedAt: job.confirmedAt,
+    confirmedBy: job.confirmedBy
   };
 }
 export default buildImportSummary;

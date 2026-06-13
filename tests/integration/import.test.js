@@ -4,7 +4,7 @@ import app from '../../src/app.js';
 import prisma from '../../src/config/database.js';
 import { hashPassword } from '../../src/utils/crypto.js';
 
-describe('Imports API Integration Tests', () => {
+describe('Imports API Integration Tests (Phase 3 Redesign)', () => {
   let user1Token;
   let user2Token;
   let user1;
@@ -87,24 +87,24 @@ describe('Imports API Integration Tests', () => {
   });
 
   describe('CSV File Validation and Upload Controls', () => {
-    it('should reject upload if token is missing (401)', async () => {
+    it('should reject preview upload if token is missing (401)', async () => {
       const res = await request(app)
-        .post(`/workspaces/${workspace1.id}/imports/customers`)
-        .attach('file', Buffer.from('firstName,email\nJohn,john@gmail.com'), 'test.csv');
+        .post(`/workspaces/${workspace1.id}/imports/preview`)
+        .attach('file', Buffer.from('first_name,email\nJohn,john@gmail.com'), 'test.csv');
       expect(res.status).toBe(401);
     });
 
-    it('should reject upload if user is not member of workspace (403)', async () => {
+    it('should reject preview upload if user is not member of workspace (403)', async () => {
       const res = await request(app)
-        .post(`/workspaces/${workspace1.id}/imports/customers`)
+        .post(`/workspaces/${workspace1.id}/imports/preview`)
         .set('Authorization', `Bearer ${user2Token}`)
-        .attach('file', Buffer.from('firstName,email\nJohn,john@gmail.com'), 'test.csv');
+        .attach('file', Buffer.from('first_name,email\nJohn,john@gmail.com'), 'test.csv');
       expect(res.status).toBe(403);
     });
 
     it('should reject non-CSV files', async () => {
       const res = await request(app)
-        .post(`/workspaces/${workspace1.id}/imports/customers`)
+        .post(`/workspaces/${workspace1.id}/imports/preview`)
         .set('Authorization', `Bearer ${user1Token}`)
         .attach('file', Buffer.from('{"name":"john"}'), 'test.json');
       
@@ -113,10 +113,9 @@ describe('Imports API Integration Tests', () => {
     });
 
     it('should reject files exceeding 10MB', async () => {
-      // Create a buffer larger than 10MB
       const largeBuffer = Buffer.alloc(11 * 1024 * 1024, 'a');
       const res = await request(app)
-        .post(`/workspaces/${workspace1.id}/imports/customers`)
+        .post(`/workspaces/${workspace1.id}/imports/preview`)
         .set('Authorization', `Bearer ${user1Token}`)
         .attach('file', largeBuffer, 'large.csv');
 
@@ -125,157 +124,266 @@ describe('Imports API Integration Tests', () => {
     });
   });
 
-  describe('Customer Ingestion Flow', () => {
-    it('should successfully ingest customers, update counters, and auto-upsert duplicates', async () => {
+  describe('Ingestion Preview Phase (No Persistence)', () => {
+    it('should correctly generate import preview with AI mapping suggestions, status, and sample records without persisting', async () => {
       const csvData = [
-        'firstName,lastName,email,phone,gender,dateOfBirth,externalId',
-        'Nike,Consumer,nike@buyer.com,+91 99999 99999,male,1990-05-15,EXT1',
-        'Adidas,Buyer,adidas@buyer.com,,female,,EXT2',
-        'InvalidRow,,,,,,' // missing email OR phone - should fail
+        'first_name,last_name,email,phone,gender,date_of_birth,external_customer_id,external_order_id,amount,currency,order_date',
+        'Nike,Consumer,nike@buyer.com,+91 99999 99999,male,1990-05-15,EXT1,ORD100,1500.50,INR,2026-06-01T12:00:00Z',
+        'Adidas,Buyer,adidas@buyer.com,,female,,EXT2,ORD200,2500.00,INR,2026-06-02T12:00:00Z',
+        'InvalidRow,,,,,,' // invalid row, missing email/phone
       ].join('\n');
 
       const res = await request(app)
-        .post(`/workspaces/${workspace1.id}/imports/customers`)
+        .post(`/workspaces/${workspace1.id}/imports/preview`)
         .set('Authorization', `Bearer ${user1Token}`)
-        .attach('file', Buffer.from(csvData), 'customers.csv');
+        .attach('file', Buffer.from(csvData), 'sales.csv');
+
+      expect(res.status).toBe(200);
+      expect(res.body.importJobId).toBeTruthy();
+      expect(res.body.summary.totalRows).toBe(3);
+      expect(res.body.summary.validRows).toBe(2);
+      expect(res.body.summary.invalidRows).toBe(1);
+      expect(res.body.suggestedStrategy).toBe('KEEP_EXISTING');
+      expect(res.body.detectedMappings.first_name).toBe('firstName');
+      expect(res.body.detectedMappings.amount).toBe('amount');
+
+      // Verify no records are persisted in customers or orders tables
+      const dbCustomers = await prisma.customer.findMany({ where: { workspaceId: workspace1.id } });
+      const dbOrders = await prisma.order.findMany({ where: { workspaceId: workspace1.id } });
+      expect(dbCustomers.length).toBe(0);
+      expect(dbOrders.length).toBe(0);
+
+      // Verify the import job status is PREVIEW_READY
+      const job = await prisma.importJob.findUnique({ where: { id: res.body.importJobId } });
+      expect(job.status).toBe('PREVIEW_READY');
+    });
+  });
+
+  describe('Ingestion Confirmation Phase (Conflict Resolution & Overrides)', () => {
+    let previewRes;
+    const mappings = {
+      first_name: 'firstName',
+      last_name: 'lastName',
+      email: 'email',
+      phone: 'phone',
+      gender: 'gender',
+      date_of_birth: 'dateOfBirth',
+      external_customer_id: 'externalId',
+      external_order_id: 'externalOrderId',
+      amount: 'amount',
+      currency: 'currency',
+      order_date: 'purchaseDate'
+    };
+
+    const csvData = [
+      'first_name,last_name,email,phone,gender,date_of_birth,external_customer_id,external_order_id,amount,currency,order_date',
+      'Nike,Consumer,nike@buyer.com,+91 99999 99999,male,1990-05-15,EXT1,ORD100,1500.50,INR,2026-06-01T12:00:00Z',
+      'Adidas,Buyer,adidas@buyer.com,,female,,EXT2,ORD200,2500.00,INR,2026-06-02T12:00:00Z'
+    ].join('\n');
+
+    beforeEach(async () => {
+      previewRes = await request(app)
+        .post(`/workspaces/${workspace1.id}/imports/preview`)
+        .set('Authorization', `Bearer ${user1Token}`)
+        .attach('file', Buffer.from(csvData), 'sales.csv');
+    });
+
+    it('should persist new customers and orders successfully under KEEP_EXISTING global strategy', async () => {
+      const res = await request(app)
+        .post(`/workspaces/${workspace1.id}/imports/confirm`)
+        .set('Authorization', `Bearer ${user1Token}`)
+        .send({
+          importJobId: previewRes.body.importJobId,
+          mappings,
+          resolutionStrategy: 'KEEP_EXISTING'
+        });
 
       expect(res.status).toBe(200);
       expect(res.body.status).toBe('COMPLETED');
-      expect(res.body.totalRows).toBe(3);
-      expect(res.body.processedRows).toBe(3);
       expect(res.body.successfulRows).toBe(2);
-      expect(res.body.failedRows).toBe(1);
 
       // Verify in DB
       const customers = await prisma.customer.findMany({ where: { workspaceId: workspace1.id } });
+      const orders = await prisma.order.findMany({ where: { workspaceId: workspace1.id } });
+
       expect(customers.length).toBe(2);
+      expect(orders.length).toBe(2);
 
       const nike = customers.find(c => c.email === 'nike@buyer.com');
-      expect(nike).toBeTruthy();
       expect(nike.firstName).toBe('Nike');
-      expect(nike.phone).toBe('919999999999'); // cleaned phone
-      expect(nike.gender).toBe('MALE');
-      expect(nike.externalId).toBe('EXT1');
+      expect(nike.phone).toBe('919999999999');
+
+      const ord1 = orders.find(o => o.externalOrderId === 'ORD100');
+      expect(ord1.customerId).toBe(nike.id);
+      expect(Number(ord1.amount)).toBe(1500.50);
     });
 
-    it('should perform duplicate upsert and fill in missing/null fields', async () => {
+    it('should respect KEEP_EXISTING strategy and only update missing fields of pre-existing customer', async () => {
       // Pre-create customer with empty lastName and dob
       await prisma.customer.create({
         data: {
           workspaceId: workspace1.id,
           firstName: 'PreExisting',
           lastName: null,
-          email: 'dup@xeno.com',
+          email: 'nike@buyer.com',
           phone: null
         }
       });
 
-      const csvData = [
-        'firstName,lastName,email,phone,gender,dateOfBirth',
-        'UpdatedName,AddedLastName,dup@xeno.com,+91 88888 88888,female,1995-10-10'
-      ].join('\n');
-
       const res = await request(app)
-        .post(`/workspaces/${workspace1.id}/imports/customers`)
+        .post(`/workspaces/${workspace1.id}/imports/confirm`)
         .set('Authorization', `Bearer ${user1Token}`)
-        .attach('file', Buffer.from(csvData), 'customers.csv');
+        .send({
+          importJobId: previewRes.body.importJobId,
+          mappings,
+          resolutionStrategy: 'KEEP_EXISTING'
+        });
 
       expect(res.status).toBe(200);
-      expect(res.body.successfulRows).toBe(1);
 
-      // Check DB
       const customers = await prisma.customer.findMany({ where: { workspaceId: workspace1.id } });
-      expect(customers.length).toBe(1); // No duplicates created
-
-      const customer = customers[0];
-      expect(customer.firstName).toBe('PreExisting'); // Do not overwrite existing firstName
-      expect(customer.lastName).toBe('AddedLastName'); // Fill in missing lastName
-      expect(customer.phone).toBe('918888888888'); // Fill in missing phone
-      expect(customer.gender).toBe('FEMALE'); // Fill in missing gender
+      const nike = customers.find(c => c.email === 'nike@buyer.com');
+      expect(nike.firstName).toBe('PreExisting'); // kept existing firstname
+      expect(nike.lastName).toBe('Consumer'); // filled in missing lastname
+      expect(nike.phone).toBe('919999999999'); // filled in missing phone
     });
-  });
 
-  describe('Order Ingestion Flow', () => {
-    let customer1;
-
-    beforeEach(async () => {
-      // Create a customer to link orders to
-      customer1 = await prisma.customer.create({
+    it('should respect UPDATE_EXISTING strategy and overwrite pre-existing customer fields', async () => {
+      // Pre-create customer
+      await prisma.customer.create({
         data: {
           workspaceId: workspace1.id,
-          firstName: 'John',
-          email: 'john@order.com',
-          phone: '917777777777'
+          firstName: 'PreExisting',
+          lastName: 'OldLastName',
+          email: 'nike@buyer.com',
+          phone: '1111111'
         }
       });
-    });
-
-    it('should successfully ingest orders, link to customer, and prevent duplicates with externalOrderId', async () => {
-      const csvData = [
-        'customerEmail,customerPhone,amount,purchaseDate,externalOrderId,currency',
-        'john@order.com,,1500.50,2026-06-01T12:00:00Z,ORD100,INR',
-        ',917777777777,2500.00,2026-06-02,ORD100,INR', // Duplicate ORD100 - should be ignored
-        'john@order.com,,999.00,2026-06-03,,INR', // No external ID - should always be created
-        'nonexistent@user.com,,500,2026-06-01,,USD' // Non-existent customer - should fail
-      ].join('\n');
 
       const res = await request(app)
-        .post(`/workspaces/${workspace1.id}/imports/orders`)
+        .post(`/workspaces/${workspace1.id}/imports/confirm`)
         .set('Authorization', `Bearer ${user1Token}`)
-        .attach('file', Buffer.from(csvData), 'orders.csv');
+        .send({
+          importJobId: previewRes.body.importJobId,
+          mappings,
+          resolutionStrategy: 'UPDATE_EXISTING'
+        });
 
       expect(res.status).toBe(200);
-      expect(res.body.totalRows).toBe(4);
-      expect(res.body.successfulRows).toBe(3); // ORD100 created, ORD100 duplicate ignored (successful but skipped), No external ID created.
-      expect(res.body.failedRows).toBe(1); // nonexistent customer failed
 
-      // Verify DB orders
+      const customers = await prisma.customer.findMany({ where: { workspaceId: workspace1.id } });
+      const nike = customers.find(c => c.email === 'nike@buyer.com');
+      expect(nike.firstName).toBe('Nike'); // Overwritten
+      expect(nike.lastName).toBe('Consumer'); // Overwritten
+      expect(nike.phone).toBe('919999999999'); // Overwritten
+    });
+
+    it('should respect SKIP strategy and ignore conflict rows entirely', async () => {
+      // Pre-create customer
+      await prisma.customer.create({
+        data: {
+          workspaceId: workspace1.id,
+          firstName: 'PreExisting',
+          lastName: 'OldLastName',
+          email: 'nike@buyer.com'
+        }
+      });
+
+      const res = await request(app)
+        .post(`/workspaces/${workspace1.id}/imports/confirm`)
+        .set('Authorization', `Bearer ${user1Token}`)
+        .send({
+          importJobId: previewRes.body.importJobId,
+          mappings,
+          resolutionStrategy: 'SKIP'
+        });
+
+      expect(res.status).toBe(200);
+
+      const customers = await prisma.customer.findMany({ where: { workspaceId: workspace1.id } });
       const orders = await prisma.order.findMany({ where: { workspaceId: workspace1.id } });
-      expect(orders.length).toBe(2); // Only 2 orders persisted (ORD100 and the one with no externalOrderId)
 
+      const nike = customers.find(c => c.email === 'nike@buyer.com');
+      expect(nike.firstName).toBe('PreExisting'); // Unchanged
+      expect(nike.lastName).toBe('OldLastName'); // Unchanged
+
+      // ORD100 order should not be created because row was skipped
       const ord1 = orders.find(o => o.externalOrderId === 'ORD100');
-      expect(ord1).toBeTruthy();
-      expect(Number(ord1.amount)).toBe(1500.50);
-      expect(ord1.customerId).toBe(customer1.id);
+      expect(ord1).toBeUndefined();
 
-      const ord2 = orders.find(o => o.externalOrderId === null);
+      // Adidas order ORD200 should be created (as it did not conflict)
+      const ord2 = orders.find(o => o.externalOrderId === 'ORD200');
       expect(ord2).toBeTruthy();
-      expect(Number(ord2.amount)).toBe(999.00);
+    });
+
+    it('should apply record-level strategy overrides', async () => {
+      // Pre-create customer
+      await prisma.customer.create({
+        data: {
+          workspaceId: workspace1.id,
+          firstName: 'PreExisting',
+          lastName: 'OldLastName',
+          email: 'nike@buyer.com'
+        }
+      });
+
+      const res = await request(app)
+        .post(`/workspaces/${workspace1.id}/imports/confirm`)
+        .set('Authorization', `Bearer ${user1Token}`)
+        .send({
+          importJobId: previewRes.body.importJobId,
+          mappings,
+          resolutionStrategy: 'KEEP_EXISTING', // global strategy
+          overrides: [
+            {
+              identifier: 'nike@buyer.com',
+              strategy: 'UPDATE_EXISTING' // per-record override
+            }
+          ]
+        });
+
+      expect(res.status).toBe(200);
+
+      const customers = await prisma.customer.findMany({ where: { workspaceId: workspace1.id } });
+      const nike = customers.find(c => c.email === 'nike@buyer.com');
+      expect(nike.firstName).toBe('Nike'); // Overwritten because override was UPDATE_EXISTING
     });
   });
 
   describe('Workspace Isolation', () => {
-    it('should enforce strict tenant data isolation', async () => {
-      // Ingest customer to Workspace 1
-      await request(app)
-        .post(`/workspaces/${workspace1.id}/imports/customers`)
+    it('should enforce strict tenant data isolation in single export previews and confirmation', async () => {
+      // Ingest preview in Workspace 1
+      const previewRes = await request(app)
+        .post(`/workspaces/${workspace1.id}/imports/preview`)
         .set('Authorization', `Bearer ${user1Token}`)
-        .attach('file', Buffer.from('firstName,email\nWorkspace1Customer,w1@xeno.com'), 'w1.csv');
+        .attach('file', Buffer.from('first_name,email,external_order_id,amount,order_date\nTenantCust,tenant@xeno.com,TEN100,500,2026-06-01'), 'tenant.csv');
 
-      // Attempt to link order to w1@xeno.com in Workspace 2 - should fail linking (customer not found)
-      const res = await request(app)
-        .post(`/workspaces/${workspace2.id}/imports/orders`)
+      // Attempt to confirm import in Workspace 2 using Workspace 1's jobId - should return 404
+      const confirmRes = await request(app)
+        .post(`/workspaces/${workspace2.id}/imports/confirm`)
         .set('Authorization', `Bearer ${user2Token}`)
-        .attach('file', Buffer.from('customerEmail,amount,purchaseDate\nw1@xeno.com,500,2026-06-01'), 'w2.csv');
+        .send({
+          importJobId: previewRes.body.importJobId,
+          mappings: { first_name: 'firstName', email: 'email', external_order_id: 'externalOrderId', amount: 'amount', order_date: 'purchaseDate' },
+          resolutionStrategy: 'KEEP_EXISTING'
+        });
 
-      expect(res.body.failedRows).toBe(1);
-      expect(res.body.successfulRows).toBe(0);
+      expect(confirmRes.status).toBe(404);
 
-      // Verify no orders in Workspace 2
-      const ordersW2 = await prisma.order.findMany({ where: { workspaceId: workspace2.id } });
-      expect(ordersW2.length).toBe(0);
+      // Verify no customers/orders were created in Workspace 2
+      const customersW2 = await prisma.customer.findMany({ where: { workspaceId: workspace2.id } });
+      expect(customersW2.length).toBe(0);
     });
   });
 
   describe('History and Details Retrieval', () => {
-    it('should fetch import history and details correctly', async () => {
-      // Trigger import
-      const uploadRes = await request(app)
-        .post(`/workspaces/${workspace1.id}/imports/customers`)
+    it('should fetch import history and details with preview details correctly', async () => {
+      const previewRes = await request(app)
+        .post(`/workspaces/${workspace1.id}/imports/preview`)
         .set('Authorization', `Bearer ${user1Token}`)
-        .attach('file', Buffer.from('firstName,email\nJohn,john@gmail.com'), 'history.csv');
+        .attach('file', Buffer.from('first_name,email\nJohn,john@gmail.com'), 'history.csv');
 
-      const jobId = uploadRes.body.id;
+      const jobId = previewRes.body.importJobId;
 
       // GET History
       const historyRes = await request(app)
@@ -285,7 +393,7 @@ describe('Imports API Integration Tests', () => {
       expect(historyRes.status).toBe(200);
       expect(historyRes.body.length).toBe(1);
       expect(historyRes.body[0].id).toBe(jobId);
-      expect(historyRes.body[0].type).toBe('CUSTOMER');
+      expect(historyRes.body[0].type).toBe('SALES_EXPORT');
 
       // GET Details
       const detailRes = await request(app)
@@ -295,6 +403,7 @@ describe('Imports API Integration Tests', () => {
       expect(detailRes.status).toBe(200);
       expect(detailRes.body.id).toBe(jobId);
       expect(detailRes.body.fileName).toBe('history.csv');
+      expect(detailRes.body.previewData).toBeTruthy();
     });
   });
 });

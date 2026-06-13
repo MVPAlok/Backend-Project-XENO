@@ -43,7 +43,8 @@ model User {
   lastLoginIp             String?
 
   memberships             WorkspaceMember[]
-  importJobs              ImportJob[]
+  importJobs              ImportJob[] @relation("UploadedJobs")
+  confirmedJobs           ImportJob[] @relation("ConfirmedJobs")
 
   @@map("users")
 }
@@ -85,28 +86,38 @@ model WorkspaceMember {
 
 enum ImportStatus {
   PENDING
+  PREVIEW_READY
+  CONFIRMED
   PROCESSING
   COMPLETED
   FAILED
 }
 
 model ImportJob {
-  id             String       @id @default(uuid()) @db.Uuid
-  workspaceId    String       @db.Uuid
-  uploadedBy     String       @db.Uuid
-  type           String
-  fileName       String
-  status         ImportStatus @default(PENDING)
-  totalRows      Int          @default(0)
-  processedRows  Int          @default(0)
-  successfulRows Int          @default(0)
+  id                 String       @id @default(uuid()) @db.Uuid
+  workspaceId        String       @db.Uuid
+  uploadedBy         String       @db.Uuid
+  type               String       @default("SALES_EXPORT")
+  fileName           String
+  status             ImportStatus @default(PENDING)
+  totalRows          Int          @default(0)
+  processedRows      Int          @default(0)
+  successfulRows     Int          @default(0)
   failedRows     Int          @default(0)
-  errorMessage   String?
-  createdAt      DateTime     @default(now())
-  completedAt    DateTime?
+  errorMessage       String?
+  createdAt          DateTime     @default(now())
+  completedAt        DateTime?
 
-  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-  user      User      @relation(fields: [uploadedBy], references: [id], onDelete: Cascade)
+  previewData        Json?
+  detectedMappings   Json?
+  conflictSummary    Json?
+  resolutionStrategy String?
+  confirmedAt        DateTime?
+  confirmedBy        String?      @db.Uuid
+
+  workspace       Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user            User      @relation("UploadedJobs", fields: [uploadedBy], references: [id], onDelete: Cascade)
+  confirmedByUser User?     @relation("ConfirmedJobs", fields: [confirmedBy], references: [id], onDelete: SetNull)
 
   @@index([workspaceId])
   @@index([uploadedBy])

@@ -2,32 +2,36 @@ import * as service from './import.service.js';
 import { buildImportSummary } from './utils/importSummary.js';
 
 /**
- * Handle POST /workspaces/:workspaceId/imports/customers
+ * Handle POST /workspaces/:workspaceId/imports/preview
  */
-export async function importCustomers(req, res, next) {
+export async function generatePreview(req, res, next) {
   try {
     const { workspaceId } = req.params;
     const userId = req.user.id;
     const file = req.file;
 
-    const job = await service.importCustomers(workspaceId, userId, file);
+    const preview = await service.generateImportPreview(workspaceId, userId, file);
 
-    return res.status(200).json(buildImportSummary(job));
+    return res.status(200).json(preview);
   } catch (error) {
     return next(error);
   }
 }
 
 /**
- * Handle POST /workspaces/:workspaceId/imports/orders
+ * Handle POST /workspaces/:workspaceId/imports/confirm
  */
-export async function importOrders(req, res, next) {
+export async function confirmImport(req, res, next) {
   try {
     const { workspaceId } = req.params;
     const userId = req.user.id;
-    const file = req.file;
+    const { importJobId, mappings, resolutionStrategy, overrides = [] } = req.body;
 
-    const job = await service.importOrders(workspaceId, userId, file);
+    const job = await service.confirmImport(workspaceId, importJobId, userId, {
+      mappings,
+      resolutionStrategy,
+      overrides
+    });
 
     return res.status(200).json(buildImportSummary(job));
   } catch (error) {
@@ -43,16 +47,7 @@ export async function getImportHistory(req, res, next) {
     const { workspaceId } = req.params;
     const jobs = await service.getWorkspaceImports(workspaceId);
 
-    const history = jobs.map(job => ({
-      id: job.id,
-      type: job.type,
-      status: job.status,
-      createdAt: job.createdAt,
-      totalRows: job.totalRows,
-      successfulRows: job.successfulRows,
-      failedRows: job.failedRows,
-      completedAt: job.completedAt
-    }));
+    const history = jobs.map(job => buildImportSummary(job));
 
     return res.status(200).json(history);
   } catch (error) {
@@ -68,7 +63,7 @@ export async function getImportDetails(req, res, next) {
     const { workspaceId, importId } = req.params;
     const job = await service.getImportDetails(workspaceId, importId);
 
-    return res.status(200).json(job);
+    return res.status(200).json(buildImportSummary(job));
   } catch (error) {
     return next(error);
   }

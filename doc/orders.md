@@ -1,4 +1,4 @@
-# Order Domain
+# Order Domain & Extraction Strategy
 
 This document describes the Order model, validation rules, customer linking mechanics, and deduplication strategies implemented in XENO.
 
@@ -29,46 +29,34 @@ model Order {
 }
 ```
 
-### Key Schema Level Guarantees:
-* **Multi-Tenant Isolation**: Every order belongs to a `workspaceId`.
-* **Workspace-Scoped Order Uniqueness**: The `externalOrderId` (e.g., Shopify/Magento Order ID) must be unique within the workspace (`@@unique([workspaceId, externalOrderId])`).
-* **Decimal Precision**: Order amounts are stored as exact decimal numbers (`Decimal(10, 2)`) to prevent floating-point rounding errors typical of double/float types in financial data.
+### Schema Guarantees:
+* **Workspace Boundary**: Every order belongs to a `workspaceId` and is fully isolated.
+* **Workspace Order Uniqueness**: The `externalOrderId` must be unique within the workspace (`@@unique([workspaceId, externalOrderId])`).
+* **Decimal Precision**: Order amounts are stored as exact decimal numbers (`Decimal(10, 2)`) to prevent floating-point rounding errors.
 
 ---
 
 ## 2. Validation & Normalization Rules
 
-| Field | CSV Column Header | Validation & Cleaning Rule |
-| :--- | :--- | :--- |
-| `externalOrderId` | `external_order_id` or `order_id` | Optional. Trimmed. Standardizes the order identifier from the source system. |
-| `amount` | `amount` or `total` | **Required**. Must parse to a positive number. Formatted to two decimal places. Invalid numbers reject the row. |
-| `currency` | `currency` | Optional. Defaults to `INR` if empty. Standardized to 3-character uppercase ISO code. |
-| `purchaseDate` | `purchase_date` or `date` | **Required**. Must parse into a valid ISO DateTime format. Invalid dates reject the row. |
-| `customerEmail` | `customer_email` or `email` | **Required (at least one of Email or Phone)**. Used to resolve the customer relationship. |
-| `customerPhone` | `customer_phone` or `phone` | **Required (at least one of Email or Phone)**. Used to resolve the customer relationship. |
+All order records undergo strict cleaning and normalization before persistence:
+- **Order ID**: Optional. Trimmed.
+- **Amount**: Required when Order ID is present. Must parse to a positive number. Formatted to two decimal places.
+- **Currency**: Optional. Defaults to `INR` if empty. Standardized to 3-character uppercase.
+- **Purchase Date**: Required when Order ID is present. Must parse into a valid ISO Date.
 
 ---
 
 ## 3. Customer Linking Logic
 
-An order cannot exist in isolation; it MUST be linked to a customer record. When processing a batch of orders, XENO resolves this relationship dynamically using the provided customer identifier (`email` or `phone`):
-
-```mermaid
-graph TD
-    Row[Ingested Order Row] -->|1. Extract email / phone| Lookup[Query database for existing customer in Workspace]
-    Lookup -->|Customer Found| Link[Associate customerId with Order]
-    Lookup -->|Customer NOT Found| Log[Log line as Failed: Missing Customer Link]
-```
-
-### Linking Order:
-1. **Query Batching**: Rather than executing a separate query for each order row (which causes severe database performance degradation), the service extracts all unique emails and phones from the order list.
-2. **Bulk Fetch**: A single query fetches all matching customer records in the current workspace.
-3. **Link Assignment**: The system maps each order to the correct `customerId`. If no customer matches the email or phone, the row is marked as **failed** with an appropriate validation message.
+An order must be linked to a customer. When processing the single dataset:
+1. **Dynamic Customer Resolution**: For each row containing order details, the system identifies the customer either from the existing database records (by email or phone) or from the new customer records created from that same row.
+2. **Transactional Insertion**: Once the customer ID is resolved, the order is created with the reference `customerId = customer.id`.
 
 ---
 
-## 4. Deduplication & Idempotency
+## 4. Conflict & Deduplication Strategies
 
-* **Idempotency Guarantee**: If an order has an `externalOrderId`, it is checked against existing orders in the database.
-* **Ignore Duplicates**: If a record with the same `externalOrderId` already exists in the workspace, the row is ignored (considered successfully parsed/idempotent or flagged as a skip), preventing duplicate transaction records and inflated sales analytics.
-* **Bulk Insertion**: Validated and deduplicated orders are inserted in batches using a single database operation (`createMany`) to ensure high-throughput processing.
+When an order with a matching `externalOrderId` already exists in the database:
+- **`KEEP_EXISTING`**: The existing database order is preserved (database wins). No changes are made to the order.
+- **`UPDATE_EXISTING`**: The incoming CSV order details (amount, currency, purchaseDate, customerId) overwrite the database order fields.
+- **`SKIP`**: The order update is ignored (skipped).

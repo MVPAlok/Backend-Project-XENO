@@ -559,12 +559,12 @@ Retrieves details for a specific workspace. Requires the authenticated user to b
 
 ---
 
-## 13. Import Customers CSV
+## 13. Generate Import Preview
 
-Uploads a CSV file of customer data for ingestion. Integrates duplicate checks and standardizations.
+Uploads a sales export CSV dataset and returns AI mapping recommendations, duplicate/conflict analysis, and sample cleaned rows. No database records are written to customers or orders tables.
 
 - **Method**: `POST`
-- **Path**: `/workspaces/:workspaceId/imports/customers`
+- **Path**: `/workspaces/:workspaceId/imports/preview`
 - **Authentication**: `Private` (Requires valid Access JWT Bearer Token & Workspace Membership)
 - **Content-Type**: `multipart/form-data`
 - **Payload Constraints**:
@@ -572,97 +572,128 @@ Uploads a CSV file of customer data for ingestion. Integrates duplicate checks a
 
 #### Example Request
 ```http
-POST /workspaces/e6de27a4-d9bc-4df1-85b2-32a51241512f/imports/customers HTTP/1.1
+POST /workspaces/e6de27a4-d9bc-4df1-85b2-32a51241512f/imports/preview HTTP/1.1
 Host: api.xeno.com
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="file"; filename="customers.csv"
+Content-Disposition: form-data; name="file"; filename="sales.csv"
 Content-Type: text/csv
 
-first_name,last_name,email,phone,gender,dob
-John,Doe,john.doe@example.com,+1234567890,male,1990-01-01
+first_name,last_name,email,phone,amount,order_date,external_order_id
+Nike,Consumer,nike@buyer.com,+91 99999 99999,1500.50,2026-06-01T12:00:00Z,ORD100
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 ```
 
 ### Response Specs
 
 #### Success Response
-- **Status**: `200 OK` or `201 Created`
+- **Status**: `200 OK`
 - **Body**:
 ```json
 {
-  "jobId": "b182cb05-3e28-4e08-9df2-ebae1c9448fd",
-  "status": "COMPLETED",
-  "type": "customers",
-  "fileName": "customers.csv",
-  "totalRows": 1,
-  "processedRows": 1,
-  "successfulRows": 1,
-  "failedRows": 0,
-  "errors": []
-}
-```
-
-#### Error Response: Invalid File Size or Type
-- **Status**: `400 Bad Request`
-- **Body**:
-```json
-{
-  "type": "about:blank",
-  "title": "Bad Request / Validation Error",
-  "status": 400,
-  "detail": "File size exceeds 10 MB limit.",
-  "instance": "/workspaces/e6de27a4-d9bc-4df1-85b2-32a51241512f/imports/customers"
+  "importJobId": "b182cb05-3e28-4e08-9df2-ebae1c9448fd",
+  "summary": {
+    "totalRows": 1,
+    "validRows": 1,
+    "invalidRows": 0,
+    "potentialCustomers": 1,
+    "potentialOrders": 1,
+    "potentialDuplicates": 0
+  },
+  "detectedMappings": {
+    "first_name": "firstName",
+    "last_name": "lastName",
+    "email": "email",
+    "phone": "phone",
+    "amount": "amount",
+    "order_date": "purchaseDate",
+    "external_order_id": "externalOrderId"
+  },
+  "conflicts": {
+    "customers": [],
+    "orders": []
+  },
+  "suggestedStrategy": "KEEP_EXISTING",
+  "strategyExplanation": "KEEP_EXISTING is recommended by default to prevent overwriting existing database customer data unless explicit approval is given.",
+  "sampleTransformedRecords": [
+    {
+      "isValid": true,
+      "errors": [],
+      "data": {
+        "firstName": "Nike",
+        "lastName": "Consumer",
+        "email": "nike@buyer.com",
+        "phone": "919999999999",
+        "amount": 1500.5,
+        "currency": "INR",
+        "purchaseDate": "2026-06-01T12:00:00.000Z",
+        "externalOrderId": "ORD100"
+      }
+    }
+  ]
 }
 ```
 
 ---
 
-## 14. Import Orders CSV
+## 14. Confirm Import Ingestion
 
-Uploads a CSV file of order data for ingestion. Links orders to existing customer profiles.
+Confirms and triggers the actual ingestion. Persists customer and order records under the specified resolution strategy.
 
 - **Method**: `POST`
-- **Path**: `/workspaces/:workspaceId/imports/orders`
+- **Path**: `/workspaces/:workspaceId/imports/confirm`
 - **Authentication**: `Private` (Requires valid Access JWT Bearer Token & Workspace Membership)
-- **Content-Type**: `multipart/form-data`
-- **Payload Constraints**:
-  - `file`: CSV file, maximum size of **10MB**.
+- **Content-Type**: `application/json`
 
 #### Example Request
 ```http
-POST /workspaces/e6de27a4-d9bc-4df1-85b2-32a51241512f/imports/orders HTTP/1.1
+POST /workspaces/e6de27a4-d9bc-4df1-85b2-32a51241512f/imports/confirm HTTP/1.1
 Host: api.xeno.com
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Type: application/json
 
-------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="file"; filename="orders.csv"
-Content-Type: text/csv
-
-order_id,email,phone,amount,currency,date
-order_1001,john.doe@example.com,,1500.50,INR,2026-06-13T10:00:00Z
-------WebKitFormBoundary7MA4YWxkTrZu0gW--
+{
+  "importJobId": "b182cb05-3e28-4e08-9df2-ebae1c9448fd",
+  "mappings": {
+    "first_name": "firstName",
+    "last_name": "lastName",
+    "email": "email",
+    "phone": "phone",
+    "amount": "amount",
+    "order_date": "purchaseDate",
+    "external_order_id": "externalOrderId"
+  },
+  "resolutionStrategy": "KEEP_EXISTING",
+  "overrides": [
+    {
+      "identifier": "nike@buyer.com",
+      "strategy": "UPDATE_EXISTING"
+    }
+  ]
+}
 ```
 
 ### Response Specs
 
 #### Success Response
-- **Status**: `200 OK` or `201 Created`
+- **Status**: `200 OK`
 - **Body**:
 ```json
 {
-  "jobId": "7df4a852-c0e8-46cb-a311-53676839be9b",
+  "id": "b182cb05-3e28-4e08-9df2-ebae1c9448fd",
+  "workspaceId": "e6de27a4-d9bc-4df1-85b2-32a51241512f",
+  "type": "SALES_EXPORT",
+  "fileName": "sales.csv",
   "status": "COMPLETED",
-  "type": "orders",
-  "fileName": "orders.csv",
   "totalRows": 1,
   "processedRows": 1,
   "successfulRows": 1,
   "failedRows": 0,
-  "errors": []
+  "errorMessage": null,
+  "createdAt": "2026-06-13T10:00:00.000Z",
+  "completedAt": "2026-06-13T10:02:00.000Z"
 }
 ```
 
@@ -685,16 +716,16 @@ Retrieves the execution log and metric summary of all import jobs run in this wo
 [
   {
     "id": "b182cb05-3e28-4e08-9df2-ebae1c9448fd",
-    "type": "customers",
-    "fileName": "customers.csv",
+    "workspaceId": "e6de27a4-d9bc-4df1-85b2-32a51241512f",
+    "type": "SALES_EXPORT",
+    "fileName": "sales.csv",
     "status": "COMPLETED",
     "totalRows": 1,
     "processedRows": 1,
     "successfulRows": 1,
     "failedRows": 0,
-    "errorMessage": null,
     "createdAt": "2026-06-13T10:00:00.000Z",
-    "completedAt": "2026-06-13T10:01:00.000Z"
+    "completedAt": "2026-06-13T10:02:00.000Z"
   }
 ]
 ```
@@ -703,7 +734,7 @@ Retrieves the execution log and metric summary of all import jobs run in this wo
 
 ## 16. Retrieve Import Job Details
 
-Retrieves details and status of a specific import job.
+Retrieves details and preview parameters of a specific import job.
 
 - **Method**: `GET`
 - **Path**: `/workspaces/:workspaceId/imports/:importId`
@@ -719,8 +750,8 @@ Retrieves details and status of a specific import job.
   "id": "b182cb05-3e28-4e08-9df2-ebae1c9448fd",
   "workspaceId": "e6de27a4-d9bc-4df1-85b2-32a51241512f",
   "uploadedBy": "a67e42d2-8b43-4a11-bc66-3d234a921d7b",
-  "type": "customers",
-  "fileName": "customers.csv",
+  "type": "SALES_EXPORT",
+  "fileName": "sales.csv",
   "status": "COMPLETED",
   "totalRows": 1,
   "processedRows": 1,
@@ -728,8 +759,14 @@ Retrieves details and status of a specific import job.
   "failedRows": 0,
   "errorMessage": null,
   "createdAt": "2026-06-13T10:00:00.000Z",
-  "completedAt": "2026-06-13T10:01:00.000Z"
+  "completedAt": "2026-06-13T10:02:00.000Z",
+  "previewData": {
+    "sampleTransformedRecords": []
+  },
+  "detectedMappings": {},
+  "conflictSummary": {},
+  "resolutionStrategy": "KEEP_EXISTING",
+  "confirmedAt": "2026-06-13T10:01:30.000Z",
+  "confirmedBy": "a67e42d2-8b43-4a11-bc66-3d234a921d7b"
 }
 ```
-
-

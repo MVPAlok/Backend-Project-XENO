@@ -70,20 +70,38 @@ src/
 | **Routing** | Directs HTTP verbs and routes to validation chains and controllers. | Request URL $\rightarrow$ Controller |
 | **Middlewares** | Intercepts requests for rate-limiting, JWT parsing, workspace authorization, and validation. | Request $\rightarrow$ Sanitized Request |
 | **Controllers** | Extracts HTTP properties (body, headers, query, client IP, User-Agent) and passes them to services. | HTTP Req $\rightarrow$ JSON Response |
-| **Services** | Core transactional business actions, validation routines, parser orchestrations. | DTO Object $\rightarrow$ Domain Models |
-| **Repositories** | Prisma query wrappers mapping PostgreSQL records to JS structures. | DTO/IDs $\rightarrow$ DB Record |
-| **Prisma DB** | Relational mapping, schema synchronization, and database index configurations. | Prisma client $\rightarrow$ PostgreSQL |
 
----
+## 2. Ingestion & Database Design
 
-## 2. Database Design & Entity Relations
+### Ingestion Engine Components
+The CSV import subsystem has been redesigned into a modular multi-stage processing pipeline:
 
-The PostgreSQL database is managed via Prisma ORM, utilizing structural enums and explicit relation cascade behaviors.
+```mermaid
+graph TD
+    Workspace[Workspace Tenant Isolation] --> ImportEngine[Import Engine]
+    ImportEngine --> PreviewEngine[Preview Engine]
+    PreviewEngine --> AIMapping[AI Mapping Advisor]
+    PreviewEngine --> ConflictResolution[Conflict Resolution & Detector]
+    ConfirmFlow[User Review & Approval] --> PersistenceEngine[Persistence Engine]
+    PersistenceEngine --> Customers[(Customers Table)]
+    PersistenceEngine --> Orders[(Orders Table)]
+    
+    subgraph Future Planned Phases
+        Segmentation[Segmentation Engine - Planned]
+        Campaigns[Campaigns Engine - Planned]
+        ChannelService[Channel Service - Planned]
+        Analytics[Analytics Engine - Planned]
+        Insights[Insights Engine - Planned]
+    end
+```
+
+### Entity Relations Diagram
 
 ```mermaid
 erDiagram
     users ||--o{ workspace_members : membership
     users ||--o{ import_jobs : uploads
+    users ||--o{ import_jobs : confirms
     workspaces ||--o{ workspace_members : belongs_to
     workspaces ||--o{ import_jobs : contains
     workspaces ||--o{ customers : owns
@@ -98,26 +116,15 @@ erDiagram
         string lastName
         boolean isEmailVerified
         UserStatus status
-        Role role
-        datetime deletedAt
-        datetime createdAt
-        datetime updatedAt
     }
-    workspaces {
-        uuid id PK
-        string name
-        string slug UK
-        string description
-        datetime createdAt
-        datetime updatedAt
-    }
+
     workspace_members {
         uuid id PK
         uuid userId FK
         uuid workspaceId FK
         WorkspaceRole role
-        datetime joinedAt
     }
+
     import_jobs {
         uuid id PK
         uuid workspaceId FK
@@ -130,9 +137,16 @@ erDiagram
         int successfulRows
         int failedRows
         string errorMessage
+        json previewData
+        json detectedMappings
+        json conflictSummary
+        string resolutionStrategy
+        datetime confirmedAt
+        uuid confirmedBy FK
         datetime createdAt
         datetime completedAt
     }
+
     customers {
         uuid id PK
         uuid workspaceId FK
@@ -147,6 +161,7 @@ erDiagram
         datetime updatedAt
         datetime deletedAt
     }
+
     orders {
         uuid id PK
         uuid workspaceId FK
@@ -173,8 +188,9 @@ erDiagram
 - **Workspace-Scoped Uniqueness**: Prevent duplicate users per workspace via a composite unique constraint on `(userId, workspaceId)`.
 
 #### ImportJob
-- **State Machine tracking**: Transitions from `PENDING` $\rightarrow$ `PROCESSING` $\rightarrow$ `COMPLETED` or `FAILED`.
-- **Metrics logging**: Stores processed, successful, and failed counts for user auditing.
+- **State Machine tracking**: Transitions from `PENDING` $\rightarrow$ `PREVIEW_READY` $\rightarrow$ `CONFIRMED` $\rightarrow$ `PROCESSING` $\rightarrow$ `COMPLETED` or `FAILED`.
+- **Ingestion Previews**: JSONB columns `previewData`, `detectedMappings`, and `conflictSummary` cache parsing metadata and detected conflicts prior to human confirmation.
+- **Auditing**: Tracks `resolutionStrategy`, `confirmedAt`, and `confirmedBy` to ensure clear accountability.
 
 #### Customer
 - **Identifiers**: Multiple potential links via email or phone. 

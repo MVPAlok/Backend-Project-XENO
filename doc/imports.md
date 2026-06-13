@@ -1,12 +1,16 @@
-# Import Infrastructure & Pipeline
+# AI-Assisted Single Dataset Import Ingestion Pipeline
 
 This document details the CSV Import Infrastructure and Pipeline, representing Phase 3 of the XENO backend architecture.
 
 ---
 
 ## 1. Overview
-The import system allows workspace users to upload structured customer and order data in CSV format to quickly bootstrap their workspace tenants. 
-This ingestion foundation is designed to validate, sanitize, and persist files up to **10MB** sequentially (synchronously) in the current iteration, with a clear path to asynchronous background worker queues.
+The import system allows workspace users to upload a single sales export CSV (e.g. from Shopify, WooCommerce, POS, etc.) containing both customer and order data, quickly bootstrapping their workspace.
+
+Rather than persisting data blindly, this system operates on a **Human-in-the-loop (HITL)** principle:
+1. **Preview**: The user uploads a CSV. The system parses it, cleans it deterministically, detects conflicts, and runs an AI Mapping Advisor to suggest mappings and strategies. No data is saved to customers or orders.
+2. **Review & Confirm**: The user reviews mapping suggestions, resolves detected conflicts, selects global or per-record strategies, and approves the import.
+3. **Persist**: The system writes customers and orders transactionally under the selected strategies.
 
 ---
 
@@ -20,115 +24,68 @@ sequenceDiagram
     actor User as Workspace Member
     participant Controller as Import Controller
     participant Service as Import Service
-    participant CSV as CSV Parser
-    participant CustService as Customer Service
-    participant OrdService as Order Service
+    participant AI as AI Mapping Advisor
+    participant Conflict as Conflict Detector
     participant DB as PostgreSQL (Prisma)
 
-    User->>Controller: POST /workspaces/:workspaceId/imports
-    Note over Controller: Validates workspace member,<br/>Checks multer file (CSV only, <= 10MB)
-    Controller->>Service: processImport(workspaceId, userId, fileDetails, type)
-    
-    Service->>DB: Create ImportJob (Status: PROCESSING)
-    DB-->>Service: ImportJob record
-    
-    Service->>CSV: parse(buffer)
-    CSV-->>Service: Raw parsed JSON rows
-    
-    alt type == "customers"
-        Service->>CustService: bulkIngestCustomers(workspaceId, parsedRows)
-        Note over CustService: Cleans emails/phones, removes invalid rows,<br/>performs in-memory conflict resolution,<br/>bulk-upserts records.
-        CustService-->>Service: { successfulRows, failedRows, errors }
-    else type == "orders"
-        Service->>OrdService: bulkIngestOrders(workspaceId, parsedRows)
-        Note over OrdService: Resolves customer IDs via emails/phones,<br/>ignores or records rows with missing customer links,<br/>bulk-inserts orders.
-        OrdService-->>Service: { successfulRows, failedRows, errors }
-    end
+    User->>Controller: POST /workspaces/:workspaceId/imports/preview (file)
+    Note over Controller: Checks multer file (CSV only, <= 10MB)
+    Controller->>Service: generatePreview(workspaceId, userId, file)
+    Service->>DB: Create ImportJob (Status: PENDING)
+    Service->>Service: Parse CSV & Deterministic Clean
+    Service->>AI: getAdvisorSuggestions(headers)
+    Note over AI: Suggests field mappings,<br/>computes confidence scores,<br/>suggests conflict strategy.
+    Service->>Conflict: detectConflicts(cleanedRows, existingData)
+    Service->>DB: Save preview rows, mappings & conflicts (Status: PREVIEW_READY)
+    Service-->>Controller: Preview JSON payload
+    Controller-->>User: 200 OK (Preview summary & suggested mappings)
 
+    User->>Controller: POST /workspaces/:workspaceId/imports/confirm (jobId, mappings, strategy, overrides)
+    Controller->>Service: confirmImport(workspaceId, jobId, userId, data)
+    Service->>DB: Update ImportJob (Status: CONFIRMED -> PROCESSING)
+    Service->>Service: Map records & apply conflict strategies/overrides
+    Service->>DB: Transactional bulkWriteCustomers & bulkWriteOrders
     Service->>DB: Update ImportJob (Status: COMPLETED / FAILED, metrics)
-    DB-->>Service: Updated ImportJob record
-    
-    Service-->>Controller: Formatted Import Summary
-    Controller-->>User: 200 OK / 201 Created (Ingestion metrics & summary)
+    Service-->>Controller: Formatted Import Job Details
+    Controller-->>User: 200 OK (Persisted Import Summary)
 ```
 
 ---
 
-## 3. Database Schema
+## 3. Conflict Resolution Strategies
 
-```prisma
-enum ImportStatus {
-  PENDING
-  PROCESSING
-  COMPLETED
-  FAILED
-}
+When customer or order conflicts occur (e.g. customer with matching email/phone already exists in the workspace), three strategies are supported:
+- **`KEEP_EXISTING`** (Default): Database records win. The system does not overwrite existing data, but will backfill missing/null database fields with incoming values.
+- **`UPDATE_EXISTING`**: Incoming CSV records win. The system overwrites database fields with incoming values.
+- **`SKIP`**: The incoming row is ignored entirely (no customer updates and no order is written).
 
-model ImportJob {
-  id             String       @id @default(uuid()) @db.Uuid
-  workspaceId    String       @db.Uuid
-  uploadedBy     String       @db.Uuid
-  type           String       // "customers" | "orders"
-  fileName       String
-  status         ImportStatus @default(PENDING)
-  totalRows      Int          @default(0)
-  processedRows  Int          @default(0)
-  successfulRows Int          @default(0)
-  failedRows     Int          @default(0)
-  errorMessage   String?
-  createdAt      DateTime     @default(now())
-  completedAt    DateTime?
-
-  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-  user      User      @relation(fields: [uploadedBy], references: [id], onDelete: Cascade)
-
-  @@index([workspaceId])
-  @@index([uploadedBy])
-  @@index([status])
-  @@index([createdAt])
-  @@map("import_jobs")
+### Record-Level Overrides
+Users can pass an array of `overrides` specifying per-record strategies matching on customer email, phone, or order ID:
+```json
+{
+  "resolutionStrategy": "KEEP_EXISTING",
+  "overrides": [
+    {
+      "identifier": "override-customer@buyer.com",
+      "strategy": "UPDATE_EXISTING"
+    }
+  ]
 }
 ```
 
 ---
 
-## 4. Architectural Tradeoffs: Synchronous vs. Asynchronous Queues
+## 4. Architectural Tradeoffs & Future Scaling
 
-Currently, imports are processed **synchronously** within the HTTP request cycle. This choice was made for:
-1. **Simplicity and Direct Feedback**: Users get instant confirmation and verification summaries in the HTTP response.
-2. **Minimal Infrastructure Footprint**: Eliminates the immediate need for Redis and background worker instances for small-scale operations.
+Currently, preview generation and persistence are handled **synchronously** within the HTTP cycle.
 
-### Production Scalability Constraints (Why Sync is a Tradeoff)
-* **Request Timeout Limits**: Large files (>5MB or near the 10MB limit) can hit API gateway (e.g. Nginx, AWS ALB) or Express request timeout thresholds (typically 30s - 120s).
-* **Event Loop Blocking**: CSV parsing and validation are CPU-intensive operations. Running large parse tasks blocking the Node.js event loop degrades API responsiveness for all other users.
-* **Memory Spikes**: Buffering the entire CSV file and loading massive arrays of objects into memory simultaneously risks crashing the container due to Out-Of-Memory (OOM) limits.
+### Constraints of the Synchronous Approach:
+* **Request Timeout Limits**: Large files (>5MB) can hit gateway timeouts.
+* **Event Loop Blocking**: CSV parsing, validation, and in-memory conflict sorting are CPU-bound and can block the event loop.
+* **Memory Limits**: Large datasets buffered in-memory risk OOM crashes.
 
-### Path to Asynchronous Scaling (Proposed Queue Design)
-For production-grade scalability, XENO will transition to an **asynchronous queue architecture** using **BullMQ** or **Bee-Queue** backed by **Redis**:
-
-```mermaid
-graph TD
-    User[Workspace User] -->|1. Uploads CSV| API[API Gateway / Express Server]
-    API -->|2. Saves file to S3/Cloud Storage| S3[Storage Bucket]
-    API -->|3. Creates ImportJob PENDING| DB[(PostgreSQL)]
-    API -->|4. Enqueues job with file URI| Redis[(Redis Queue)]
-    API -->|5. Immediate Response 202 Accepted| User
-    
-    subgraph Worker Pool
-        Worker1[Background Worker 1]
-        Worker2[Background Worker 2]
-    end
-
-    Redis -->|Pulls Job| Worker1
-    Worker1 -->|6. Streams CSV file| S3
-    Worker1 -->|7. Updates Job status to PROCESSING| DB
-    Worker1 -->|8. Batch processes & upserts| DB
-    Worker1 -->|9. Marks Job COMPLETED/FAILED| DB
-    Worker1 -->|10. Triggers WebSocket Notification| WS[Websocket Server]
-    WS -.->|11. UI Toast Alert| User
-```
-
-#### Key Changes in the Async Pipeline:
-1. **Stream-based Processing**: Instead of reading the entire file into memory, use Node.js streams (`csv-parse` stream API) to read and process the file in batches (e.g., 500 records at a time).
-2. **Dedicated Workers**: Offload processing to a separate cluster of CPU-optimized Docker containers running worker processes.
-3. **Optimistic HTTP Accepted (202)**: Instantly return an import job ID with a status of `PENDING` so the client UI can poll the job or wait for a WebSocket notification.
+### Path to Asynchronous Scaling:
+For production-grade scalability, XENO will migrate this Preview & Confirm pipeline to an asynchronous queue backed by Redis:
+1. **Upload CSV**: The UI uploads the CSV file. The server saves it to S3/Cloud Storage, creates a `PENDING` ImportJob, and enqueues a background job. The server returns 202 Accepted.
+2. **Preview Processing**: A background worker pulls the job, downloads/streams the CSV, generates preview data, writes it to the database, and marks the job `PREVIEW_READY`. WebSockets notify the UI.
+3. **Confirm & Persist**: The user confirms the preview. The UI sends the confirmation payload. The server creates a confirmation queue task, immediately returning 202 Accepted. The worker applies strategies and performs batch database transactions.

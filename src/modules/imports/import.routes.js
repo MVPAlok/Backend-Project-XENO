@@ -1,7 +1,7 @@
 import multer from 'multer';
 import { Router } from 'express';
 import { validate } from '../../middlewares/validation.middleware.js';
-import { importDetailParamSchema } from './import.validation.js';
+import { importDetailParamSchema, confirmImportBodySchema } from './import.validation.js';
 import * as controller from './import.controller.js';
 import { ValidationError } from '../../utils/errors.js';
 
@@ -47,18 +47,18 @@ function handleMulterUpload(field) {
   };
 }
 
-// POST /workspaces/:workspaceId/imports/customers
+// POST /workspaces/:workspaceId/imports/preview
 router.post(
-  '/customers',
+  '/preview',
   handleMulterUpload('file'),
-  controller.importCustomers
+  controller.generatePreview
 );
 
-// POST /workspaces/:workspaceId/imports/orders
+// POST /workspaces/:workspaceId/imports/confirm
 router.post(
-  '/orders',
-  handleMulterUpload('file'),
-  controller.importOrders
+  '/confirm',
+  validate(confirmImportBodySchema),
+  controller.confirmImport
 );
 
 // GET /workspaces/:workspaceId/imports

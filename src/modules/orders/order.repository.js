@@ -26,3 +26,23 @@ export async function bulkCreateOrders(orders) {
     data: orders
   });
 }
+
+/**
+ * Executes a transaction to batch insert and update orders.
+ */
+export async function bulkWriteOrders(newOrders, updates) {
+  return prisma.$transaction(async (tx) => {
+    if (newOrders.length > 0) {
+      await tx.order.createMany({
+        data: newOrders
+      });
+    }
+    for (const update of updates) {
+      await tx.order.update({
+        where: { id: update.id },
+        data: update.data
+      });
+    }
+  });
+}
+
