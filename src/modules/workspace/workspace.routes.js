@@ -6,6 +6,7 @@ import { requireWorkspaceMember } from './workspace.middleware.js';
 import * as controller from './workspace.controller.js';
 
 import importRoutes from '../imports/import.routes.js';
+import audienceRoutes from '../audience/audience.routes.js';
 
 const router = Router();
 
@@ -14,6 +15,9 @@ router.use(requireAuth);
 
 // Nest import routes
 router.use('/:workspaceId/imports', validate(workspaceIdParamSchema), requireWorkspaceMember, importRoutes);
+
+// Nest audience and segment routes
+router.use('/:workspaceId', validate(workspaceIdParamSchema), audienceRoutes);
 
 // Create workspace
 router.post(

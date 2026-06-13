@@ -32,7 +32,7 @@ src/
 │   ├── error.middleware.js
 │   ├── rate-limit.middleware.js
 │   └── validation.middleware.js
-├── modules/                 # Feature Module Directory (Workspace, Imports, Customers, Orders)
+├── modules/                 # Feature Module Directory (Workspace, Imports, Customers, Orders, Audience)
 │   ├── workspace/           # Workspace & Membership Module
 │   │   ├── workspace.controller.js
 │   │   ├── workspace.middleware.js
@@ -50,9 +50,23 @@ src/
 │   ├── customers/           # Customer Management Domain Module
 │   │   ├── customer.repository.js
 │   │   └── customer.service.js
-│   └── orders/              # Order Management Domain Module
-│       ├── order.repository.js
-│       └── order.service.js
+│   ├── orders/              # Order Management Domain Module
+│   │   ├── order.repository.js
+│   │   └── order.service.js
+│   └── audience/            # Audience & Segment Intelligence Module
+│       ├── audience.controller.js
+│       ├── audience.repository.js
+│       ├── audience.routes.js
+│       ├── audience.service.js
+│       └── audience.validation.js
+├── brain/                   # AI Simulator Engine (Phase 4)
+│   ├── intent-parser/       # Natural Language Parser Simulator
+│   │   └── index.js
+│   └── summary-generator/   # Audience summary descriptions generator
+│       └── index.js
+├── shared/                  # Shared system components
+│   └── query-builder/       # Safe parameter-bound SQL compiler
+│       └── queryBuilder.js
 ├── schemas/                 # Zod validation schema templates (auth engine)
 │   └── auth.schema.js
 ├── utils/                   # Shared utility logic
@@ -102,11 +116,14 @@ erDiagram
     users ||--o{ workspace_members : membership
     users ||--o{ import_jobs : uploads
     users ||--o{ import_jobs : confirms
+    users ||--o{ segments : creates
     workspaces ||--o{ workspace_members : belongs_to
     workspaces ||--o{ import_jobs : contains
     workspaces ||--o{ customers : owns
     workspaces ||--o{ orders : contains
+    workspaces ||--o{ segments : contains
     customers ||--o{ orders : places
+    segments ||--o{ segment_rules : contains
 
     users {
         uuid id PK
@@ -160,6 +177,7 @@ erDiagram
         datetime createdAt
         datetime updatedAt
         datetime deletedAt
+        string city
     }
 
     orders {
@@ -172,6 +190,26 @@ erDiagram
         datetime purchaseDate
         datetime createdAt
         datetime updatedAt
+        string category
+        boolean discountUsage
+    }
+
+    segments {
+        uuid id PK
+        uuid workspaceId FK
+        string name
+        string description
+        uuid createdBy FK
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    segment_rules {
+        uuid id PK
+        uuid segmentId FK
+        string field
+        string operator
+        string value
     }
 ```
 
@@ -195,10 +233,20 @@ erDiagram
 #### Customer
 - **Identifiers**: Multiple potential links via email or phone. 
 - **Workspace-Scoped Uniqueness**: Composite unique keys on `(workspaceId, email)` and `(workspaceId, phone)` ensure brands keep clean independent records.
+- **Segmentation Attributes**: Includes demographic info such as `city` (String, optional) to support geo-segmentation.
 
 #### Order
 - **Transactional Idempotency**: Handled using composite unique constraint on `(workspaceId, externalOrderId)`.
 - **Decimal Amount**: Leverages exact Decimal columns to eliminate floating-point rounding errors.
+- **Segmentation Attributes**: Includes product `category` (String, optional) and `discountUsage` (Boolean) to track campaign effectiveness.
+
+#### Segment
+- **Target Audience Persistence**: Stores metadata about a defined cohort of customers within a specific workspace context.
+- **Auditing**: Tracks the creating user (`createdBy`) and timestamps (`createdAt`, `updatedAt`).
+
+#### SegmentRule
+- **JSON Serialization**: Stores filter configurations (`field`, `operator`, `value` stored as JSON string) to support flexible, dynamic segment evaluation.
+- **Cascading Deletes**: Associated segment rules are automatically cleaned up when the parent segment is deleted.
 
 ---
 

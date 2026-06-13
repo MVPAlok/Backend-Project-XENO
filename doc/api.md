@@ -762,3 +762,244 @@ Retrieves details and preview parameters of a specific import job.
   "confirmedBy": "a67e42d2-8b43-4a11-bc66-3d234a921d7b"
 }
 ```
+
+---
+
+## 13. Generate Audience Preview
+
+Uses a natural language query or predefined goal to compile target customer conditions, evaluate matching rules, query matching count, sample customers, and output AI summary details.
+
+- **Method**: `POST`
+- **Path**: `/workspaces/:workspaceId/audiences/generate`
+- **Authentication**: `Private` (Requires valid Access JWT Bearer Token, Workspace Membership, and Rate-Limiting validation)
+
+### Request Payload Fields
+| Name | Type | Rules / Constraints |
+| :--- | :--- | :--- |
+| `prompt` | String | Min 3, max 1000 characters. |
+
+#### Example Request
+```http
+POST /workspaces/e6de27a4-d9bc-4df1-85b2-32a51241512f/audiences/generate HTTP/1.1
+Host: api.xeno.com
+Content-Type: application/json
+Authorization: Bearer <access_token>
+
+{
+  "prompt": "Find customers from Mumbai who bought skincare products"
+}
+```
+
+### Response Specs
+
+#### Success Response
+- **Status**: `200 OK`
+- **Body**:
+```json
+{
+  "segmentName": "Custom Segment: Find customers from Mumbai who bought skincare products",
+  "rules": [
+    {
+      "field": "city",
+      "operator": "=",
+      "value": "Mumbai"
+    },
+    {
+      "field": "category",
+      "operator": "=",
+      "value": "skincare"
+    }
+  ],
+  "count": 1,
+  "previewCustomers": [
+    {
+      "id": "e44d32b5-827b-4029-a417-3bf777e57c66",
+      "name": "John Doe",
+      "email": "john@mumbai.com",
+      "city": "Mumbai",
+      "totalSpend": 7000.0,
+      "orderCount": 2,
+      "lastPurchaseDays": 5
+    }
+  ],
+  "aiSummary": "AI Analysis: Your audience segment matches 1 custom contact from Mumbai with a total of 2 orders. The average deal value is INR 3,500.00, with a most recent purchase made 5 days ago."
+}
+```
+
+---
+
+## 14. Save Segment
+
+Saves a generated audience segment filter configuration for later list and execution previews.
+
+- **Method**: `POST`
+- **Path**: `/workspaces/:workspaceId/segments`
+- **Authentication**: `Private` (Requires valid Access JWT Bearer Token & Workspace Membership)
+
+### Request Payload Fields
+| Name | Type | Rules / Constraints |
+| :--- | :--- | :--- |
+| `name` | String | Min 3, max 100 characters. |
+| `description` | String | Optional. Max 500 characters. |
+| `rules` | Array of Objects | Min 1 rule constraint. Each rule contains: `field` (string, whitelist), `operator` (string, whitelist), `value` (string, number, boolean, array). |
+
+#### Example Request
+```http
+POST /workspaces/e6de27a4-d9bc-4df1-85b2-32a51241512f/segments HTTP/1.1
+Host: api.xeno.com
+Content-Type: application/json
+Authorization: Bearer <access_token>
+
+{
+  "name": "Mumbai Skincare Spenders",
+  "description": "High-intent skincare buyers in Mumbai",
+  "rules": [
+    {
+      "field": "city",
+      "operator": "=",
+      "value": "Mumbai"
+    },
+    {
+      "field": "category",
+      "operator": "=",
+      "value": "skincare"
+    }
+  ]
+}
+```
+
+### Response Specs
+
+#### Success Response
+- **Status**: `201 Created`
+- **Body**:
+```json
+{
+  "id": "522197fb-ee0b-4eb8-b996-bf753fb16277",
+  "workspaceId": "e6de27a4-d9bc-4df1-85b2-32a51241512f",
+  "name": "Mumbai Skincare Spenders",
+  "description": "High-intent skincare buyers in Mumbai",
+  "createdBy": "a67e42d2-8b43-4a11-bc66-3d234a921d7b",
+  "createdAt": "2026-06-13T20:20:00.000Z",
+  "updatedAt": "2026-06-13T20:20:00.000Z",
+  "rules": [
+    {
+      "id": "c1387d85-d66a-4934-be5c-eaef099cd365",
+      "segmentId": "522197fb-ee0b-4eb8-b996-bf753fb16277",
+      "field": "city",
+      "operator": "=",
+      "value": "Mumbai"
+    },
+    {
+      "id": "402ebdf8-a3f2-4912-8418-4720e36582a9",
+      "segmentId": "522197fb-ee0b-4eb8-b996-bf753fb16277",
+      "field": "category",
+      "operator": "=",
+      "value": "skincare"
+    }
+  ]
+}
+```
+
+---
+
+## 15. List Saved Segments
+
+Lists all saved segment queries belonging to a specific workspace tenant.
+
+- **Method**: `GET`
+- **Path**: `/workspaces/:workspaceId/segments`
+- **Authentication**: `Private` (Requires valid Access JWT Bearer Token & Workspace Membership)
+
+### Response Specs
+
+#### Success Response
+- **Status**: `200 OK`
+- **Body**:
+```json
+[
+  {
+    "id": "522197fb-ee0b-4eb8-b996-bf753fb16277",
+    "workspaceId": "e6de27a4-d9bc-4df1-85b2-32a51241512f",
+    "name": "Mumbai Skincare Spenders",
+    "description": "High-intent skincare buyers in Mumbai",
+    "createdBy": "a67e42d2-8b43-4a11-bc66-3d234a921d7b",
+    "createdAt": "2026-06-13T20:20:00.000Z",
+    "updatedAt": "2026-06-13T20:20:00.000Z"
+  }
+]
+```
+
+---
+
+## 16. Get Segment Details
+
+Fetches metadata, description, creator, and raw rules configured for a specific saved segment.
+
+- **Method**: `GET`
+- **Path**: `/workspaces/:workspaceId/segments/:segmentId`
+- **Authentication**: `Private` (Requires valid Access JWT Bearer Token & Workspace Membership)
+
+### Response Specs
+
+#### Success Response
+- **Status**: `200 OK`
+- **Body**:
+```json
+{
+  "id": "522197fb-ee0b-4eb8-b996-bf753fb16277",
+  "workspaceId": "e6de27a4-d9bc-4df1-85b2-32a51241512f",
+  "name": "Mumbai Skincare Spenders",
+  "description": "High-intent skincare buyers in Mumbai",
+  "createdBy": "a67e42d2-8b43-4a11-bc66-3d234a921d7b",
+  "createdAt": "2026-06-13T20:20:00.000Z",
+  "updatedAt": "2026-06-13T20:20:00.000Z",
+  "rules": [
+    {
+      "id": "c1387d85-d66a-4934-be5c-eaef099cd365",
+      "field": "city",
+      "operator": "=",
+      "value": "Mumbai"
+    },
+    {
+      "id": "402ebdf8-a3f2-4912-8418-4720e36582a9",
+      "field": "category",
+      "operator": "=",
+      "value": "skincare"
+    }
+  ]
+}
+```
+
+---
+
+## 17. Execute Segment Preview
+
+Evaluates a saved segment configuration against active database records to preview the size, statistics, and sample of matching customers.
+
+- **Method**: `GET`
+- **Path**: `/workspaces/:workspaceId/segments/:segmentId/preview`
+- **Authentication**: `Private` (Requires valid Access JWT Bearer Token & Workspace Membership)
+
+### Response Specs
+
+#### Success Response
+- **Status**: `200 OK`
+- **Body**:
+```json
+{
+  "count": 1,
+  "sampleCustomers": [
+    {
+      "id": "e44d32b5-827b-4029-a417-3bf777e57c66",
+      "name": "John Doe",
+      "email": "john@mumbai.com",
+      "city": "Mumbai",
+      "totalSpend": 7000.0,
+      "orderCount": 2,
+      "lastPurchaseDays": 5
+    }
+  ]
+}
+```
+

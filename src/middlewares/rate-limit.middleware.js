@@ -10,7 +10,7 @@ const createLimiter = (windowMs, max, message) => {
     max,
     standardHeaders: true, // Return rate limit info in standard headers
     legacyHeaders: false,  // Disable older headers
-    skip: () => process.env.NODE_ENV === 'test',
+    skip: (req) => process.env.NODE_ENV === 'test' && !req.headers['x-test-rate-limit'],
     handler: (req, res) => {
       res.setHeader('Content-Type', 'application/problem+json');
       return res.status(429).json({
@@ -54,10 +54,17 @@ export const refreshTokenLimiter = createLimiter(
   'Too many refresh attempts from this IP. Please try again after 15 minutes.'
 );
 
+export const audienceGenLimiter = createLimiter(
+  15 * 60 * 1000, // 15 minutes
+  5, // Limit to 5 requests in tests if enabled
+  'Too many audience generation requests. Please try again after 15 minutes.'
+);
+
 export default {
   loginLimiter,
   signupLimiter,
   forgotPasswordLimiter,
   verifyEmailLimiter,
-  refreshTokenLimiter
+  refreshTokenLimiter,
+  audienceGenLimiter
 };

@@ -171,6 +171,12 @@ export function cleanRow(rawRow, mappings) {
     errors.push(err.message);
   }
 
+  try {
+    data.city = getRawValue('city') ? toTitleCase(getRawValue('city')) : null;
+  } catch (err) {
+    errors.push(err.message);
+  }
+
   // 2. Order Fields
   try {
     data.externalOrderId = getRawValue('externalOrderId');
@@ -207,6 +213,23 @@ export function cleanRow(rawRow, mappings) {
     }
   } catch (err) {
     errors.push(`Purchase date error: ${err.message}`);
+  }
+
+  try {
+    data.category = getRawValue('category') ? getRawValue('category').trim() : null;
+  } catch (err) {
+    errors.push(err.message);
+  }
+
+  try {
+    const rawDiscount = getRawValue('discountUsage');
+    if (rawDiscount !== null && rawDiscount !== '') {
+      data.discountUsage = rawDiscount === 'true' || rawDiscount === '1' || rawDiscount === 'yes' || rawDiscount === true;
+    } else {
+      data.discountUsage = false;
+    }
+  } catch (err) {
+    errors.push(err.message);
   }
 
   // Validation Rule: Customer needs at least firstName AND either email or phone

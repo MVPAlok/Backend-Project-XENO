@@ -150,6 +150,7 @@ export async function persistImport(workspaceId, jobId, userId, { mappings, reso
             if (data.gender !== undefined && data.gender !== matchedCustomer.gender) updateData.gender = data.gender;
             if (data.dateOfBirth !== undefined && data.dateOfBirth !== matchedCustomer.dateOfBirth) updateData.dateOfBirth = data.dateOfBirth;
             if (data.externalId !== undefined && data.externalId !== matchedCustomer.externalId) updateData.externalId = data.externalId;
+            if (data.city !== undefined && data.city !== matchedCustomer.city) updateData.city = data.city;
 
             if (Object.keys(updateData).length > 0) {
               const existingUpdateIndex = customerUpdates.findIndex(u => u.id === customerId);
@@ -173,6 +174,7 @@ export async function persistImport(workspaceId, jobId, userId, { mappings, reso
             if (matchedCustomer.gender === null && data.gender !== null) updateData.gender = data.gender;
             if (matchedCustomer.dateOfBirth === null && data.dateOfBirth !== null) updateData.dateOfBirth = data.dateOfBirth;
             if (matchedCustomer.externalId === null && data.externalId !== null) updateData.externalId = data.externalId;
+            if (matchedCustomer.city === null && data.city !== null) updateData.city = data.city;
 
             if (Object.keys(updateData).length > 0) {
               const existingUpdateIndex = customerUpdates.findIndex(u => u.id === customerId);
@@ -200,7 +202,8 @@ export async function persistImport(workspaceId, jobId, userId, { mappings, reso
             phone: data.phone,
             gender: data.gender,
             dateOfBirth: data.dateOfBirth,
-            externalId: data.externalId
+            externalId: data.externalId,
+            city: data.city
           };
           newCustomers.push(customerObj);
           if (data.email) {
@@ -241,6 +244,8 @@ export async function persistImport(workspaceId, jobId, userId, { mappings, reso
                 updateData.purchaseDate = data.purchaseDate;
               }
               if (customerId && customerId !== matchedOrder.customerId) updateData.customerId = customerId;
+              if (data.category !== undefined && data.category !== matchedOrder.category) updateData.category = data.category;
+              if (data.discountUsage !== undefined && data.discountUsage !== matchedOrder.discountUsage) updateData.discountUsage = data.discountUsage;
 
               if (Object.keys(updateData).length > 0) {
                 orderUpdates.push({ id: matchedOrder.id, data: updateData });
@@ -255,7 +260,9 @@ export async function persistImport(workspaceId, jobId, userId, { mappings, reso
               externalOrderId: data.externalOrderId,
               amount: data.amount,
               currency: data.currency || 'INR',
-              purchaseDate: data.purchaseDate
+              purchaseDate: data.purchaseDate,
+              category: data.category,
+              discountUsage: data.discountUsage
             });
             orderMap.set(data.externalOrderId, {
               id: newOrders[newOrders.length - 1].id,

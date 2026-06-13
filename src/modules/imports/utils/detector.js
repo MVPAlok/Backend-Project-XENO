@@ -33,6 +33,10 @@ export function detectFieldCategory(header) {
   if (['customerid', 'customer_id', 'externalid', 'external_id', 'cust_id', 'custid', 'external_customer_id'].includes(h)) {
     return { field: 'externalId', confidence: 0.88, explanation: `Likely maps to Customer External ID based on header '${header}'.` };
   }
+  // City
+  if (['city', 'town', 'location', 'custcity', 'customer_city'].includes(h)) {
+    return { field: 'city', confidence: 0.92, explanation: `Likely maps to Customer City based on header '${header}'.` };
+  }
 
   // Order ID
   if (['orderid', 'order_id', 'externalorderid', 'external_order_id', 'transaction_id', 'transactionid', 'invoice_id', 'invoiceid', 'dealid', 'deal_id'].includes(h)) {
@@ -49,6 +53,14 @@ export function detectFieldCategory(header) {
   // Purchase Date
   if (['purchasedate', 'purchase_date', 'order_date', 'orderdate', 'date', 'timestamp', 'created_at'].includes(h)) {
     return { field: 'purchaseDate', confidence: 0.93, explanation: `Likely maps to Order Purchase Date based on header '${header}'.` };
+  }
+  // Product Category
+  if (['category', 'product_category', 'prod_category', 'item_category'].includes(h)) {
+    return { field: 'category', confidence: 0.92, explanation: `Likely maps to Order Product Category based on header '${header}'.` };
+  }
+  // Discount Usage
+  if (['discountusage', 'discount_usage', 'discount', 'isdiscount', 'is_discount'].includes(h)) {
+    return { field: 'discountUsage', confidence: 0.94, explanation: `Likely maps to Order Discount Usage based on header '${header}'.` };
   }
 
   return null;

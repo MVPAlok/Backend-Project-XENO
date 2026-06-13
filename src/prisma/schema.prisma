@@ -45,6 +45,7 @@ model User {
   memberships             WorkspaceMember[]
   importJobs              ImportJob[] @relation("UploadedJobs")
   confirmedJobs           ImportJob[] @relation("ConfirmedJobs")
+  createdSegments         Segment[]   @relation("CreatedSegments")
 
   @@map("users")
 }
@@ -66,6 +67,7 @@ model Workspace {
   importJobs  ImportJob[]
   customers   Customer[]
   orders      Order[]
+  segments    Segment[]
 
   @@map("workspaces")
 }
@@ -139,6 +141,7 @@ model Customer {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   deletedAt   DateTime?
+  city        String?
 
   workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   orders    Order[]
@@ -161,6 +164,8 @@ model Order {
   purchaseDate    DateTime
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  category        String?
+  discountUsage   Boolean  @default(false)
 
   workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   customer  Customer  @relation(fields: [customerId], references: [id], onDelete: Cascade)
@@ -170,5 +175,36 @@ model Order {
   @@index([customerId])
   @@index([purchaseDate])
   @@map("orders")
+}
+
+model Segment {
+  id          String        @id @default(uuid()) @db.Uuid
+  workspaceId String        @db.Uuid
+  name        String
+  description String?
+  createdBy   String        @db.Uuid
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  rules       SegmentRule[]
+
+  workspace   Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user        User          @relation("CreatedSegments", fields: [createdBy], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId])
+  @@index([createdBy])
+  @@map("segments")
+}
+
+model SegmentRule {
+  id        String   @id @default(uuid()) @db.Uuid
+  segmentId String   @db.Uuid
+  field     String
+  operator  String
+  value     String
+
+  segment   Segment  @relation(fields: [segmentId], references: [id], onDelete: Cascade)
+
+  @@index([segmentId])
+  @@map("segment_rules")
 }
 
