@@ -39,7 +39,7 @@ router.post(
 );
 
 // 2. Email Verification
-router.post(
+router.get(
   '/verify-email',
   verifyEmailLimiter,
   validate(verifyEmailSchema),

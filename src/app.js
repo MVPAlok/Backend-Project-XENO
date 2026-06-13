@@ -2,6 +2,7 @@ import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import authRoutes from './routes/auth.routes.js';
+import workspaceRoutes from './modules/workspace/workspace.routes.js';
 import errorMiddleware from './middlewares/error.middleware.js';
 import logger from './utils/logger.js';
 
@@ -31,6 +32,7 @@ app.use((req, res, next) => {
 
 // 5. Mount API Routes
 app.use('/auth', authRoutes);
+app.use('/workspaces', workspaceRoutes);
 
 // 6. Catch-all 404 Handler
 app.use((req, res) => {

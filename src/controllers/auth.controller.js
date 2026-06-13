@@ -77,8 +77,8 @@ export async function handleRefresh(req, res, next) {
  */
 export async function handleLogout(req, res, next) {
   try {
-    const { id: userId, sessionId } = req.user;
-    await authService.logout(userId, sessionId);
+    const { id: userId } = req.user;
+    await authService.logout(userId);
     return res.status(204).end();
   } catch (error) {
     return next(error);

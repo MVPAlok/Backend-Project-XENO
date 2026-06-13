@@ -13,12 +13,26 @@ Create a new Postman Environment (e.g., `XENO - Local`) and add the following va
 | `baseUrl` | `http://localhost:5000` | `http://localhost:5000` | The backend API root address. |
 | `accessToken` | *leave empty* | *will auto-populate* | Token for Authenticated routes. |
 | `refreshToken` | *leave empty* | *will auto-populate* | Rotation Token. |
-| `verifyToken` | *leave empty* | *will auto-populate* | Email verification helper. |
-| `resetToken` | *leave empty* | *will auto-populate* | Password reset helper. |
-
----
-
-## 2. Collection Directory Structure
+  | `verifyToken` | *leave empty* | *will auto-populate* | Email verification helper. |
+  | `resetToken` | *leave empty* | *will auto-populate* | Password reset helper. |
+  
+  ---
+  
+  ## 1.5 Local Development Note (Email Tokens)
+  
+  During local development (when `NODE_ENV=development`), the backend will print the verification and password reset links directly to your server terminal. This allows you to test email flows without needing a running SMTP server!
+  
+  **How to use it:**
+  1. Trigger a Signup or Forgot Password request.
+  2. Check your backend terminal for a log like this:
+     `"msg": "🛠️ DEVELOPMENT MODE: Verification Link"`
+     `"verificationLink": "http://localhost:5000/auth/verify-email?token=abc-123"`
+  3. Copy the `token` value from the URL (`abc-123`).
+  4. Use that token in your **Verify Email** or **Reset Password** Postman requests.
+  
+  ---
+  
+  ## 2. Collection Directory Structure
 
 Create a collection named `XENO Authentication` organized as follows:
 
@@ -26,7 +40,7 @@ Create a collection named `XENO Authentication` organized as follows:
 XENO Authentication/
 ├── 1. Setup & Registration/
 │   ├── POST Signup
-│   └── POST Verify Email
+│   └── GET Verify Email
 ├── 2. Session Management/
 │   ├── POST Login
 │   ├── POST Refresh Tokens

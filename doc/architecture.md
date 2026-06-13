@@ -61,11 +61,6 @@ The PostgreSQL database is managed via Prisma ORM, utilizing structural enums an
 
 ```mermaid
 erDiagram
-    users ||--o{ sessions : "has"
-    users ||--o{ email_verification_tokens : "has"
-    users ||--o{ password_reset_tokens : "has"
-    users ||--o{ audit_logs : "creates"
-
     users {
         uuid id PK
         string email UK
@@ -79,49 +74,14 @@ erDiagram
         datetime deletedAt
         datetime createdAt
         datetime updatedAt
-    }
-
-    sessions {
-        uuid id PK
         string refreshTokenHash UK
-        string deviceInfo
-        string userAgent
-        string ipAddress
-        datetime expirationTimestamp
-        datetime revokedTimestamp
-        uuid userId FK
-        datetime createdAt
-        datetime updatedAt
-    }
-
-    email_verification_tokens {
-        uuid id PK
-        string tokenHash UK
-        datetime expiry
-        datetime consumedAt
-        uuid userId FK
-        datetime createdAt
-        datetime updatedAt
-    }
-
-    password_reset_tokens {
-        uuid id PK
-        string tokenHash UK
-        datetime expiry
-        datetime consumedAt
-        uuid userId FK
-        datetime createdAt
-        datetime updatedAt
-    }
-
-    audit_logs {
-        uuid id PK
-        uuid userId FK
-        string action
-        string ipAddress
-        string userAgent
-        json details
-        datetime createdAt
+        datetime sessionExpiry
+        string emailVerificationToken UK
+        datetime emailVerificationExpiry
+        string passwordResetToken UK
+        datetime passwordResetExpiry
+        datetime lastLoginAt
+        string lastLoginIp
     }
 ```
 
@@ -132,13 +92,11 @@ erDiagram
 - **Case-Insensitive Uniqueness**: Handled by lowercasing the email at Zod validation and service boundaries before writing to PostgreSQL.
 - **Soft Delete Support**: Flagged via the `deletedAt` DateTime timestamp. If populated, the record is excluded from all search queries, and status is marked `DELETED`.
 
-#### Session
-- **Refresh Token Isolation**: Only the SHA-256 hash of the refresh token is stored. In-transit refresh tokens never exist in plaintext within the database.
-- **Revocation State**: Flagged via `revokedTimestamp`. Expired or revoked sessions automatically deny API access.
-
-#### Verification & Reset Tokens
-- **One-Time Consumable**: Consumed state marked via `consumedAt` timestamp.
-- **Security Check**: Enforced expiration via `expiry` timestamp checking during intake.
+#### Session & Token Fields
+- **Refresh Token Isolation**: Only the SHA-256 hash of the refresh token is stored on the `refreshTokenHash` field. In-transit refresh tokens never exist in plaintext within the database.
+- **Revocation State**: A session is revoked by setting `refreshTokenHash` and `sessionExpiry` to `null`.
+- **Single Session Limitation**: A user can only be logged into one device at a time.
+- **Verification & Reset Tokens**: Managed directly via `emailVerificationToken` and `passwordResetToken` fields, validated against their respective expiry columns.
 
 ---
 
@@ -157,14 +115,13 @@ Access JWT (Short-Lived: 15 minutes)
     ├── sub: UUID (User ID)
     ├── email: string
     ├── role: USER | ADMIN | SUPER_ADMIN
-    ├── sessionId: UUID (Current Session database reference)
     ├── iss: 'xeno-auth-issuer'
     └── aud: 'xeno-saas-audience'
 
 Refresh JWT (Long-Lived: 7 days)
 └── Payload
     ├── sub: UUID (User ID)
-    ├── sessionId: UUID (Session reference in DB)
+    ├── jti: UUID (Unique Token ID to prevent same-second generation collisions)
     ├── iss: 'xeno-auth-issuer'
     └── aud: 'xeno-saas-audience'
 ```
@@ -174,14 +131,14 @@ To mitigate token theft, XENO enforces strict Refresh Token Rotation (RTR).
 
 1. **Successful Rotation**:
    - The user requests a token rotation by sending their current JWT Refresh Token.
-   - The server decodes the token, extracts the `sessionId`, and fetches the session from the database.
+   - The server decodes the token, extracts the `sub` (userId), and fetches the user from the database.
    - The incoming token's SHA-256 hash is compared using `timingSafeCompare` with the database's stored `refreshTokenHash`.
-   - Upon verification, the session is revoked (`revokedTimestamp = new Date()`), a brand new `sessionId` is generated, a new JWT refresh token is issued, and its hash is persisted in a brand new Session row. All actions execute in a single **PostgreSQL Transaction**.
+   - Upon verification, a new JWT refresh token (with a new `jti`) is issued, and its hash is persisted in the User row, overwriting the old one.
 
 2. **Replay Attack / Compromise Detection**:
-   - If a client attempts to rotate a session that is **already revoked**, this indicates the token has been replayed (e.g. an attacker obtained an old refresh token and is trying to rotate it, or the victim's client rotated it, and the attacker tries a second time).
+   - If a client attempts to rotate a session using a hash that does NOT match the active `refreshTokenHash` (meaning they used an older, replaced refresh token), this indicates a replay attack.
    - The server immediately flags a `SUSPICIOUS_REPLAY_ATTACK` security breach.
-   - In a transaction, the server revokes **ALL active sessions** for the associated user ID. The user is logged out globally across all active devices immediately.
+   - The server revokes the active session by nullifying `refreshTokenHash` and `sessionExpiry`. The user is logged out immediately.
 
 ```mermaid
 sequenceDiagram
@@ -190,13 +147,13 @@ sequenceDiagram
     participant Server as Express Server
     participant DB as PostgreSQL
 
-    Client->>Server: POST /auth/refresh (JWT Refresh Token)
-    Server->>Server: Verify JWT signature & Decrypt
-    Server->>DB: Fetch Session by sessionId
-    DB-->>Server: Return Session (marked revokedTimestamp != null)
-    Note over Server: Security Breach Detected: Replay of Revoked Token!
-    Server->>DB: Transaction: Set revokedTimestamp = now() for ALL User Sessions
-    Server->>DB: Transaction: Create AuditLog 'SUSPICIOUS_REPLAY_ATTACK'
+    Client->>Server: POST /auth/refresh (Old JWT Refresh Token)
+    Server->>Server: Verify JWT signature & Extract incomingHash
+    Server->>DB: Fetch User by userId
+    DB-->>Server: Return User (with new active refreshTokenHash)
+    Note over Server: Security Breach Detected: Hash Mismatch (Replay Attack)!
+    Server->>DB: Transaction: Nullify refreshTokenHash & sessionExpiry
+    Server->>Server: Log 'SUSPICIOUS_REPLAY_ATTACK'
     DB-->>Server: Commit Transaction
     Server->>Client: Return 401 Unauthorized (Session Revoked)
 ```

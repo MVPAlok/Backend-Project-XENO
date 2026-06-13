@@ -101,7 +101,7 @@ Content-Type: application/json
 
 Consumes a verification token to activate/verify a user's email address.
 
-- **Method**: `POST`
+- **Method**: `GET`
 - **Path**: `/auth/verify-email`
 - **Authentication**: `Public` (Rate-limited: Max 5 requests/hour per IP)
 - **Query Parameters**:
@@ -109,7 +109,7 @@ Consumes a verification token to activate/verify a user's email address.
 
 #### Example Request
 ```http
-POST /auth/verify-email?token=ab87f9c2d1b74898c081e7f9a8a72b8d HTTP/1.1
+GET /auth/verify-email?token=ab87f9c2d1b74898c081e7f9a8a72b8d HTTP/1.1
 Host: api.xeno.com
 ```
 
@@ -457,3 +457,103 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
   "status": "ACTIVE"
 }
 ```
+
+---
+
+## 10. Create Workspace
+
+Creates a new brand workspace. The authenticated creator is assigned the `OWNER` membership role.
+
+- **Method**: `POST`
+- **Path**: `/workspaces`
+- **Authentication**: `Private` (Requires valid Access JWT Bearer Token)
+
+### Request Payload Fields
+| Name | Type | Rules / Constraints |
+| :--- | :--- | :--- |
+| `name` | String | Required. Trimmed, min 3, max 100 characters. |
+| `description` | String | Optional. Max 500 characters. |
+
+#### Example Request
+```http
+POST /workspaces HTTP/1.1
+Host: api.xeno.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+Content-Type: application/json
+
+{
+  "name": "Nike India",
+  "description": "Sports Wear"
+}
+```
+
+### Response Specs
+
+#### Success Response
+- **Status**: `201 Created`
+- **Body**:
+```json
+{
+  "id": "e6de27a4-d9bc-4df1-85b2-32a51241512f",
+  "name": "Nike India",
+  "slug": "nike-india",
+  "description": "Sports Wear",
+  "createdAt": "2026-06-13T10:00:00.000Z",
+  "updatedAt": "2026-06-13T10:00:00.000Z",
+  "role": "OWNER"
+}
+```
+
+---
+
+## 11. List Workspaces
+
+Lists all workspaces the authenticated user is currently a member of.
+
+- **Method**: `GET`
+- **Path**: `/workspaces`
+- **Authentication**: `Private` (Requires valid Access JWT Bearer Token)
+
+### Response Specs
+
+#### Success Response
+- **Status**: `200 OK`
+- **Body**:
+```json
+[
+  {
+    "id": "e6de27a4-d9bc-4df1-85b2-32a51241512f",
+    "name": "Nike India",
+    "slug": "nike-india",
+    "role": "OWNER",
+    "createdAt": "2026-06-13T10:00:00.000Z"
+  }
+]
+```
+
+---
+
+## 12. Retrieve Workspace
+
+Retrieves details for a specific workspace. Requires the authenticated user to be a member of the workspace.
+
+- **Method**: `GET`
+- **Path**: `/workspaces/:workspaceId`
+- **Authentication**: `Private` (Requires valid Access JWT Bearer Token)
+
+### Response Specs
+
+#### Success Response
+- **Status**: `200 OK`
+- **Body**:
+```json
+{
+  "id": "e6de27a4-d9bc-4df1-85b2-32a51241512f",
+  "name": "Nike India",
+  "slug": "nike-india",
+  "description": "Sports Wear",
+  "createdAt": "2026-06-13T10:00:00.000Z",
+  "updatedAt": "2026-06-13T10:00:00.000Z"
+}
+```
+

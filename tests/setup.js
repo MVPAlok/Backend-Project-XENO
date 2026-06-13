@@ -22,10 +22,8 @@ beforeEach(async () => {
   try {
     // Ordering deletions to satisfy Postgres foreign key references
     await prisma.$transaction([
-      prisma.session.deleteMany(),
-      prisma.passwordResetToken.deleteMany(),
-      prisma.emailVerificationToken.deleteMany(),
-      prisma.auditLog.deleteMany(),
+      prisma.workspaceMember.deleteMany(),
+      prisma.workspace.deleteMany(),
       prisma.user.deleteMany()
     ]);
   } catch (err) {

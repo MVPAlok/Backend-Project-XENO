@@ -29,29 +29,23 @@ export async function requireAuth(req, res, next) {
       throw new AuthenticationError('Invalid or malformed access token.');
     }
 
-    const { sub: userId, sessionId } = decoded;
+    const { sub: userId } = decoded;
 
-    // Lookup session to verify it has not been revoked or expired
-    const session = await prisma.session.findUnique({
-      where: { id: sessionId },
-      include: { user: true }
+    // Lookup user to verify session state
+    const user = await prisma.user.findUnique({
+      where: { id: userId }
     });
 
-    if (!session) {
-      throw new AuthenticationError('Active session not found.');
-    }
-
-    if (session.revokedTimestamp) {
-      throw new AuthenticationError('Session has been revoked.');
-    }
-
-    if (new Date() > session.expirationTimestamp) {
-      throw new AuthenticationError('Session has expired.');
-    }
-
-    const user = session.user;
     if (!user || user.deletedAt) {
       throw new AuthenticationError('User account not found or deleted.');
+    }
+
+    if (!user.refreshTokenHash) {
+      throw new AuthenticationError('Active session not found or has been revoked.');
+    }
+
+    if (user.sessionExpiry && new Date() > user.sessionExpiry) {
+      throw new AuthenticationError('Session has expired.');
     }
 
     if (user.status === 'SUSPENDED') {
@@ -62,7 +56,7 @@ export async function requireAuth(req, res, next) {
       throw new AuthenticationError('Your account has been deleted.');
     }
 
-    // Attach user information and sessionId to the request context
+    // Attach user information to the request context
     req.user = {
       id: user.id,
       email: user.email,
@@ -71,8 +65,7 @@ export async function requireAuth(req, res, next) {
       lastName: user.lastName,
       avatarUrl: user.avatarUrl,
       isEmailVerified: user.isEmailVerified,
-      status: user.status,
-      sessionId: session.id
+      status: user.status
     };
 
     return next();

@@ -1,8 +1,16 @@
 import request from 'supertest';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach, afterAll } from 'vitest';
 import app from '../../src/app.js';
 import prisma from '../../src/config/database.js';
 import { hashPassword, hashToken, comparePassword } from '../../src/utils/crypto.js';
+
+beforeEach(async () => {
+  await prisma.user.deleteMany({});
+});
+
+afterAll(async () => {
+  await prisma.$disconnect();
+});
 
 describe('Authentication API Integration Tests', () => {
   const testUser = {
@@ -30,9 +38,7 @@ describe('Authentication API Integration Tests', () => {
       expect(user).toBeTruthy();
       expect(user.isEmailVerified).toBe(false);
 
-      const token = await prisma.emailVerificationToken.findFirst({ where: { userId: user.id } });
-      expect(token).toBeTruthy();
-      expect(token.tokenHash).toBeTruthy();
+      expect(user.emailVerificationToken).toBeTruthy();
     });
 
     it('should fail registration with validation errors for invalid password complexity', async () => {
@@ -65,20 +71,17 @@ describe('Authentication API Integration Tests', () => {
       await request(app).post('/auth/signup').send(testUser);
       const user = await prisma.user.findUnique({ where: { email: testUser.email.toLowerCase() } });
       
-      // We need to look up token. Since it is hashed in DB, we'll mock verification by grabbing the token from DB
-      const dbToken = await prisma.emailVerificationToken.findFirst({ where: { userId: user.id } });
-      
       // Let's create a known token hash in database so we can test with its raw value
       const rawToken = 'abcdef1234567890abcdef1234567890';
       const tokenHash = hashToken(rawToken);
       
-      await prisma.emailVerificationToken.update({
-        where: { id: dbToken.id },
-        data: { tokenHash }
+      await prisma.user.update({
+        where: { id: user.id },
+        data: { emailVerificationToken: tokenHash }
       });
 
       const res = await request(app)
-        .post(`/auth/verify-email?token=${rawToken}`)
+        .get(`/auth/verify-email?token=${rawToken}`)
         .send();
 
       expect(res.status).toBe(200);
@@ -87,8 +90,7 @@ describe('Authentication API Integration Tests', () => {
       const updatedUser = await prisma.user.findUnique({ where: { id: user.id } });
       expect(updatedUser.isEmailVerified).toBe(true);
 
-      const updatedToken = await prisma.emailVerificationToken.findUnique({ where: { id: dbToken.id } });
-      expect(updatedToken.consumedAt).toBeTruthy();
+      expect(updatedUser.emailVerificationToken).toBeNull();
     });
   });
 
@@ -133,13 +135,14 @@ describe('Authentication API Integration Tests', () => {
       expect(res.body).toHaveProperty('refreshToken');
       expect(res.body.user.email).toBe(testUser.email.toLowerCase());
 
-      const sessionsCount = await prisma.session.count({ where: { userId: user.id } });
-      expect(sessionsCount).toBe(1);
+      const loggedInUser = await prisma.user.findUnique({ where: { id: user.id } });
+      expect(loggedInUser.refreshTokenHash).toBeTruthy();
+      expect(loggedInUser.sessionExpiry).toBeTruthy();
     });
   });
 
   describe('POST /auth/refresh', () => {
-    it('should successfully rotate tokens and revoke old session', async () => {
+    it('should successfully rotate tokens', async () => {
       // Setup verified user
       const passwordHash = await hashPassword(testUser.password);
       await prisma.user.create({
@@ -170,21 +173,9 @@ describe('Authentication API Integration Tests', () => {
       expect(refreshRes.status).toBe(200);
       expect(refreshRes.body).toHaveProperty('accessToken');
       expect(refreshRes.body).toHaveProperty('refreshToken');
-
-      // Verify old session has been marked revoked
-      const oldSession = await prisma.session.findFirst({
-        where: { revokedTimestamp: { not: null } }
-      });
-      expect(oldSession).toBeTruthy();
-
-      // Verify new session exists
-      const newSession = await prisma.session.findFirst({
-        where: { revokedTimestamp: null }
-      });
-      expect(newSession).toBeTruthy();
     });
 
-    it('should detect replay attack and revoke all active sessions on token reuse', async () => {
+    it('should detect replay attack and revoke active session on token reuse', async () => {
       const passwordHash = await hashPassword(testUser.password);
       const user = await prisma.user.create({
         data: {
@@ -216,11 +207,10 @@ describe('Authentication API Integration Tests', () => {
       expect(replayRes.status).toBe(401);
       expect(replayRes.body.detail).toContain('revoked due to security compromise');
 
-      // Assert that ALL sessions are now revoked
-      const activeSessionsCount = await prisma.session.count({
-        where: { userId: user.id, revokedTimestamp: null }
-      });
-      expect(activeSessionsCount).toBe(0);
+      // Assert that session is revoked
+      const compromisedUser = await prisma.user.findUnique({ where: { id: user.id } });
+      expect(compromisedUser.refreshTokenHash).toBeNull();
+      expect(compromisedUser.sessionExpiry).toBeNull();
     });
   });
 
@@ -280,17 +270,12 @@ describe('Authentication API Integration Tests', () => {
       expect(forgotRes.status).toBe(200);
       expect(forgotRes.body.message).toContain('instructions');
 
-      const resetRecord = await prisma.passwordResetToken.findFirst({
-        where: { userId: user.id }
-      });
-      expect(resetRecord).toBeTruthy();
-
       const rawResetToken = 'resettokenabcdef123456';
       const resetHash = hashToken(rawResetToken);
       
-      await prisma.passwordResetToken.update({
-        where: { id: resetRecord.id },
-        data: { tokenHash: resetHash }
+      await prisma.user.update({
+        where: { id: user.id },
+        data: { passwordResetToken: resetHash }
       });
 
       // 2. Perform Reset
@@ -306,13 +291,10 @@ describe('Authentication API Integration Tests', () => {
       expect(resetRes.body.message).toContain('successfully');
 
       // Verify token marked consumed
-      const updatedReset = await prisma.passwordResetToken.findUnique({
-        where: { id: resetRecord.id }
-      });
-      expect(updatedReset.consumedAt).toBeTruthy();
+      const updatedUser = await prisma.user.findUnique({ where: { id: user.id } });
+      expect(updatedUser.passwordResetToken).toBeNull();
 
       // Verify credentials update
-      const updatedUser = await prisma.user.findUnique({ where: { id: user.id } });
       const canLoginWithOld = await comparePassword(testUser.password, updatedUser.passwordHash);
       expect(canLoginWithOld).toBe(false);
 

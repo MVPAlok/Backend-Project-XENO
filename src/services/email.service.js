@@ -40,6 +40,11 @@ export async function sendEmail({ to, subject, html, text }) {
  */
 export async function sendVerificationEmail(email, firstName, token, origin = 'http://localhost:3000') {
   const verificationLink = `${origin}/auth/verify-email?token=${token}`;
+  
+  if (env.NODE_ENV === 'development') {
+    logger.info({ verificationLink }, '🛠️ DEVELOPMENT MODE: Verification Link');
+  }
+
   const subject = 'Verify your email address';
   const text = `Hi ${firstName},\n\nPlease verify your email address by visiting this link: ${verificationLink}\n\nThis verification link is valid for 24 hours.`;
   const html = `
@@ -100,6 +105,11 @@ export async function sendVerificationEmail(email, firstName, token, origin = 'h
  */
 export async function sendPasswordResetEmail(email, firstName, token, origin = 'http://localhost:3000') {
   const resetLink = `${origin}/auth/reset-password?token=${token}`;
+  
+  if (env.NODE_ENV === 'development') {
+    logger.info({ resetLink }, '🛠️ DEVELOPMENT MODE: Password Reset Link');
+  }
+
   const subject = 'Reset your password';
   const text = `Hi ${firstName},\n\nYou requested to reset your password. Please click this link to complete the reset: ${resetLink}\n\nThis password reset link is valid for 1 hour.`;
   const html = `
