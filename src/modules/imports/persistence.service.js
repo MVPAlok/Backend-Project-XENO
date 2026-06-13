@@ -49,9 +49,11 @@ export async function persistImport(workspaceId, jobId, userId, { mappings, reso
     const existingCustomers = await customerRepository.findByWorkspace(workspaceId);
     const emailMap = new Map();
     const phoneMap = new Map();
+    const externalIdMap = new Map();
     for (const c of existingCustomers) {
       if (c.email) emailMap.set(c.email.toLowerCase(), c);
       if (c.phone) phoneMap.set(c.phone, c);
+      if (c.externalId) externalIdMap.set(c.externalId, c);
     }
 
     // Load existing orders in workspace matching raw rows
@@ -76,9 +78,24 @@ export async function persistImport(workspaceId, jobId, userId, { mappings, reso
     // Keep track of new customer objects we generate in this run to avoid duplicates in the same CSV
     const newCustomersEmailMap = new Map();
     const newCustomersPhoneMap = new Map();
+    const newCustomersExternalIdMap = new Map();
+
+    const seenRawRows = new Set();
 
     for (const rawRow of rawRows) {
       try {
+        const rawStr = JSON.stringify(Object.keys(rawRow).sort().reduce((acc, key) => {
+          acc[key] = rawRow[key] !== undefined && rawRow[key] !== null ? rawRow[key].toString().trim() : '';
+          return acc;
+        }, {}));
+
+        if (seenRawRows.has(rawStr)) {
+          processedRows++;
+          successfulRows++;
+          continue; // Exact duplicate row deduplication
+        }
+        seenRawRows.add(rawStr);
+
         const cleaned = cleanRow(rawRow, mappings);
         if (!cleaned.isValid) {
           failedRows++;
@@ -90,7 +107,10 @@ export async function persistImport(workspaceId, jobId, userId, { mappings, reso
 
         // 1. Resolve Customer
         let matchedCustomer = null;
-        if (data.email) {
+        if (data.externalId) {
+          matchedCustomer = externalIdMap.get(data.externalId) || newCustomersExternalIdMap.get(data.externalId);
+        }
+        if (!matchedCustomer && data.email) {
           matchedCustomer = emailMap.get(data.email) || newCustomersEmailMap.get(data.email);
         }
         if (!matchedCustomer && data.phone) {
@@ -105,7 +125,8 @@ export async function persistImport(workspaceId, jobId, userId, { mappings, reso
           let strategy = resolutionStrategy;
           const override = overrides.find(o => 
             (data.email && o.identifier === data.email) || 
-            (data.phone && o.identifier === data.phone)
+            (data.phone && o.identifier === data.phone) ||
+            (data.externalId && o.identifier === data.externalId)
           );
           if (override) {
             strategy = override.strategy;
@@ -138,6 +159,10 @@ export async function persistImport(workspaceId, jobId, userId, { mappings, reso
                 customerUpdates.push({ id: customerId, data: updateData });
               }
               Object.assign(matchedCustomer, updateData); // Sync in-memory
+              
+              if (updateData.email) emailMap.set(updateData.email, matchedCustomer);
+              if (updateData.phone) phoneMap.set(updateData.phone, matchedCustomer);
+              if (updateData.externalId) externalIdMap.set(updateData.externalId, matchedCustomer);
             }
           } else {
             // KEEP_EXISTING: only fill in missing/null fields
@@ -157,6 +182,10 @@ export async function persistImport(workspaceId, jobId, userId, { mappings, reso
                 customerUpdates.push({ id: customerId, data: updateData });
               }
               Object.assign(matchedCustomer, updateData); // Sync in-memory
+
+              if (updateData.email) emailMap.set(updateData.email, matchedCustomer);
+              if (updateData.phone) phoneMap.set(updateData.phone, matchedCustomer);
+              if (updateData.externalId) externalIdMap.set(updateData.externalId, matchedCustomer);
             }
           }
         } else {
@@ -181,6 +210,10 @@ export async function persistImport(workspaceId, jobId, userId, { mappings, reso
           if (data.phone) {
             phoneMap.set(data.phone, customerObj);
             newCustomersPhoneMap.set(data.phone, customerObj);
+          }
+          if (data.externalId) {
+            externalIdMap.set(data.externalId, customerObj);
+            newCustomersExternalIdMap.set(data.externalId, customerObj);
           }
         }
 

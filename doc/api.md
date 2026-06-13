@@ -559,16 +559,19 @@ Retrieves details for a specific workspace. Requires the authenticated user to b
 
 ---
 
-## 13. Generate Import Preview
+## 13. Preview Import Ingestion
 
-Uploads a sales export CSV dataset and returns AI mapping recommendations, duplicate/conflict analysis, and sample cleaned rows. No database records are written to customers or orders tables.
+Uploads a sales export CSV file to generate a preview. This parses the CSV, cleans data, detects conflicts, and suggests AI mappings, but does NOT persist customer or order data.
 
 - **Method**: `POST`
 - **Path**: `/workspaces/:workspaceId/imports/preview`
 - **Authentication**: `Private` (Requires valid Access JWT Bearer Token & Workspace Membership)
 - **Content-Type**: `multipart/form-data`
-- **Payload Constraints**:
-  - `file`: CSV file, maximum size of **10MB**.
+
+### Request Payload Fields
+| Name | Type | Rules / Constraints |
+| :--- | :--- | :--- |
+| `file` | File | Required. Must be a `.csv` file. Maximum size 10MB. |
 
 #### Example Request
 ```http
@@ -581,8 +584,7 @@ Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0g
 Content-Disposition: form-data; name="file"; filename="sales.csv"
 Content-Type: text/csv
 
-first_name,last_name,email,phone,amount,order_date,external_order_id
-Nike,Consumer,nike@buyer.com,+91 99999 99999,1500.50,2026-06-01T12:00:00Z,ORD100
+(binary data)
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 ```
 
@@ -594,14 +596,9 @@ Nike,Consumer,nike@buyer.com,+91 99999 99999,1500.50,2026-06-01T12:00:00Z,ORD100
 ```json
 {
   "importJobId": "b182cb05-3e28-4e08-9df2-ebae1c9448fd",
-  "summary": {
-    "totalRows": 1,
-    "validRows": 1,
-    "invalidRows": 0,
-    "potentialCustomers": 1,
-    "potentialOrders": 1,
-    "potentialDuplicates": 0
-  },
+  "workspaceId": "e6de27a4-d9bc-4df1-85b2-32a51241512f",
+  "fileName": "sales.csv",
+  "totalRows": 1,
   "detectedMappings": {
     "first_name": "firstName",
     "last_name": "lastName",
@@ -611,28 +608,23 @@ Nike,Consumer,nike@buyer.com,+91 99999 99999,1500.50,2026-06-01T12:00:00Z,ORD100
     "order_date": "purchaseDate",
     "external_order_id": "externalOrderId"
   },
-  "conflicts": {
-    "customers": [],
-    "orders": []
-  },
-  "suggestedStrategy": "KEEP_EXISTING",
-  "strategyExplanation": "KEEP_EXISTING is recommended by default to prevent overwriting existing database customer data unless explicit approval is given.",
-  "sampleTransformedRecords": [
-    {
-      "isValid": true,
-      "errors": [],
-      "data": {
-        "firstName": "Nike",
-        "lastName": "Consumer",
-        "email": "nike@buyer.com",
-        "phone": "919999999999",
-        "amount": 1500.5,
-        "currency": "INR",
-        "purchaseDate": "2026-06-01T12:00:00.000Z",
-        "externalOrderId": "ORD100"
+  "previewData": {
+    "sampleTransformedRecords": [
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john.doe@example.com",
+        "phone": "+1234567890",
+        "amount": 99.99,
+        "purchaseDate": "2026-06-13T10:00:00.000Z",
+        "externalOrderId": "ORD-1001"
       }
-    }
-  ]
+    ]
+  },
+  "conflictSummary": {
+    "customersWithConflicts": 0,
+    "ordersWithConflicts": 0
+  }
 }
 ```
 

@@ -3,6 +3,7 @@ import { parseCSV } from './utils/csvParser.js';
 import { cleanRow } from './utils/cleaner.js';
 import { getAdvisorSuggestions } from './ai/mappingAdvisor.js';
 import { getConflictsForRows } from './conflict.service.js';
+import { detectInFileDuplicates } from './utils/deduplicator.js';
 import { buildPreview } from './utils/previewBuilder.js';
 import { ValidationError } from '../../utils/errors.js';
 
@@ -37,6 +38,9 @@ export async function generateImportPreview(workspaceId, userId, file) {
     // Run clean step on all raw rows based on AI suggested mappings
     const cleanedRows = rawRows.map(row => cleanRow(row, aiAdvisor.mappings));
 
+    // Detect in-file duplicates
+    const inFileDuplicates = detectInFileDuplicates(rawRows, cleanedRows);
+
     const validRowsCount = cleanedRows.filter(r => r.isValid).length;
     const invalidRowsCount = totalRows - validRowsCount;
 
@@ -44,9 +48,9 @@ export async function generateImportPreview(workspaceId, userId, file) {
     const potentialCustomersCount = cleanedRows.filter(r => r.isValid && (r.data.firstName || r.data.email || r.data.phone)).length;
     const potentialOrdersCount = cleanedRows.filter(r => r.isValid && r.data.externalOrderId).length;
 
-    // Detect conflicts (potential duplicates)
+    // Detect conflicts (potential duplicates in DB)
     const conflicts = await getConflictsForRows(workspaceId, cleanedRows);
-    const potentialDuplicatesCount = conflicts.customers.length + conflicts.orders.length;
+    const potentialDuplicatesCount = inFileDuplicates.totalInFileDuplicates + conflicts.customers.length + conflicts.orders.length;
 
     // Sample cleaned records for preview display (up to 10 rows)
     const sampleTransformedRecords = cleanedRows.slice(0, 10).map(r => ({

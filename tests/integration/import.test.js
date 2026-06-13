@@ -406,4 +406,76 @@ describe('Imports API Integration Tests (Phase 3 Redesign)', () => {
       expect(detailRes.body.previewData).toBeTruthy();
     });
   });
+
+  describe('Dirty Dataset Mapping, Cleaning, and Deduplication', () => {
+    it('should correctly infer mappings, clean and split names, detect duplicates, and deduplicate during confirm', async () => {
+      const csvData = [
+        'Cust Name,Total Amt,Phone_Num,CustomerID,EmailAddress,PurchaseDate,external_order_id',
+        'john doe,99.99,+1234567890,CUST1,john.doe@example.com,2026-06-13T10:00:00Z,ORD1001',
+        'JANE  SMITH,149.50,+1987654321,CUST2,jane.smith@example.com,2026-06-13T11:30:00Z,ORD1002',
+        'john doe,45.00,+1234567890,CUST1,john.doe@example.com,2026-06-13T12:00:00Z,ORD1003', // Duplicate CustomerID CUST1, different order
+        'john doe,99.99,+1234567890,CUST1,john.doe@example.com,2026-06-13T10:00:00Z,ORD1001', // Exact match duplicate of Row 1
+        'Invalid,null,null,CUST3,invalidemail,31/02/2023,ORD1004' // Invalid row
+      ].join('\n');
+
+      const previewRes = await request(app)
+        .post(`/workspaces/${workspace1.id}/imports/preview`)
+        .set('Authorization', `Bearer ${user1Token}`)
+        .attach('file', Buffer.from(csvData), 'dirty_restaurant.csv');
+
+      expect(previewRes.status).toBe(200);
+      expect(previewRes.body.summary.totalRows).toBe(5);
+      expect(previewRes.body.summary.validRows).toBe(4);
+      expect(previewRes.body.summary.invalidRows).toBe(1);
+      expect(previewRes.body.summary.potentialDuplicates).toBe(2); // 1 exact duplicate, 1 duplicate CustomerID CUST1
+
+      // Mappings mapping checks
+      expect(previewRes.body.detectedMappings['Cust Name']).toBe('firstName');
+      expect(previewRes.body.detectedMappings['Total Amt']).toBe('amount');
+      expect(previewRes.body.detectedMappings['Phone_Num']).toBe('phone');
+      expect(previewRes.body.detectedMappings['CustomerID']).toBe('externalId');
+      expect(previewRes.body.detectedMappings['EmailAddress']).toBe('email');
+      expect(previewRes.body.detectedMappings['PurchaseDate']).toBe('purchaseDate');
+
+      // Confirm ingestion
+      const confirmRes = await request(app)
+        .post(`/workspaces/${workspace1.id}/imports/confirm`)
+        .set('Authorization', `Bearer ${user1Token}`)
+        .send({
+          importJobId: previewRes.body.importJobId,
+          mappings: previewRes.body.detectedMappings,
+          resolutionStrategy: 'KEEP_EXISTING'
+        });
+
+      expect(confirmRes.status).toBe(200);
+      expect(confirmRes.body.status).toBe('COMPLETED');
+      expect(confirmRes.body.processedRows).toBe(5);
+      expect(confirmRes.body.successfulRows).toBe(4); // 4 valid rows processed
+
+      // Verify DB persistence
+      const customers = await prisma.customer.findMany({ where: { workspaceId: workspace1.id } });
+      const orders = await prisma.order.findMany({ where: { workspaceId: workspace1.id } });
+
+      // There should be exactly 2 unique valid customers created: John Doe, Jane Smith
+      expect(customers.length).toBe(2);
+      
+      const john = customers.find(c => c.externalId === 'CUST1');
+      expect(john).toBeTruthy();
+      expect(john.firstName).toBe('John'); // Title cased
+      expect(john.lastName).toBe('Doe'); // Split from "john doe" since lastName was not mapped
+      expect(john.phone).toBe('1234567890');
+
+      const jane = customers.find(c => c.externalId === 'CUST2');
+      expect(jane).toBeTruthy();
+      expect(jane.firstName).toBe('Jane');
+      expect(jane.lastName).toBe('Smith'); // Split from "JANE  SMITH"
+
+      // There should be exactly 3 orders created: ORD1001, ORD1002, ORD1003. (The exact duplicate ORD1001 is skipped/deduplicated)
+      expect(orders.length).toBe(3);
+      expect(orders.some(o => o.externalOrderId === 'ORD1001')).toBe(true);
+      expect(orders.some(o => o.externalOrderId === 'ORD1002')).toBe(true);
+      expect(orders.some(o => o.externalOrderId === 'ORD1003')).toBe(true);
+      expect(orders.filter(o => o.externalOrderId === 'ORD1001').length).toBe(1); // exactly 1, not 2!
+    });
+  });
 });

@@ -5,20 +5,20 @@ export function detectFieldCategory(header) {
   if (!header) return null;
   const h = header.toLowerCase().trim().replace(/[^a-z0-9_]/g, '');
 
-  // Customer First Name
-  if (['firstname', 'f_name', 'first_name', 'first', 'name', 'customer_name', 'customername'].includes(h)) {
+  // Customer First Name / Full Name
+  if (['firstname', 'f_name', 'first_name', 'first', 'name', 'customer_name', 'customername', 'custname', 'cust_name', 'contactname', 'contact_name', 'fullname', 'full_name'].includes(h)) {
     return { field: 'firstName', confidence: 0.92, explanation: `Likely maps to Customer First Name based on header '${header}'.` };
   }
   // Customer Last Name
-  if (['lastname', 'l_name', 'last_name', 'last'].includes(h)) {
+  if (['lastname', 'l_name', 'last_name', 'last', 'surname'].includes(h)) {
     return { field: 'lastName', confidence: 0.95, explanation: `Likely maps to Customer Last Name based on header '${header}'.` };
   }
   // Email
-  if (['email', 'email_address', 'emailaddress', 'mail'].includes(h)) {
+  if (['email', 'email_address', 'emailaddress', 'mail', 'email_id', 'emailid'].includes(h)) {
     return { field: 'email', confidence: 0.98, explanation: `Likely maps to Customer Email based on header '${header}'.` };
   }
   // Phone
-  if (['phone', 'phone_number', 'phonenumber', 'mobile', 'tel', 'contact'].includes(h)) {
+  if (['phone', 'phone_number', 'phonenumber', 'mobile', 'tel', 'contact', 'phone_num', 'phonenum', 'phone_no', 'phoneno'].includes(h)) {
     return { field: 'phone', confidence: 0.96, explanation: `Likely maps to Customer Phone based on header '${header}'.` };
   }
   // Gender
@@ -35,11 +35,11 @@ export function detectFieldCategory(header) {
   }
 
   // Order ID
-  if (['orderid', 'order_id', 'externalorderid', 'external_order_id', 'transaction_id', 'transactionid', 'invoice_id', 'invoiceid'].includes(h)) {
+  if (['orderid', 'order_id', 'externalorderid', 'external_order_id', 'transaction_id', 'transactionid', 'invoice_id', 'invoiceid', 'dealid', 'deal_id'].includes(h)) {
     return { field: 'externalOrderId', confidence: 0.95, explanation: `Likely maps to Order External ID based on header '${header}'.` };
   }
   // Order Amount / Revenue
-  if (['amount', 'price', 'revenue', 'order_amount', 'orderamount', 'total', 'order_total', 'ordertotal'].includes(h)) {
+  if (['amount', 'price', 'revenue', 'order_amount', 'orderamount', 'total', 'order_total', 'ordertotal', 'totalamt', 'total_amt', 'dealvalue', 'deal_value', 'ordervalue', 'order_value'].includes(h)) {
     return { field: 'amount', confidence: 0.96, explanation: `Likely maps to Order Amount based on header '${header}'.` };
   }
   // Currency

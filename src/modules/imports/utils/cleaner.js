@@ -70,6 +70,16 @@ export function cleanDate(dateStr) {
   return parsed;
 }
 
+function toTitleCase(str) {
+  if (!str) return '';
+  return str
+    .toLowerCase()
+    .split(' ')
+    .filter(Boolean)
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+}
+
 /**
  * Clean a single raw row according to custom mappings.
  * Returns { data, errors }
@@ -91,13 +101,28 @@ export function cleanRow(rawRow, mappings) {
     const headerKey = invertedMappings[targetField];
     if (!headerKey) return null;
     const value = rawRow[headerKey];
-    return value !== undefined ? value.trim() : null;
+    return value !== undefined && value !== null ? value.toString().trim() : null;
   };
 
 
   // 1. Customer Fields
   try {
-    data.firstName = getRawValue('firstName') || '';
+    let rawFirstName = getRawValue('firstName') || '';
+    rawFirstName = rawFirstName.trim().replace(/\s+/g, ' ');
+    
+    if (rawFirstName) {
+      const formattedFirstName = toTitleCase(rawFirstName);
+      if (!invertedMappings['lastName'] && formattedFirstName.includes(' ')) {
+        const parts = formattedFirstName.split(' ');
+        data.firstName = parts[0];
+        data.lastName = parts.slice(1).join(' ');
+      } else {
+        data.firstName = formattedFirstName;
+      }
+    } else {
+      data.firstName = '';
+    }
+
     if (invertedMappings['firstName'] && !data.firstName) {
       errors.push('First name is required.');
     }
@@ -106,7 +131,12 @@ export function cleanRow(rawRow, mappings) {
   }
 
   try {
-    data.lastName = getRawValue('lastName');
+    if (invertedMappings['lastName']) {
+      const rawLastName = getRawValue('lastName') || '';
+      data.lastName = toTitleCase(rawLastName.trim().replace(/\s+/g, ' ')) || null;
+    } else {
+      data.lastName = data.lastName || null;
+    }
   } catch (err) {
     errors.push(err.message);
   }
