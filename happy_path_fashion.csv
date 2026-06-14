@@ -1,0 +1,1001 @@
+CustomerID,CustomerName,EmailAddress,PhoneNumber,PurchasedItem,ItemCategory,Quantity,OrderValue,PurchaseDate,Location,DiscountApplied,PaymentMethod
+CUST-10627,Isabella Miller,isabella.miller@company.org,+1-854-314-1409,Jeans,Apparel,1,60.0,2023-07-01,Houston,0,Apple Pay
+CUST-10349,Alexander Moore,alexander.moore@outlook.com,+1-959-481-5012,T-Shirt,Apparel,4,80.0,2023-04-20,New York,20,PayPal
+CUST-52195,Amelia Johnson,amelia.johnson@company.org,+1-428-342-2679,Jacket,Outerwear,2,235.0,2023-04-06,San Diego,5,Gift Card
+CUST-27278,Mia Taylor,mia.taylor@outlook.com,+1-892-958-9935,Dress,Apparel,2,150.0,2023-05-21,San Antonio,0,Debit Card
+CUST-92081,Elijah Hernandez,elijah.hernandez@yahoo.com,+1-289-804-7912,Dress,Apparel,3,220.0,2023-05-24,Chicago,5,Apple Pay
+CUST-97055,Isabella Lopez,isabella.lopez@outlook.com,+1-232-230-2535,Dress,Apparel,4,300.0,2023-08-17,Phoenix,0,Credit Card
+CUST-41790,Evelyn Jackson,evelyn.jackson@icloud.com,+1-423-438-9279,Sneakers,Footwear,3,250.0,2023-03-18,San Diego,5,Gift Card
+CUST-14731,Mia Miller,mia.miller@icloud.com,+1-816-227-4257,Jacket,Outerwear,4,480.0,2023-01-18,Phoenix,0,Debit Card
+CUST-30251,Mia Martin,mia.martin@icloud.com,+1-933-865-9928,T-Shirt,Apparel,2,50.0,2023-11-11,Los Angeles,0,Credit Card
+CUST-59220,Noah Garcia,noah.garcia@gmail.com,+1-629-425-8359,Scarf,Accessories,1,0.0,2023-11-14,Phoenix,20,Cash
+CUST-41706,Elijah Smith,elijah.smith@yahoo.com,+1-803-484-1106,Jacket,Outerwear,1,115.0,2023-11-12,Phoenix,5,PayPal
+CUST-47610,Olivia Taylor,olivia.taylor@company.org,+1-977-363-7924,Sneakers,Footwear,1,85.0,2023-05-06,San Antonio,0,Cash
+CUST-19457,Liam Hernandez,liam.hernandez@company.org,+1-548-484-3547,Sneakers,Footwear,1,85.0,2023-11-28,Phoenix,0,PayPal
+CUST-78656,James Moore,james.moore@gmail.com,+1-420-981-6514,Jeans,Apparel,1,45.0,2023-06-01,San Diego,15,Apple Pay
+CUST-12619,Oliver Taylor,oliver.taylor@outlook.com,+1-304-294-7224,Jacket,Outerwear,3,360.0,2023-09-13,Chicago,0,Debit Card
+CUST-36423,Liam Miller,liam.miller@gmail.com,+1-299-567-6635,Dress,Apparel,4,300.0,2023-07-30,Phoenix,0,Apple Pay
+CUST-13840,Emma Taylor,emma.taylor@outlook.com,+1-818-470-1711,Sneakers,Footwear,2,170.0,2023-10-09,Philadelphia,0,PayPal
+CUST-35724,James Martin,james.martin@outlook.com,+1-947-670-9785,Sneakers,Footwear,3,255.0,2023-09-03,Phoenix,0,PayPal
+CUST-61734,James Rodriguez,james.rodriguez@hotmail.com,+1-327-587-2291,Jeans,Apparel,4,230.0,2023-02-01,Phoenix,10,PayPal
+CUST-78098,Harper Taylor,harper.taylor@company.org,+1-765-500-6925,Scarf,Accessories,1,10.0,2023-02-14,New York,10,Gift Card
+CUST-39771,William Martin,william.martin@icloud.com,+1-791-396-2139,Dress,Apparel,4,300.0,2023-05-24,Chicago,0,Credit Card
+CUST-42245,Lucas Davis,lucas.davis@outlook.com,+1-246-877-4733,Scarf,Accessories,4,75.0,2023-07-16,San Diego,5,Debit Card
+CUST-67036,Amelia Taylor,amelia.taylor@hotmail.com,+1-991-496-2307,Sneakers,Footwear,1,85.0,2023-03-12,Los Angeles,0,Apple Pay
+CUST-39639,Amelia Miller,amelia.miller@company.org,+1-438-303-7227,T-Shirt,Apparel,1,5.0,2023-08-03,New York,20,Apple Pay
+CUST-08513,Evelyn Smith,evelyn.smith@icloud.com,+1-484-664-6977,Dress,Apparel,1,55.0,2023-04-13,San Diego,20,Cash
+CUST-68870,James Gonzalez,james.gonzalez@outlook.com,+1-366-579-6820,Jacket,Outerwear,2,240.0,2023-11-26,Houston,0,PayPal
+CUST-40930,Alexander Jackson,alexander.jackson@outlook.com,+1-414-886-5374,Jeans,Apparel,1,45.0,2023-09-27,Chicago,15,PayPal
+CUST-82778,Olivia Jackson,olivia.jackson@gmail.com,+1-918-899-2169,Scarf,Accessories,2,30.0,2023-05-08,Philadelphia,10,PayPal
+CUST-33804,Ava Taylor,ava.taylor@gmail.com,+1-823-850-3803,T-Shirt,Apparel,1,25.0,2023-11-19,Chicago,0,Apple Pay
+CUST-26114,Evelyn Gonzalez,evelyn.gonzalez@company.org,+1-746-946-5010,T-Shirt,Apparel,2,50.0,2023-10-06,Houston,0,Cash
+CUST-55507,Isabella Thomas,isabella.thomas@icloud.com,+1-367-673-7216,Jacket,Outerwear,4,480.0,2023-01-10,Houston,0,Credit Card
+CUST-34454,Sophia Davis,sophia.davis@outlook.com,+1-476-855-4598,Jeans,Apparel,3,170.0,2023-07-15,Houston,10,Gift Card
+CUST-98182,Isabella Jackson,isabella.jackson@company.org,+1-901-532-1916,Sneakers,Footwear,4,320.0,2023-07-03,San Antonio,20,Debit Card
+CUST-46821,Henry Moore,henry.moore@company.org,+1-434-232-6168,Scarf,Accessories,4,70.0,2023-09-03,Los Angeles,10,Credit Card
+CUST-58036,Noah Smith,noah.smith@yahoo.com,+1-610-474-2084,Scarf,Accessories,1,5.0,2023-10-06,Phoenix,15,Apple Pay
+CUST-02946,Benjamin Wilson,benjamin.wilson@gmail.com,+1-416-780-6155,Jeans,Apparel,2,115.0,2023-09-06,Chicago,5,Gift Card
+CUST-15936,Henry Jackson,henry.jackson@icloud.com,+1-417-871-9179,Scarf,Accessories,3,50.0,2023-06-26,San Diego,10,Gift Card
+CUST-27925,Sophia Anderson,sophia.anderson@outlook.com,+1-605-858-8517,Sneakers,Footwear,1,75.0,2023-10-17,San Antonio,10,Gift Card
+CUST-79940,Liam Moore,liam.moore@company.org,+1-346-471-3287,Jacket,Outerwear,1,120.0,2023-09-15,San Diego,0,PayPal
+CUST-65729,Alexander Johnson,alexander.johnson@outlook.com,+1-452-962-9830,Jacket,Outerwear,1,115.0,2023-06-14,Phoenix,5,Debit Card
+CUST-52826,Amelia Taylor,amelia.taylor@yahoo.com,+1-469-964-8019,T-Shirt,Apparel,4,90.0,2023-07-18,Phoenix,10,Apple Pay
+CUST-83649,Isabella Moore,isabella.moore@icloud.com,+1-797-608-6930,T-Shirt,Apparel,2,50.0,2023-05-19,Philadelphia,0,Apple Pay
+CUST-84109,James Garcia,james.garcia@company.org,+1-424-341-9348,T-Shirt,Apparel,2,40.0,2023-04-03,Houston,10,Gift Card
+CUST-46842,Elijah Jackson,elijah.jackson@outlook.com,+1-705-293-1771,Jacket,Outerwear,3,360.0,2023-01-14,Los Angeles,0,Apple Pay
+CUST-36959,Amelia Brown,amelia.brown@gmail.com,+1-312-356-3621,Sneakers,Footwear,2,165.0,2023-06-13,Philadelphia,5,Debit Card
+CUST-69425,Olivia Smith,olivia.smith@yahoo.com,+1-896-632-2040,Jacket,Outerwear,2,230.0,2023-11-02,New York,10,Debit Card
+CUST-97580,Benjamin Davis,benjamin.davis@icloud.com,+1-594-590-8668,Jacket,Outerwear,1,120.0,2023-04-23,San Antonio,0,Cash
+CUST-25392,Harper Miller,harper.miller@yahoo.com,+1-741-457-1188,T-Shirt,Apparel,1,25.0,2023-01-16,San Antonio,0,Cash
+CUST-09941,Noah Williams,noah.williams@gmail.com,+1-896-938-2876,Jeans,Apparel,4,240.0,2023-05-24,Los Angeles,0,Credit Card
+CUST-55693,Henry Martinez,henry.martinez@icloud.com,+1-898-749-5371,T-Shirt,Apparel,1,10.0,2023-01-30,Phoenix,15,Debit Card
+CUST-09787,Elijah Martinez,elijah.martinez@yahoo.com,+1-987-856-6573,Jeans,Apparel,1,60.0,2023-08-30,San Diego,0,Debit Card
+CUST-30492,Noah Jackson,noah.jackson@hotmail.com,+1-314-500-8123,Sneakers,Footwear,1,70.0,2023-09-29,San Antonio,15,Debit Card
+CUST-47723,Liam Wilson,liam.wilson@gmail.com,+1-361-664-1053,Sneakers,Footwear,1,85.0,2023-07-03,Los Angeles,0,Cash
+CUST-28011,Oliver Johnson,oliver.johnson@gmail.com,+1-939-936-5315,Dress,Apparel,4,280.0,2023-10-27,San Antonio,20,Gift Card
+CUST-48702,William Smith,william.smith@gmail.com,+1-712-980-3927,Dress,Apparel,1,55.0,2023-04-30,San Antonio,20,Gift Card
+CUST-89998,Noah Moore,noah.moore@hotmail.com,+1-719-308-5889,Dress,Apparel,3,225.0,2023-03-23,Houston,0,Apple Pay
+CUST-13236,Henry Miller,henry.miller@hotmail.com,+1-854-719-4258,Sneakers,Footwear,3,250.0,2023-02-21,New York,5,Gift Card
+CUST-31722,James Davis,james.davis@outlook.com,+1-356-582-3646,T-Shirt,Apparel,3,75.0,2023-05-07,Houston,0,PayPal
+CUST-73756,Liam Smith,liam.smith@company.org,+1-752-997-9689,T-Shirt,Apparel,3,70.0,2023-12-03,New York,5,Cash
+CUST-96653,William Williams,william.williams@yahoo.com,+1-200-813-6310,T-Shirt,Apparel,1,25.0,2023-05-04,San Antonio,0,Debit Card
+CUST-02530,Noah Davis,noah.davis@outlook.com,+1-700-219-2832,Jacket,Outerwear,3,360.0,2023-05-17,Philadelphia,0,Gift Card
+CUST-94117,Benjamin Anderson,benjamin.anderson@yahoo.com,+1-571-514-4923,Dress,Apparel,1,75.0,2023-10-01,San Diego,0,Cash
+CUST-80915,Lucas Jones,lucas.jones@company.org,+1-259-446-2290,T-Shirt,Apparel,4,100.0,2023-01-29,Phoenix,0,Gift Card
+CUST-21385,Amelia Williams,amelia.williams@hotmail.com,+1-287-949-8962,Dress,Apparel,3,225.0,2023-04-23,San Antonio,0,Credit Card
+CUST-80858,Elijah Jackson,elijah.jackson@company.org,+1-270-978-9727,Dress,Apparel,2,145.0,2023-10-22,New York,5,Debit Card
+CUST-82016,Benjamin Smith,benjamin.smith@hotmail.com,+1-984-328-3103,Jacket,Outerwear,3,340.0,2023-07-18,New York,20,Credit Card
+CUST-17428,Elijah Anderson,elijah.anderson@company.org,+1-875-686-3705,Sneakers,Footwear,3,255.0,2023-07-01,New York,0,Debit Card
+CUST-42245,Lucas Davis,lucas.davis@outlook.com,+1-471-740-7932,T-Shirt,Apparel,1,20.0,2023-03-30,San Antonio,5,Cash
+CUST-36673,Charlotte Johnson,charlotte.johnson@icloud.com,+1-416-752-4295,Jacket,Outerwear,3,360.0,2023-04-01,Los Angeles,0,Apple Pay
+CUST-63443,Henry Williams,henry.williams@outlook.com,+1-930-519-7537,Sneakers,Footwear,2,160.0,2023-05-02,Philadelphia,10,Gift Card
+CUST-14936,Amelia Wilson,amelia.wilson@yahoo.com,+1-887-865-7118,Sneakers,Footwear,1,70.0,2023-10-31,Los Angeles,15,Gift Card
+CUST-53694,Charlotte Wilson,charlotte.wilson@outlook.com,+1-648-729-8397,T-Shirt,Apparel,1,10.0,2023-06-12,Phoenix,15,PayPal
+CUST-41021,Sophia Hernandez,sophia.hernandez@gmail.com,+1-323-453-4681,Scarf,Accessories,4,60.0,2023-12-24,San Antonio,20,Credit Card
+CUST-67596,Amelia Thomas,amelia.thomas@yahoo.com,+1-265-546-1344,Dress,Apparel,4,300.0,2023-07-03,New York,0,Gift Card
+CUST-63495,Charlotte Brown,charlotte.brown@company.org,+1-802-767-4770,Jeans,Apparel,3,170.0,2023-10-30,Philadelphia,10,Cash
+CUST-35254,Emma Martin,emma.martin@yahoo.com,+1-802-425-1117,Dress,Apparel,4,290.0,2023-01-15,Philadelphia,10,Apple Pay
+CUST-11824,Isabella Jones,isabella.jones@icloud.com,+1-272-924-1964,Dress,Apparel,4,300.0,2023-12-27,Chicago,0,Cash
+CUST-25713,Sophia Wilson,sophia.wilson@hotmail.com,+1-434-269-1514,Jeans,Apparel,4,220.0,2023-12-25,Phoenix,20,Credit Card
+CUST-62415,Emma Thomas,emma.thomas@company.org,+1-538-272-9423,Scarf,Accessories,1,20.0,2023-06-30,San Diego,0,PayPal
+CUST-61664,James Moore,james.moore@yahoo.com,+1-443-485-8953,Sneakers,Footwear,1,80.0,2023-10-18,San Diego,5,Gift Card
+CUST-33084,Elijah Miller,elijah.miller@company.org,+1-419-752-3167,Jeans,Apparel,1,60.0,2023-10-16,Philadelphia,0,Cash
+CUST-85716,Mia Martinez,mia.martinez@company.org,+1-940-784-8744,Jeans,Apparel,4,240.0,2023-03-14,San Antonio,0,Debit Card
+CUST-81265,Evelyn Miller,evelyn.miller@company.org,+1-448-684-7669,Jacket,Outerwear,1,110.0,2023-10-16,New York,10,Apple Pay
+CUST-47286,Harper Smith,harper.smith@hotmail.com,+1-394-296-2588,Jacket,Outerwear,4,475.0,2023-04-07,New York,5,Cash
+CUST-46842,Elijah Jackson,elijah.jackson@outlook.com,+1-874-641-6804,Jacket,Outerwear,1,120.0,2023-09-10,Philadelphia,0,Apple Pay
+CUST-28033,Olivia Thomas,olivia.thomas@company.org,+1-633-620-8651,Sneakers,Footwear,1,85.0,2023-10-05,Los Angeles,0,Gift Card
+CUST-82778,Olivia Jackson,olivia.jackson@gmail.com,+1-946-255-2612,Jeans,Apparel,2,110.0,2023-06-08,Phoenix,10,Debit Card
+CUST-03983,Emma Brown,emma.brown@icloud.com,+1-262-612-6559,T-Shirt,Apparel,3,75.0,2023-03-31,New York,0,PayPal
+CUST-07427,Ava Moore,ava.moore@hotmail.com,+1-311-454-4139,Jeans,Apparel,4,240.0,2023-09-09,Philadelphia,0,PayPal
+CUST-91292,William Johnson,william.johnson@yahoo.com,+1-394-749-8350,Sneakers,Footwear,2,155.0,2023-01-20,New York,15,Debit Card
+CUST-59007,Isabella Smith,isabella.smith@hotmail.com,+1-343-632-4006,Jacket,Outerwear,1,110.0,2023-02-16,San Diego,10,Apple Pay
+CUST-20158,Sophia Anderson,sophia.anderson@yahoo.com,+1-485-673-5092,Sneakers,Footwear,4,340.0,2023-01-29,Philadelphia,0,Gift Card
+CUST-06324,Isabella Jones,isabella.jones@hotmail.com,+1-277-653-2604,Jacket,Outerwear,1,110.0,2023-04-30,Phoenix,10,Cash
+CUST-11027,Sophia Martin,sophia.martin@yahoo.com,+1-251-867-9856,Sneakers,Footwear,3,245.0,2023-11-05,Philadelphia,10,Debit Card
+CUST-50538,Elijah Hernandez,elijah.hernandez@company.org,+1-215-295-4872,T-Shirt,Apparel,2,35.0,2023-04-23,Chicago,15,Credit Card
+CUST-58586,James Martinez,james.martinez@outlook.com,+1-370-616-8956,Jacket,Outerwear,3,355.0,2023-01-11,Philadelphia,5,Apple Pay
+CUST-57587,Liam Johnson,liam.johnson@yahoo.com,+1-692-418-7570,Jacket,Outerwear,2,240.0,2023-09-27,Philadelphia,0,PayPal
+CUST-70378,Emma Williams,emma.williams@yahoo.com,+1-260-368-7209,Jeans,Apparel,1,60.0,2023-09-02,San Antonio,0,Debit Card
+CUST-43881,Lucas Lopez,lucas.lopez@gmail.com,+1-202-599-5345,Scarf,Accessories,3,60.0,2023-01-01,San Diego,0,PayPal
+CUST-74666,Ava Martin,ava.martin@yahoo.com,+1-665-492-7930,Scarf,Accessories,3,55.0,2023-06-19,Phoenix,5,Apple Pay
+CUST-83005,Olivia Jones,olivia.jones@gmail.com,+1-913-948-8973,Sneakers,Footwear,1,85.0,2023-11-11,San Antonio,0,PayPal
+CUST-97865,James Jones,james.jones@icloud.com,+1-358-394-5861,Dress,Apparel,3,220.0,2023-04-14,Philadelphia,5,Debit Card
+CUST-74090,Elijah Garcia,elijah.garcia@company.org,+1-422-259-9883,Dress,Apparel,4,300.0,2023-03-08,Phoenix,0,Apple Pay
+CUST-46562,Olivia Rodriguez,olivia.rodriguez@gmail.com,+1-262-965-6138,Jeans,Apparel,2,120.0,2023-06-24,Chicago,0,Credit Card
+CUST-63604,Emma Johnson,emma.johnson@outlook.com,+1-258-251-8811,Sneakers,Footwear,2,155.0,2023-04-01,Phoenix,15,Debit Card
+CUST-07938,Olivia Lopez,olivia.lopez@company.org,+1-714-743-3579,T-Shirt,Apparel,2,50.0,2023-06-15,New York,0,Cash
+CUST-24287,Ava Williams,ava.williams@gmail.com,+1-258-720-2312,Jeans,Apparel,4,240.0,2023-01-31,San Antonio,0,Gift Card
+CUST-45014,Amelia Martin,amelia.martin@company.org,+1-390-270-2113,Jacket,Outerwear,2,230.0,2023-01-12,Phoenix,10,Debit Card
+CUST-62017,Benjamin Lopez,benjamin.lopez@company.org,+1-891-440-7615,T-Shirt,Apparel,1,25.0,2023-03-17,San Diego,0,Apple Pay
+CUST-47610,Olivia Taylor,olivia.taylor@company.org,+1-322-783-5033,Sneakers,Footwear,3,245.0,2023-10-28,Chicago,10,Gift Card
+CUST-50383,Emma Martinez,emma.martinez@icloud.com,+1-792-808-1651,Jacket,Outerwear,4,470.0,2023-12-27,Houston,10,Debit Card
+CUST-11720,Ava Wilson,ava.wilson@outlook.com,+1-834-283-7868,Dress,Apparel,2,150.0,2023-03-14,Philadelphia,0,Credit Card
+CUST-53070,Benjamin Taylor,benjamin.taylor@hotmail.com,+1-873-797-9565,Sneakers,Footwear,1,75.0,2023-02-26,Phoenix,10,Credit Card
+CUST-77751,Isabella Moore,isabella.moore@hotmail.com,+1-523-467-4346,Jacket,Outerwear,3,355.0,2023-09-27,Philadelphia,5,Cash
+CUST-94227,Sophia Jackson,sophia.jackson@gmail.com,+1-885-933-6147,Sneakers,Footwear,3,255.0,2023-07-06,Los Angeles,0,PayPal
+CUST-36718,Amelia Taylor,amelia.taylor@company.org,+1-444-471-7484,Jacket,Outerwear,4,480.0,2023-02-07,New York,0,Gift Card
+CUST-95826,Amelia Wilson,amelia.wilson@gmail.com,+1-334-887-5915,Sneakers,Footwear,4,340.0,2023-07-11,San Antonio,0,Apple Pay
+CUST-85848,William Rodriguez,william.rodriguez@icloud.com,+1-668-523-2188,Scarf,Accessories,4,65.0,2023-12-27,New York,15,Apple Pay
+CUST-80860,Charlotte Davis,charlotte.davis@icloud.com,+1-209-669-2638,Dress,Apparel,1,75.0,2023-12-06,Los Angeles,0,PayPal
+CUST-38725,Evelyn Johnson,evelyn.johnson@yahoo.com,+1-275-750-4492,Jeans,Apparel,1,55.0,2023-07-22,Los Angeles,5,Credit Card
+CUST-45183,Isabella Gonzalez,isabella.gonzalez@icloud.com,+1-718-471-3170,Jacket,Outerwear,4,475.0,2023-10-28,San Antonio,5,Credit Card
+CUST-25392,Harper Miller,harper.miller@yahoo.com,+1-557-270-5002,Jacket,Outerwear,2,235.0,2023-02-21,Phoenix,5,Debit Card
+CUST-66330,Alexander Rodriguez,alexander.rodriguez@outlook.com,+1-578-491-3584,Dress,Apparel,3,225.0,2023-06-22,Los Angeles,0,Cash
+CUST-24465,Noah Hernandez,noah.hernandez@gmail.com,+1-648-756-5956,Scarf,Accessories,3,60.0,2023-06-04,Houston,0,Gift Card
+CUST-11720,Ava Wilson,ava.wilson@outlook.com,+1-826-869-9666,Jeans,Apparel,1,50.0,2023-06-15,Philadelphia,10,Cash
+CUST-37876,Isabella Brown,isabella.brown@icloud.com,+1-208-883-5905,Sneakers,Footwear,3,255.0,2023-03-11,Philadelphia,0,Cash
+CUST-39076,Charlotte Gonzalez,charlotte.gonzalez@outlook.com,+1-879-306-3200,Jacket,Outerwear,2,240.0,2023-03-22,Chicago,0,Debit Card
+CUST-64289,Amelia Johnson,amelia.johnson@outlook.com,+1-470-318-2753,Jeans,Apparel,3,180.0,2023-08-12,San Diego,0,Cash
+CUST-13602,Mia Jones,mia.jones@outlook.com,+1-960-766-3546,Sneakers,Footwear,1,85.0,2023-11-24,Los Angeles,0,PayPal
+CUST-01190,Noah Hernandez,noah.hernandez@icloud.com,+1-478-488-4450,Jacket,Outerwear,1,105.0,2023-09-07,Los Angeles,15,Debit Card
+CUST-86057,Charlotte Garcia,charlotte.garcia@company.org,+1-934-551-4335,Jacket,Outerwear,2,240.0,2023-11-29,Houston,0,PayPal
+CUST-98153,Isabella Moore,isabella.moore@outlook.com,+1-903-849-5325,Scarf,Accessories,2,40.0,2023-06-12,New York,0,Debit Card
+CUST-71472,Evelyn Martinez,evelyn.martinez@yahoo.com,+1-717-700-5114,Scarf,Accessories,3,60.0,2023-03-31,New York,0,Cash
+CUST-24074,Liam Brown,liam.brown@icloud.com,+1-252-294-7939,Scarf,Accessories,3,50.0,2023-12-29,Philadelphia,10,PayPal
+CUST-82133,William Rodriguez,william.rodriguez@outlook.com,+1-483-245-1058,Sneakers,Footwear,1,80.0,2023-10-15,Philadelphia,5,PayPal
+CUST-86057,Charlotte Garcia,charlotte.garcia@company.org,+1-541-989-3143,Dress,Apparel,2,150.0,2023-12-22,Phoenix,0,PayPal
+CUST-91262,Oliver Johnson,oliver.johnson@icloud.com,+1-852-468-3647,Jeans,Apparel,2,110.0,2023-11-11,San Antonio,10,Debit Card
+CUST-98956,James Taylor,james.taylor@hotmail.com,+1-959-652-8007,Jacket,Outerwear,2,235.0,2023-07-02,San Diego,5,Apple Pay
+CUST-15643,James Jones,james.jones@company.org,+1-774-209-2832,Sneakers,Footwear,3,240.0,2023-04-25,Houston,15,Cash
+CUST-87696,Alexander Garcia,alexander.garcia@yahoo.com,+1-277-907-3442,Jacket,Outerwear,2,230.0,2023-12-07,San Antonio,10,PayPal
+CUST-70982,Mia Lopez,mia.lopez@outlook.com,+1-758-236-7049,Sneakers,Footwear,1,85.0,2023-10-29,San Antonio,0,Gift Card
+CUST-52435,Isabella Martinez,isabella.martinez@hotmail.com,+1-796-765-3426,Jacket,Outerwear,1,120.0,2023-03-31,Chicago,0,Apple Pay
+CUST-67564,Emma Garcia,emma.garcia@hotmail.com,+1-640-330-1685,T-Shirt,Apparel,3,75.0,2023-07-13,San Antonio,0,Gift Card
+CUST-71487,Emma Davis,emma.davis@icloud.com,+1-515-573-1653,Dress,Apparel,4,300.0,2023-06-07,Chicago,0,Cash
+CUST-85427,Alexander Johnson,alexander.johnson@hotmail.com,+1-566-415-5088,Jeans,Apparel,3,160.0,2023-12-19,San Antonio,20,Cash
+CUST-53708,Charlotte Lopez,charlotte.lopez@yahoo.com,+1-882-305-6794,Dress,Apparel,4,300.0,2023-05-31,Houston,0,PayPal
+CUST-27281,Sophia Gonzalez,sophia.gonzalez@yahoo.com,+1-998-773-7658,Dress,Apparel,2,150.0,2023-03-07,Chicago,0,PayPal
+CUST-19659,Olivia Miller,olivia.miller@gmail.com,+1-835-967-3532,Jeans,Apparel,3,170.0,2023-04-01,New York,10,Debit Card
+CUST-91411,Isabella Martinez,isabella.martinez@yahoo.com,+1-442-366-3900,Scarf,Accessories,1,15.0,2023-01-01,Chicago,5,Apple Pay
+CUST-33049,Oliver Gonzalez,oliver.gonzalez@company.org,+1-622-225-3938,Dress,Apparel,2,150.0,2023-12-26,Chicago,0,Apple Pay
+CUST-04221,Elijah Taylor,elijah.taylor@hotmail.com,+1-954-540-7745,T-Shirt,Apparel,1,25.0,2023-10-21,Houston,0,PayPal
+CUST-33258,Sophia Wilson,sophia.wilson@yahoo.com,+1-885-952-5065,Scarf,Accessories,2,40.0,2023-07-20,Houston,0,Cash
+CUST-00152,Ava Johnson,ava.johnson@icloud.com,+1-473-363-2771,Sneakers,Footwear,3,245.0,2023-10-18,Chicago,10,PayPal
+CUST-02045,Emma Hernandez,emma.hernandez@gmail.com,+1-591-239-8711,Scarf,Accessories,4,80.0,2023-01-17,San Diego,0,Cash
+CUST-82147,Evelyn Smith,evelyn.smith@hotmail.com,+1-427-404-8541,Jeans,Apparel,2,120.0,2023-04-04,Los Angeles,0,Cash
+CUST-77058,William Jackson,william.jackson@gmail.com,+1-558-512-4728,Sneakers,Footwear,4,335.0,2023-11-05,San Diego,5,PayPal
+CUST-98371,James Brown,james.brown@hotmail.com,+1-428-224-4164,Jacket,Outerwear,2,240.0,2023-06-12,Houston,0,Credit Card
+CUST-82521,Amelia Jackson,amelia.jackson@icloud.com,+1-608-536-5564,Scarf,Accessories,1,15.0,2023-11-10,San Diego,5,Apple Pay
+CUST-41021,Sophia Hernandez,sophia.hernandez@gmail.com,+1-271-991-5573,T-Shirt,Apparel,1,25.0,2023-04-24,San Diego,0,Gift Card
+CUST-71151,Alexander Davis,alexander.davis@outlook.com,+1-559-856-9346,Sneakers,Footwear,2,170.0,2023-11-24,Phoenix,0,Cash
+CUST-17147,Harper Hernandez,harper.hernandez@company.org,+1-609-895-9785,Scarf,Accessories,4,65.0,2023-10-17,Phoenix,15,Cash
+CUST-57110,Harper Brown,harper.brown@company.org,+1-539-228-2889,Sneakers,Footwear,3,250.0,2023-02-23,New York,5,Credit Card
+CUST-30627,Alexander Taylor,alexander.taylor@hotmail.com,+1-467-382-5349,Jeans,Apparel,3,180.0,2023-09-12,San Antonio,0,Gift Card
+CUST-06858,James Miller,james.miller@outlook.com,+1-239-311-8119,Scarf,Accessories,1,15.0,2023-03-14,Chicago,5,Debit Card
+CUST-89828,Isabella Davis,isabella.davis@gmail.com,+1-553-946-6139,Jacket,Outerwear,3,350.0,2023-06-19,Los Angeles,10,Credit Card
+CUST-37209,Liam Williams,liam.williams@outlook.com,+1-646-820-9379,Jeans,Apparel,1,50.0,2023-02-09,New York,10,Gift Card
+CUST-58604,Olivia Johnson,olivia.johnson@outlook.com,+1-318-594-4114,Jacket,Outerwear,3,360.0,2023-05-02,Chicago,0,Credit Card
+CUST-04396,Harper Anderson,harper.anderson@gmail.com,+1-460-245-8144,Scarf,Accessories,2,20.0,2023-06-27,San Diego,20,Cash
+CUST-49439,Ava Jones,ava.jones@icloud.com,+1-201-732-9821,Jeans,Apparel,1,60.0,2023-06-13,Houston,0,Apple Pay
+CUST-91026,Harper Smith,harper.smith@outlook.com,+1-903-936-4228,Scarf,Accessories,1,20.0,2023-03-27,Phoenix,0,Credit Card
+CUST-34523,Harper Brown,harper.brown@outlook.com,+1-572-641-2146,Sneakers,Footwear,2,170.0,2023-11-22,Philadelphia,0,Debit Card
+CUST-17569,Harper Anderson,harper.anderson@icloud.com,+1-880-538-6143,Sneakers,Footwear,1,85.0,2023-02-15,Los Angeles,0,PayPal
+CUST-42239,Liam Martin,liam.martin@outlook.com,+1-879-327-5920,T-Shirt,Apparel,3,65.0,2023-12-29,San Diego,10,Gift Card
+CUST-30162,Liam Jackson,liam.jackson@outlook.com,+1-719-516-7691,Sneakers,Footwear,3,255.0,2023-12-10,Philadelphia,0,Credit Card
+CUST-18063,Ava Williams,ava.williams@outlook.com,+1-534-612-5844,Dress,Apparel,1,75.0,2023-11-24,Phoenix,0,Credit Card
+CUST-07525,Emma Martin,emma.martin@company.org,+1-767-330-4143,Sneakers,Footwear,3,240.0,2023-06-21,San Diego,15,Debit Card
+CUST-03635,Emma Hernandez,emma.hernandez@yahoo.com,+1-630-880-7211,Dress,Apparel,4,300.0,2023-08-17,San Antonio,0,Apple Pay
+CUST-96472,Evelyn Taylor,evelyn.taylor@icloud.com,+1-893-966-3851,Sneakers,Footwear,1,85.0,2023-01-06,San Antonio,0,Credit Card
+CUST-17945,Liam Gonzalez,liam.gonzalez@outlook.com,+1-830-782-5930,Dress,Apparel,2,150.0,2023-05-16,Philadelphia,0,Credit Card
+CUST-37654,James Hernandez,james.hernandez@company.org,+1-615-761-1006,Dress,Apparel,4,300.0,2023-04-18,Houston,0,Apple Pay
+CUST-91262,Oliver Johnson,oliver.johnson@icloud.com,+1-511-493-4443,Scarf,Accessories,1,20.0,2023-05-08,San Diego,0,Debit Card
+CUST-28635,Noah Rodriguez,noah.rodriguez@hotmail.com,+1-640-793-6279,Sneakers,Footwear,2,165.0,2023-12-21,Chicago,5,Gift Card
+CUST-58025,Mia Johnson,mia.johnson@hotmail.com,+1-676-652-8244,Dress,Apparel,3,225.0,2023-02-04,San Diego,0,Gift Card
+CUST-44298,Harper Rodriguez,harper.rodriguez@outlook.com,+1-891-418-9375,T-Shirt,Apparel,2,50.0,2023-06-29,Houston,0,Credit Card
+CUST-35898,Oliver Rodriguez,oliver.rodriguez@company.org,+1-684-953-3780,Jacket,Outerwear,4,470.0,2023-05-12,San Diego,10,Apple Pay
+CUST-06025,Ava Davis,ava.davis@company.org,+1-874-286-5649,Scarf,Accessories,3,55.0,2023-02-25,Philadelphia,5,Credit Card
+CUST-19093,Alexander Taylor,alexander.taylor@icloud.com,+1-727-879-6491,Dress,Apparel,1,75.0,2023-01-01,Houston,0,PayPal
+CUST-93673,Liam Smith,liam.smith@icloud.com,+1-295-969-4848,Dress,Apparel,3,220.0,2023-01-25,Phoenix,5,Gift Card
+CUST-48164,Oliver Hernandez,oliver.hernandez@company.org,+1-888-517-4680,Scarf,Accessories,1,20.0,2023-07-17,Los Angeles,0,Cash
+CUST-96531,Mia Davis,mia.davis@icloud.com,+1-403-350-1400,T-Shirt,Apparel,1,25.0,2023-08-13,Houston,0,PayPal
+CUST-93454,Lucas Martinez,lucas.martinez@company.org,+1-247-450-8784,T-Shirt,Apparel,2,45.0,2023-08-03,San Diego,5,Credit Card
+CUST-91834,Lucas Miller,lucas.miller@yahoo.com,+1-825-986-2193,Jeans,Apparel,2,120.0,2023-03-27,Phoenix,0,Debit Card
+CUST-40412,Emma Williams,emma.williams@company.org,+1-666-624-4185,Scarf,Accessories,2,25.0,2023-07-31,Los Angeles,15,Gift Card
+CUST-78328,Sophia Williams,sophia.williams@hotmail.com,+1-935-913-7291,Scarf,Accessories,4,80.0,2023-09-10,San Antonio,0,Cash
+CUST-30702,Oliver Moore,oliver.moore@icloud.com,+1-706-609-4997,Jacket,Outerwear,4,470.0,2023-07-13,Chicago,10,PayPal
+CUST-80915,Lucas Jones,lucas.jones@company.org,+1-351-871-1090,Jeans,Apparel,2,120.0,2023-06-29,Philadelphia,0,Gift Card
+CUST-07938,Olivia Lopez,olivia.lopez@company.org,+1-968-988-2746,Scarf,Accessories,4,70.0,2023-10-07,San Diego,10,Apple Pay
+CUST-81728,Alexander Lopez,alexander.lopez@icloud.com,+1-997-635-4585,Dress,Apparel,3,220.0,2023-07-12,San Diego,5,Debit Card
+CUST-56904,Noah Jackson,noah.jackson@yahoo.com,+1-380-912-9486,T-Shirt,Apparel,3,65.0,2023-02-21,San Antonio,10,PayPal
+CUST-93728,Evelyn Garcia,evelyn.garcia@yahoo.com,+1-675-251-5082,Dress,Apparel,4,300.0,2023-09-03,Chicago,0,Apple Pay
+CUST-42717,Olivia Johnson,olivia.johnson@icloud.com,+1-324-667-3184,Scarf,Accessories,4,75.0,2023-10-23,San Antonio,5,Credit Card
+CUST-87528,Evelyn Lopez,evelyn.lopez@gmail.com,+1-675-883-9702,Scarf,Accessories,3,55.0,2023-11-30,New York,5,Apple Pay
+CUST-46797,Alexander Jackson,alexander.jackson@icloud.com,+1-772-809-6198,Scarf,Accessories,1,10.0,2023-12-18,San Antonio,10,PayPal
+CUST-11824,Isabella Jones,isabella.jones@icloud.com,+1-973-653-9270,Sneakers,Footwear,3,250.0,2023-04-26,Phoenix,5,PayPal
+CUST-73082,Alexander Lopez,alexander.lopez@yahoo.com,+1-636-761-8305,Jacket,Outerwear,3,355.0,2023-03-25,Los Angeles,5,Credit Card
+CUST-51684,Sophia Taylor,sophia.taylor@yahoo.com,+1-362-961-8777,Sneakers,Footwear,4,340.0,2023-08-20,San Diego,0,Apple Pay
+CUST-88373,Emma Taylor,emma.taylor@icloud.com,+1-660-465-5050,T-Shirt,Apparel,3,75.0,2023-02-07,San Antonio,0,Apple Pay
+CUST-02325,Elijah Martinez,elijah.martinez@icloud.com,+1-852-483-9540,T-Shirt,Apparel,4,100.0,2023-01-18,San Diego,0,Credit Card
+CUST-09870,Isabella Taylor,isabella.taylor@icloud.com,+1-696-841-4919,T-Shirt,Apparel,4,100.0,2023-05-31,Houston,0,Apple Pay
+CUST-53110,Henry Anderson,henry.anderson@yahoo.com,+1-481-650-2269,Jacket,Outerwear,2,220.0,2023-01-11,Chicago,20,Gift Card
+CUST-48664,Elijah Lopez,elijah.lopez@icloud.com,+1-930-492-4841,Jeans,Apparel,3,170.0,2023-06-13,San Antonio,10,Credit Card
+CUST-09808,Emma Thomas,emma.thomas@icloud.com,+1-478-543-6238,Dress,Apparel,1,55.0,2023-05-14,Los Angeles,20,Debit Card
+CUST-66910,Mia Jackson,mia.jackson@outlook.com,+1-753-282-3267,Scarf,Accessories,2,40.0,2023-02-23,Phoenix,0,PayPal
+CUST-49728,Henry Davis,henry.davis@gmail.com,+1-354-436-7275,Dress,Apparel,4,285.0,2023-02-07,New York,15,Debit Card
+CUST-50139,William Taylor,william.taylor@hotmail.com,+1-910-356-4505,Dress,Apparel,4,290.0,2023-06-25,San Diego,10,Gift Card
+CUST-83005,Olivia Jones,olivia.jones@gmail.com,+1-265-624-7678,Dress,Apparel,1,70.0,2023-03-29,Chicago,5,Gift Card
+CUST-49947,Isabella Thomas,isabella.thomas@outlook.com,+1-538-755-8633,Scarf,Accessories,4,75.0,2023-07-12,Philadelphia,5,Cash
+CUST-48479,Lucas Garcia,lucas.garcia@hotmail.com,+1-625-263-4388,Dress,Apparel,3,225.0,2023-03-24,Los Angeles,0,Cash
+CUST-69453,Lucas Davis,lucas.davis@icloud.com,+1-630-598-1320,Jeans,Apparel,2,110.0,2023-02-08,Philadelphia,10,Cash
+CUST-10349,Alexander Moore,alexander.moore@outlook.com,+1-983-789-7232,Sneakers,Footwear,4,335.0,2023-10-08,Los Angeles,5,Credit Card
+CUST-01703,Harper Lopez,harper.lopez@icloud.com,+1-688-206-6763,Jacket,Outerwear,4,480.0,2023-02-17,Los Angeles,0,Apple Pay
+CUST-75423,Liam Anderson,liam.anderson@yahoo.com,+1-505-971-7389,Sneakers,Footwear,1,85.0,2023-06-23,Phoenix,0,Gift Card
+CUST-85435,Emma Rodriguez,emma.rodriguez@company.org,+1-629-751-9947,Sneakers,Footwear,3,240.0,2023-11-01,Phoenix,15,Debit Card
+CUST-46927,Lucas Gonzalez,lucas.gonzalez@outlook.com,+1-817-425-8999,Scarf,Accessories,4,65.0,2023-11-11,Phoenix,15,Debit Card
+CUST-64847,James Anderson,james.anderson@yahoo.com,+1-424-479-8140,Dress,Apparel,1,55.0,2023-09-05,San Antonio,20,Debit Card
+CUST-17829,Ava Martinez,ava.martinez@outlook.com,+1-697-229-7371,Scarf,Accessories,4,75.0,2023-12-27,Houston,5,Debit Card
+CUST-61439,Ava Thomas,ava.thomas@outlook.com,+1-544-884-7624,Dress,Apparel,1,75.0,2023-01-16,Los Angeles,0,Cash
+CUST-03836,Sophia Miller,sophia.miller@yahoo.com,+1-941-369-8657,Jeans,Apparel,1,60.0,2023-08-09,Chicago,0,Debit Card
+CUST-89429,Sophia Taylor,sophia.taylor@hotmail.com,+1-330-837-9751,Jacket,Outerwear,3,360.0,2023-12-01,Philadelphia,0,Apple Pay
+CUST-19659,Olivia Miller,olivia.miller@gmail.com,+1-227-603-1444,T-Shirt,Apparel,4,100.0,2023-03-26,Phoenix,0,Cash
+CUST-78264,Evelyn Wilson,evelyn.wilson@icloud.com,+1-285-858-8022,Sneakers,Footwear,3,255.0,2023-11-07,San Antonio,0,Debit Card
+CUST-20349,Lucas Anderson,lucas.anderson@outlook.com,+1-338-672-3977,T-Shirt,Apparel,1,25.0,2023-08-11,Phoenix,0,Credit Card
+CUST-47813,Lucas Miller,lucas.miller@icloud.com,+1-251-466-7211,Jacket,Outerwear,2,240.0,2023-03-22,Philadelphia,0,PayPal
+CUST-54148,Olivia Rodriguez,olivia.rodriguez@company.org,+1-535-416-8449,Sneakers,Footwear,4,325.0,2023-01-28,Philadelphia,15,PayPal
+CUST-42667,Alexander Jackson,alexander.jackson@yahoo.com,+1-534-545-7211,T-Shirt,Apparel,2,50.0,2023-02-21,San Diego,0,PayPal
+CUST-09808,Emma Thomas,emma.thomas@icloud.com,+1-484-970-7906,T-Shirt,Apparel,4,85.0,2023-06-19,Los Angeles,15,Cash
+CUST-05565,Alexander Davis,alexander.davis@yahoo.com,+1-458-283-8705,Scarf,Accessories,3,55.0,2023-04-16,Phoenix,5,Debit Card
+CUST-11042,Mia Moore,mia.moore@icloud.com,+1-219-967-9837,Jeans,Apparel,3,180.0,2023-04-08,Philadelphia,0,Gift Card
+CUST-50340,Harper Moore,harper.moore@gmail.com,+1-253-558-4673,Jacket,Outerwear,3,360.0,2023-07-29,Houston,0,Gift Card
+CUST-24997,Elijah Martin,elijah.martin@gmail.com,+1-865-270-1659,Jacket,Outerwear,3,360.0,2023-12-23,Houston,0,Gift Card
+CUST-79555,Noah Miller,noah.miller@gmail.com,+1-972-231-5051,Jacket,Outerwear,3,360.0,2023-10-11,Phoenix,0,Cash
+CUST-28406,Oliver Williams,oliver.williams@gmail.com,+1-404-220-3496,Sneakers,Footwear,2,165.0,2023-10-04,San Antonio,5,Apple Pay
+CUST-05764,Elijah Moore,elijah.moore@gmail.com,+1-444-329-8758,Jeans,Apparel,3,180.0,2023-05-16,Philadelphia,0,Credit Card
+CUST-99492,Alexander Martinez,alexander.martinez@gmail.com,+1-885-317-4571,Dress,Apparel,1,75.0,2023-12-05,San Diego,0,Credit Card
+CUST-63019,Olivia Miller,olivia.miller@yahoo.com,+1-676-916-5198,Sneakers,Footwear,1,85.0,2023-05-25,Los Angeles,0,PayPal
+CUST-60582,Lucas Taylor,lucas.taylor@outlook.com,+1-985-577-3749,Jacket,Outerwear,2,220.0,2023-06-02,Los Angeles,20,PayPal
+CUST-47343,Olivia Wilson,olivia.wilson@icloud.com,+1-820-821-2876,Sneakers,Footwear,4,330.0,2023-05-02,San Antonio,10,Gift Card
+CUST-84056,Henry Williams,henry.williams@gmail.com,+1-996-367-6096,T-Shirt,Apparel,1,15.0,2023-02-19,San Diego,10,Gift Card
+CUST-70198,Benjamin Lopez,benjamin.lopez@yahoo.com,+1-310-792-1420,Sneakers,Footwear,4,340.0,2023-01-26,Los Angeles,0,PayPal
+CUST-27714,Henry Gonzalez,henry.gonzalez@yahoo.com,+1-519-789-7149,Scarf,Accessories,2,30.0,2023-07-21,San Diego,10,Debit Card
+CUST-57587,Liam Johnson,liam.johnson@yahoo.com,+1-606-932-4249,Scarf,Accessories,4,70.0,2023-10-20,New York,10,Apple Pay
+CUST-97934,Olivia Williams,olivia.williams@outlook.com,+1-277-806-4978,Sneakers,Footwear,4,335.0,2023-10-09,Phoenix,5,Apple Pay
+CUST-33072,Lucas Jones,lucas.jones@icloud.com,+1-304-913-5941,Jacket,Outerwear,4,460.0,2023-09-09,Los Angeles,20,Apple Pay
+CUST-63325,Sophia Hernandez,sophia.hernandez@outlook.com,+1-900-814-2983,T-Shirt,Apparel,4,100.0,2023-03-20,Houston,0,Apple Pay
+CUST-68285,Noah Davis,noah.davis@hotmail.com,+1-779-242-6688,Jacket,Outerwear,2,225.0,2023-01-28,Philadelphia,15,PayPal
+CUST-05297,Emma Lopez,emma.lopez@yahoo.com,+1-745-638-7071,T-Shirt,Apparel,1,10.0,2023-07-04,San Diego,15,Credit Card
+CUST-24259,Noah Miller,noah.miller@hotmail.com,+1-270-718-6590,Scarf,Accessories,3,60.0,2023-01-02,San Diego,0,PayPal
+CUST-69890,Emma Anderson,emma.anderson@company.org,+1-212-630-9031,T-Shirt,Apparel,4,100.0,2023-08-07,Chicago,0,Apple Pay
+CUST-51240,Benjamin Taylor,benjamin.taylor@gmail.com,+1-308-643-6934,T-Shirt,Apparel,1,5.0,2023-02-14,San Antonio,20,PayPal
+CUST-64464,Lucas Brown,lucas.brown@gmail.com,+1-850-670-3506,Jacket,Outerwear,1,120.0,2023-05-31,Chicago,0,Apple Pay
+CUST-09025,Alexander Gonzalez,alexander.gonzalez@outlook.com,+1-645-380-9548,Scarf,Accessories,2,35.0,2023-12-05,Los Angeles,5,Cash
+CUST-08341,Elijah Moore,elijah.moore@icloud.com,+1-866-476-9817,T-Shirt,Apparel,1,5.0,2023-11-17,Chicago,20,Gift Card
+CUST-59007,Isabella Smith,isabella.smith@hotmail.com,+1-993-695-8616,Scarf,Accessories,2,35.0,2023-11-04,Chicago,5,Credit Card
+CUST-82695,Olivia Thomas,olivia.thomas@icloud.com,+1-646-948-5397,Jeans,Apparel,4,240.0,2023-09-03,New York,0,Cash
+CUST-63523,Harper Gonzalez,harper.gonzalez@outlook.com,+1-530-451-2419,Scarf,Accessories,4,75.0,2023-04-13,San Diego,5,Debit Card
+CUST-01302,Emma Martinez,emma.martinez@gmail.com,+1-485-661-4995,Jeans,Apparel,3,180.0,2023-02-19,Houston,0,PayPal
+CUST-30571,Lucas Lopez,lucas.lopez@icloud.com,+1-968-675-7209,Dress,Apparel,3,220.0,2023-01-14,San Antonio,5,Debit Card
+CUST-68771,James Johnson,james.johnson@icloud.com,+1-544-229-9098,Jeans,Apparel,3,180.0,2023-04-16,Houston,0,PayPal
+CUST-06233,Evelyn Williams,evelyn.williams@gmail.com,+1-532-386-8988,Dress,Apparel,1,70.0,2023-03-29,New York,5,Gift Card
+CUST-02146,Benjamin Martinez,benjamin.martinez@hotmail.com,+1-417-563-5232,Jeans,Apparel,4,235.0,2023-11-23,New York,5,Cash
+CUST-28011,Oliver Johnson,oliver.johnson@gmail.com,+1-548-486-5526,Jacket,Outerwear,2,230.0,2023-05-30,Chicago,10,Gift Card
+CUST-63794,Oliver Gonzalez,oliver.gonzalez@icloud.com,+1-769-210-9464,Dress,Apparel,3,220.0,2023-02-11,Phoenix,5,Apple Pay
+CUST-16053,Charlotte Gonzalez,charlotte.gonzalez@hotmail.com,+1-395-287-4954,Sneakers,Footwear,2,165.0,2023-08-31,San Diego,5,Gift Card
+CUST-83662,Evelyn Moore,evelyn.moore@hotmail.com,+1-937-616-9004,Sneakers,Footwear,2,165.0,2023-03-01,Philadelphia,5,Gift Card
+CUST-85061,Elijah Williams,elijah.williams@gmail.com,+1-768-976-4937,Jeans,Apparel,3,180.0,2023-06-07,San Diego,0,Apple Pay
+CUST-21237,Liam Miller,liam.miller@icloud.com,+1-907-687-9041,Sneakers,Footwear,4,335.0,2023-07-23,Philadelphia,5,PayPal
+CUST-83480,Emma Wilson,emma.wilson@outlook.com,+1-658-217-2524,Scarf,Accessories,3,60.0,2023-08-30,Chicago,0,Apple Pay
+CUST-35093,Amelia Martin,amelia.martin@icloud.com,+1-501-426-7625,Jeans,Apparel,2,105.0,2023-09-08,Philadelphia,15,Cash
+CUST-25906,Emma Taylor,emma.taylor@yahoo.com,+1-908-449-6016,Jeans,Apparel,3,180.0,2023-12-05,New York,0,Gift Card
+CUST-54493,Ava Lopez,ava.lopez@company.org,+1-879-795-7046,Scarf,Accessories,2,40.0,2023-05-16,Houston,0,Apple Pay
+CUST-22486,Lucas Thomas,lucas.thomas@outlook.com,+1-684-766-9698,Scarf,Accessories,2,35.0,2023-02-16,Philadelphia,5,Gift Card
+CUST-28646,Evelyn Lopez,evelyn.lopez@hotmail.com,+1-552-635-6419,Sneakers,Footwear,3,255.0,2023-11-25,San Diego,0,Cash
+CUST-34365,Noah Anderson,noah.anderson@outlook.com,+1-560-919-8434,Sneakers,Footwear,1,85.0,2023-10-06,San Antonio,0,Debit Card
+CUST-56205,Olivia Martinez,olivia.martinez@hotmail.com,+1-477-513-5118,T-Shirt,Apparel,3,70.0,2023-07-18,Chicago,5,Cash
+CUST-05743,Harper Miller,harper.miller@hotmail.com,+1-436-323-4155,Scarf,Accessories,1,15.0,2023-04-05,Phoenix,5,Credit Card
+CUST-32824,Harper Martin,harper.martin@outlook.com,+1-523-322-9779,Dress,Apparel,2,140.0,2023-07-09,Chicago,10,Credit Card
+CUST-20486,James Jones,james.jones@hotmail.com,+1-980-906-4033,Jeans,Apparel,2,120.0,2023-07-15,Los Angeles,0,Credit Card
+CUST-82016,Benjamin Smith,benjamin.smith@hotmail.com,+1-396-421-8933,Sneakers,Footwear,1,80.0,2023-07-09,Chicago,5,Gift Card
+CUST-45671,Oliver Taylor,oliver.taylor@yahoo.com,+1-483-941-9595,Dress,Apparel,2,150.0,2023-04-06,New York,0,PayPal
+CUST-85586,Olivia Williams,olivia.williams@icloud.com,+1-811-489-2647,Sneakers,Footwear,1,80.0,2023-08-17,Houston,5,PayPal
+CUST-92097,Sophia Gonzalez,sophia.gonzalez@icloud.com,+1-398-503-4727,Sneakers,Footwear,1,80.0,2023-01-23,Houston,5,PayPal
+CUST-90126,Ava Wilson,ava.wilson@company.org,+1-569-383-5952,T-Shirt,Apparel,2,45.0,2023-05-15,San Antonio,5,Gift Card
+CUST-35629,Harper Moore,harper.moore@company.org,+1-214-925-9751,Scarf,Accessories,4,80.0,2023-08-14,Philadelphia,0,Cash
+CUST-54441,Benjamin Brown,benjamin.brown@yahoo.com,+1-329-480-1745,Jeans,Apparel,1,60.0,2023-08-27,New York,0,PayPal
+CUST-29225,Olivia Moore,olivia.moore@company.org,+1-255-766-5786,Jeans,Apparel,3,180.0,2023-05-15,Los Angeles,0,Debit Card
+CUST-70568,Emma Jones,emma.jones@outlook.com,+1-914-329-9042,Jacket,Outerwear,3,360.0,2023-04-26,New York,0,Credit Card
+CUST-07621,Alexander Thomas,alexander.thomas@gmail.com,+1-305-212-5658,Scarf,Accessories,2,40.0,2023-05-18,Chicago,0,Cash
+CUST-62709,Emma Smith,emma.smith@gmail.com,+1-680-690-8216,T-Shirt,Apparel,4,95.0,2023-10-16,New York,5,Credit Card
+CUST-39729,Olivia Wilson,olivia.wilson@gmail.com,+1-548-388-1841,Dress,Apparel,2,150.0,2023-02-01,New York,0,PayPal
+CUST-53110,Henry Anderson,henry.anderson@yahoo.com,+1-458-689-2869,T-Shirt,Apparel,4,85.0,2023-03-19,San Antonio,15,Cash
+CUST-96992,William Rodriguez,william.rodriguez@yahoo.com,+1-266-610-9056,Dress,Apparel,1,75.0,2023-12-23,Los Angeles,0,Apple Pay
+CUST-89072,Olivia Anderson,olivia.anderson@hotmail.com,+1-275-790-1878,Jeans,Apparel,1,50.0,2023-12-08,Chicago,10,Debit Card
+CUST-67412,Elijah Taylor,elijah.taylor@gmail.com,+1-355-352-5978,Jacket,Outerwear,1,115.0,2023-02-19,Phoenix,5,PayPal
+CUST-89347,Benjamin Brown,benjamin.brown@outlook.com,+1-287-454-2940,Jacket,Outerwear,1,120.0,2023-02-13,San Antonio,0,PayPal
+CUST-11022,Henry Lopez,henry.lopez@company.org,+1-771-982-7818,Jeans,Apparel,3,180.0,2023-12-09,Phoenix,0,Debit Card
+CUST-31455,Amelia Jones,amelia.jones@outlook.com,+1-820-810-4697,Sneakers,Footwear,3,250.0,2023-06-26,San Antonio,5,Debit Card
+CUST-88393,Liam Jones,liam.jones@company.org,+1-994-735-7232,T-Shirt,Apparel,2,50.0,2023-10-05,Houston,0,Apple Pay
+CUST-75627,William Hernandez,william.hernandez@gmail.com,+1-661-653-5871,Jacket,Outerwear,4,465.0,2023-07-31,San Diego,15,PayPal
+CUST-55449,Liam Garcia,liam.garcia@gmail.com,+1-802-639-6003,Scarf,Accessories,1,15.0,2023-10-29,San Antonio,5,Gift Card
+CUST-27103,Harper Miller,harper.miller@gmail.com,+1-782-835-1986,Sneakers,Footwear,1,70.0,2023-04-27,Philadelphia,15,PayPal
+CUST-47802,Elijah Wilson,elijah.wilson@yahoo.com,+1-824-957-2625,Dress,Apparel,4,300.0,2023-10-11,New York,0,Credit Card
+CUST-58287,Emma Hernandez,emma.hernandez@company.org,+1-981-412-4457,Scarf,Accessories,4,70.0,2023-02-01,Houston,10,Cash
+CUST-27281,Sophia Gonzalez,sophia.gonzalez@yahoo.com,+1-470-876-2330,Jacket,Outerwear,2,235.0,2023-07-18,Los Angeles,5,Cash
+CUST-09933,Mia Johnson,mia.johnson@yahoo.com,+1-360-445-3847,Dress,Apparel,4,290.0,2023-09-25,Phoenix,10,Credit Card
+CUST-47813,Lucas Miller,lucas.miller@icloud.com,+1-765-276-3564,Sneakers,Footwear,1,85.0,2023-08-03,San Diego,0,Cash
+CUST-98485,Isabella Martin,isabella.martin@outlook.com,+1-202-618-8381,Dress,Apparel,1,70.0,2023-10-02,San Diego,5,Debit Card
+CUST-87969,William Brown,william.brown@outlook.com,+1-905-808-8699,Sneakers,Footwear,1,85.0,2023-12-18,San Antonio,0,Cash
+CUST-95751,Olivia Davis,olivia.davis@hotmail.com,+1-498-233-4792,Dress,Apparel,1,65.0,2023-09-01,New York,10,Cash
+CUST-35011,Henry Martin,henry.martin@yahoo.com,+1-495-923-5632,T-Shirt,Apparel,1,25.0,2023-10-21,Los Angeles,0,Credit Card
+CUST-31851,Charlotte Jackson,charlotte.jackson@company.org,+1-919-664-2166,Jacket,Outerwear,2,225.0,2023-05-01,Philadelphia,15,Apple Pay
+CUST-45183,Isabella Gonzalez,isabella.gonzalez@icloud.com,+1-903-439-5334,Jacket,Outerwear,1,120.0,2023-09-01,Los Angeles,0,Cash
+CUST-17112,Noah Wilson,noah.wilson@icloud.com,+1-840-803-4241,Sneakers,Footwear,2,160.0,2023-06-03,New York,10,Gift Card
+CUST-51963,Charlotte Martinez,charlotte.martinez@outlook.com,+1-635-317-9922,Dress,Apparel,1,60.0,2023-02-10,Philadelphia,15,Cash
+CUST-24163,Alexander Hernandez,alexander.hernandez@yahoo.com,+1-430-863-3441,Jeans,Apparel,3,170.0,2023-07-22,Los Angeles,10,Apple Pay
+CUST-46527,Emma Johnson,emma.johnson@hotmail.com,+1-472-345-2169,Scarf,Accessories,3,55.0,2023-01-18,Philadelphia,5,Credit Card
+CUST-18528,Elijah Rodriguez,elijah.rodriguez@yahoo.com,+1-261-369-6039,Scarf,Accessories,3,60.0,2023-09-15,San Antonio,0,Apple Pay
+CUST-51240,Benjamin Taylor,benjamin.taylor@gmail.com,+1-809-966-5728,Jacket,Outerwear,3,340.0,2023-10-20,San Antonio,20,Credit Card
+CUST-22749,Lucas Williams,lucas.williams@yahoo.com,+1-649-327-8679,Dress,Apparel,2,150.0,2023-09-22,New York,0,Debit Card
+CUST-58103,Benjamin Garcia,benjamin.garcia@gmail.com,+1-905-511-7594,Dress,Apparel,2,145.0,2023-10-20,New York,5,Credit Card
+CUST-56806,James Jones,james.jones@gmail.com,+1-478-712-9847,T-Shirt,Apparel,4,95.0,2023-12-13,Philadelphia,5,Debit Card
+CUST-57680,Evelyn Jones,evelyn.jones@hotmail.com,+1-705-648-2317,Scarf,Accessories,1,10.0,2023-11-14,Chicago,10,Debit Card
+CUST-48692,Amelia Anderson,amelia.anderson@company.org,+1-812-240-8078,Jeans,Apparel,3,180.0,2023-03-17,Houston,0,Credit Card
+CUST-07566,Liam Taylor,liam.taylor@outlook.com,+1-952-530-5102,Jacket,Outerwear,2,235.0,2023-03-03,San Diego,5,Gift Card
+CUST-68072,Liam Rodriguez,liam.rodriguez@yahoo.com,+1-226-293-4750,T-Shirt,Apparel,1,15.0,2023-08-18,Los Angeles,10,PayPal
+CUST-06233,Evelyn Williams,evelyn.williams@gmail.com,+1-890-789-1339,Jeans,Apparel,1,60.0,2023-03-30,Los Angeles,0,Credit Card
+CUST-58611,Harper Martin,harper.martin@yahoo.com,+1-983-888-5415,Jacket,Outerwear,2,225.0,2023-03-27,Chicago,15,Cash
+CUST-04038,Alexander Taylor,alexander.taylor@company.org,+1-790-241-3870,T-Shirt,Apparel,3,75.0,2023-04-19,Chicago,0,Gift Card
+CUST-84536,William Martinez,william.martinez@outlook.com,+1-681-731-8245,Jeans,Apparel,4,240.0,2023-04-09,Chicago,0,Gift Card
+CUST-94408,Oliver Williams,oliver.williams@company.org,+1-484-385-8141,Jacket,Outerwear,1,120.0,2023-03-06,Phoenix,0,Cash
+CUST-93320,Amelia Moore,amelia.moore@outlook.com,+1-850-703-2494,Scarf,Accessories,4,80.0,2023-01-22,Phoenix,0,PayPal
+CUST-11042,Mia Moore,mia.moore@icloud.com,+1-681-556-7690,Jeans,Apparel,3,165.0,2023-08-05,Philadelphia,15,Gift Card
+CUST-84212,Ava Taylor,ava.taylor@outlook.com,+1-541-528-2713,Dress,Apparel,3,225.0,2023-02-10,Phoenix,0,Debit Card
+CUST-64461,Emma Williams,emma.williams@hotmail.com,+1-364-537-7744,Sneakers,Footwear,4,340.0,2023-12-16,San Antonio,0,PayPal
+CUST-39340,Elijah Williams,elijah.williams@company.org,+1-910-707-5722,Sneakers,Footwear,3,255.0,2023-08-11,San Antonio,0,Cash
+CUST-26901,James Garcia,james.garcia@gmail.com,+1-878-610-1601,Dress,Apparel,1,70.0,2023-04-14,New York,5,PayPal
+CUST-30044,James Gonzalez,james.gonzalez@icloud.com,+1-665-290-6153,Jeans,Apparel,4,235.0,2023-11-18,San Diego,5,Credit Card
+CUST-71963,Ava Anderson,ava.anderson@hotmail.com,+1-458-531-2899,Dress,Apparel,3,225.0,2023-03-17,Philadelphia,0,PayPal
+CUST-49926,Isabella Rodriguez,isabella.rodriguez@yahoo.com,+1-991-613-9431,Sneakers,Footwear,4,340.0,2023-11-01,San Diego,0,Debit Card
+CUST-87330,Noah Brown,noah.brown@company.org,+1-201-873-9889,Sneakers,Footwear,1,70.0,2023-05-13,Los Angeles,15,Credit Card
+CUST-64532,Oliver Wilson,oliver.wilson@gmail.com,+1-673-623-1888,Jeans,Apparel,3,180.0,2023-06-13,Houston,0,Apple Pay
+CUST-91877,Charlotte Jones,charlotte.jones@outlook.com,+1-392-730-6927,Sneakers,Footwear,1,85.0,2023-02-04,New York,0,Cash
+CUST-99125,Alexander Johnson,alexander.johnson@gmail.com,+1-837-974-9167,Scarf,Accessories,3,60.0,2023-02-14,Los Angeles,0,Cash
+CUST-00117,Amelia Hernandez,amelia.hernandez@yahoo.com,+1-840-652-1845,Dress,Apparel,2,140.0,2023-07-18,Los Angeles,10,PayPal
+CUST-45548,Olivia Rodriguez,olivia.rodriguez@icloud.com,+1-408-473-9998,Scarf,Accessories,3,60.0,2023-10-12,Philadelphia,0,Gift Card
+CUST-00770,Elijah Williams,elijah.williams@icloud.com,+1-334-494-8178,Scarf,Accessories,4,75.0,2023-07-23,Chicago,5,Credit Card
+CUST-44967,Alexander Rodriguez,alexander.rodriguez@company.org,+1-915-696-2989,Jeans,Apparel,3,180.0,2023-10-10,Chicago,0,Apple Pay
+CUST-70686,Lucas Williams,lucas.williams@icloud.com,+1-229-845-4920,Dress,Apparel,1,55.0,2023-06-16,San Diego,20,Credit Card
+CUST-20407,Charlotte Johnson,charlotte.johnson@company.org,+1-926-362-6091,Jeans,Apparel,1,60.0,2023-05-22,New York,0,Cash
+CUST-11022,Henry Lopez,henry.lopez@company.org,+1-764-214-7684,Sneakers,Footwear,3,245.0,2023-09-24,Chicago,10,Credit Card
+CUST-44814,William Martinez,william.martinez@company.org,+1-295-430-2858,Jacket,Outerwear,4,480.0,2023-08-23,Los Angeles,0,Apple Pay
+CUST-81662,Evelyn Rodriguez,evelyn.rodriguez@outlook.com,+1-672-320-3522,Jeans,Apparel,2,120.0,2023-01-07,Chicago,0,Gift Card
+CUST-87482,Harper Anderson,harper.anderson@hotmail.com,+1-710-933-5781,Jeans,Apparel,4,230.0,2023-12-25,Phoenix,10,PayPal
+CUST-77394,Evelyn Davis,evelyn.davis@company.org,+1-721-922-5479,Jacket,Outerwear,2,240.0,2023-11-16,Chicago,0,Debit Card
+CUST-57131,Ava Jones,ava.jones@company.org,+1-625-694-8736,Sneakers,Footwear,1,70.0,2023-10-28,Los Angeles,15,Credit Card
+CUST-29537,Sophia Hernandez,sophia.hernandez@hotmail.com,+1-449-667-3369,Dress,Apparel,4,285.0,2023-09-25,San Diego,15,Debit Card
+CUST-23985,James Johnson,james.johnson@gmail.com,+1-592-395-9327,T-Shirt,Apparel,2,35.0,2023-08-03,Philadelphia,15,Cash
+CUST-69890,Emma Anderson,emma.anderson@company.org,+1-964-339-2143,Jacket,Outerwear,3,360.0,2023-02-27,New York,0,PayPal
+CUST-61655,Emma Garcia,emma.garcia@outlook.com,+1-482-991-7798,T-Shirt,Apparel,1,15.0,2023-08-01,Houston,10,PayPal
+CUST-35996,Amelia Davis,amelia.davis@icloud.com,+1-548-719-5377,Sneakers,Footwear,3,255.0,2023-03-18,Chicago,0,Credit Card
+CUST-78090,Liam Jones,liam.jones@icloud.com,+1-202-489-5891,Jeans,Apparel,1,45.0,2023-03-17,San Antonio,15,Gift Card
+CUST-27911,Lucas Thomas,lucas.thomas@yahoo.com,+1-801-793-9022,Jeans,Apparel,4,235.0,2023-10-18,San Antonio,5,PayPal
+CUST-04600,Elijah Moore,elijah.moore@yahoo.com,+1-352-657-9824,Sneakers,Footwear,4,330.0,2023-10-29,San Diego,10,Credit Card
+CUST-37588,Charlotte Garcia,charlotte.garcia@icloud.com,+1-695-553-6446,Dress,Apparel,1,75.0,2023-10-26,Los Angeles,0,Credit Card
+CUST-72964,Emma Jones,emma.jones@icloud.com,+1-765-981-9903,Dress,Apparel,1,70.0,2023-02-21,Houston,5,Debit Card
+CUST-22486,Lucas Thomas,lucas.thomas@outlook.com,+1-586-666-6272,Scarf,Accessories,1,20.0,2023-02-24,Houston,0,PayPal
+CUST-03620,Isabella Gonzalez,isabella.gonzalez@hotmail.com,+1-393-914-4912,Sneakers,Footwear,4,330.0,2023-10-16,Phoenix,10,Credit Card
+CUST-59845,Ava Jones,ava.jones@yahoo.com,+1-785-592-4826,Sneakers,Footwear,2,170.0,2023-02-21,Houston,0,Debit Card
+CUST-98861,Olivia Gonzalez,olivia.gonzalez@hotmail.com,+1-994-620-1715,Scarf,Accessories,3,55.0,2023-05-27,San Antonio,5,Apple Pay
+CUST-88693,James Taylor,james.taylor@outlook.com,+1-525-962-8749,Sneakers,Footwear,3,245.0,2023-10-02,Philadelphia,10,Debit Card
+CUST-35514,Lucas Moore,lucas.moore@icloud.com,+1-922-590-7325,Sneakers,Footwear,4,335.0,2023-06-26,Los Angeles,5,Debit Card
+CUST-77394,Evelyn Davis,evelyn.davis@company.org,+1-879-867-3492,Scarf,Accessories,3,60.0,2023-07-30,Los Angeles,0,Credit Card
+CUST-57819,Ava Gonzalez,ava.gonzalez@hotmail.com,+1-707-237-3068,Sneakers,Footwear,1,80.0,2023-05-16,Chicago,5,Cash
+CUST-09910,Benjamin Jackson,benjamin.jackson@icloud.com,+1-714-804-6439,Sneakers,Footwear,2,170.0,2023-07-16,Chicago,0,Cash
+CUST-24788,Ava Williams,ava.williams@icloud.com,+1-302-650-2633,Jeans,Apparel,3,180.0,2023-12-02,Chicago,0,Gift Card
+CUST-93347,Amelia Davis,amelia.davis@gmail.com,+1-738-667-1251,T-Shirt,Apparel,2,50.0,2023-09-06,San Antonio,0,Cash
+CUST-83929,Harper Johnson,harper.johnson@hotmail.com,+1-939-347-7717,Dress,Apparel,1,75.0,2023-10-20,San Antonio,0,Debit Card
+CUST-58027,Benjamin Davis,benjamin.davis@company.org,+1-870-358-2225,T-Shirt,Apparel,3,75.0,2023-11-08,San Diego,0,Gift Card
+CUST-98166,Alexander Gonzalez,alexander.gonzalez@hotmail.com,+1-680-471-6546,Jeans,Apparel,4,230.0,2023-08-31,San Antonio,10,Credit Card
+CUST-75537,Ava Gonzalez,ava.gonzalez@icloud.com,+1-838-909-7512,Jacket,Outerwear,2,240.0,2023-01-20,San Antonio,0,PayPal
+CUST-76007,James Smith,james.smith@company.org,+1-865-282-6383,T-Shirt,Apparel,1,25.0,2023-03-30,San Antonio,0,Debit Card
+CUST-65311,Lucas Garcia,lucas.garcia@outlook.com,+1-890-746-7226,Jacket,Outerwear,2,225.0,2023-05-22,San Antonio,15,Debit Card
+CUST-16889,Lucas Jackson,lucas.jackson@gmail.com,+1-524-841-8994,Jeans,Apparel,3,180.0,2023-07-26,Philadelphia,0,Gift Card
+CUST-55507,Isabella Thomas,isabella.thomas@icloud.com,+1-754-236-2121,Dress,Apparel,3,220.0,2023-03-15,San Antonio,5,Credit Card
+CUST-87644,Noah Davis,noah.davis@yahoo.com,+1-440-846-5708,Jacket,Outerwear,4,470.0,2023-11-13,San Diego,10,Apple Pay
+CUST-06283,Emma Smith,emma.smith@yahoo.com,+1-432-964-2480,Jeans,Apparel,1,45.0,2023-11-08,Houston,15,Debit Card
+CUST-79607,Ava Thomas,ava.thomas@gmail.com,+1-644-300-2646,Sneakers,Footwear,1,75.0,2023-12-15,Houston,10,Apple Pay
+CUST-82133,William Rodriguez,william.rodriguez@outlook.com,+1-654-370-5906,Dress,Apparel,4,290.0,2023-12-22,Phoenix,10,Apple Pay
+CUST-75537,Ava Gonzalez,ava.gonzalez@icloud.com,+1-229-247-6314,Scarf,Accessories,4,70.0,2023-07-25,Philadelphia,10,Cash
+CUST-61314,Noah Hernandez,noah.hernandez@hotmail.com,+1-257-500-6873,Sneakers,Footwear,1,85.0,2023-01-20,Chicago,0,Credit Card
+CUST-67812,Liam Gonzalez,liam.gonzalez@gmail.com,+1-583-641-3385,Dress,Apparel,2,140.0,2023-07-22,New York,10,Apple Pay
+CUST-20192,Alexander Martinez,alexander.martinez@outlook.com,+1-450-743-7751,Dress,Apparel,2,150.0,2023-06-19,San Antonio,0,Credit Card
+CUST-64947,William Brown,william.brown@hotmail.com,+1-779-898-3950,T-Shirt,Apparel,4,85.0,2023-12-20,Phoenix,15,Cash
+CUST-93728,Evelyn Garcia,evelyn.garcia@yahoo.com,+1-374-379-2293,Dress,Apparel,2,150.0,2023-05-02,New York,0,Credit Card
+CUST-50686,Emma Miller,emma.miller@yahoo.com,+1-824-591-4945,T-Shirt,Apparel,1,20.0,2023-01-26,San Diego,5,Debit Card
+CUST-94696,Ava Jones,ava.jones@hotmail.com,+1-709-797-3344,Jacket,Outerwear,3,360.0,2023-09-01,Houston,0,Apple Pay
+CUST-95041,Charlotte Hernandez,charlotte.hernandez@gmail.com,+1-437-672-5161,Dress,Apparel,3,215.0,2023-05-18,Phoenix,10,Credit Card
+CUST-43837,Noah Gonzalez,noah.gonzalez@yahoo.com,+1-670-461-1153,Jacket,Outerwear,2,240.0,2023-07-10,San Diego,0,PayPal
+CUST-53619,Lucas Jackson,lucas.jackson@icloud.com,+1-676-494-9955,Dress,Apparel,4,285.0,2023-01-11,Phoenix,15,Credit Card
+CUST-93454,Lucas Martinez,lucas.martinez@company.org,+1-361-275-8237,T-Shirt,Apparel,4,90.0,2023-06-22,Los Angeles,10,Apple Pay
+CUST-27675,Liam Martinez,liam.martinez@hotmail.com,+1-553-801-5901,Scarf,Accessories,4,80.0,2023-06-05,San Diego,0,Cash
+CUST-13273,Harper Hernandez,harper.hernandez@hotmail.com,+1-854-634-5097,Sneakers,Footwear,4,330.0,2023-06-09,Houston,10,Cash
+CUST-19752,Alexander Miller,alexander.miller@yahoo.com,+1-667-509-4263,Dress,Apparel,4,290.0,2023-05-24,Houston,10,Apple Pay
+CUST-78656,James Moore,james.moore@gmail.com,+1-593-694-2747,Jeans,Apparel,2,115.0,2023-09-09,Philadelphia,5,Debit Card
+CUST-45552,Henry Brown,henry.brown@icloud.com,+1-442-590-6881,Sneakers,Footwear,3,255.0,2023-12-23,Phoenix,0,Debit Card
+CUST-66278,Olivia Johnson,olivia.johnson@gmail.com,+1-788-502-5837,T-Shirt,Apparel,3,75.0,2023-12-17,San Antonio,0,Cash
+CUST-83480,Emma Wilson,emma.wilson@outlook.com,+1-222-874-7484,Scarf,Accessories,2,40.0,2023-02-20,Houston,0,Cash
+CUST-90445,Emma Gonzalez,emma.gonzalez@outlook.com,+1-481-208-1803,Scarf,Accessories,4,80.0,2023-04-27,Phoenix,0,Apple Pay
+CUST-15274,Evelyn Lopez,evelyn.lopez@company.org,+1-820-963-9138,Jeans,Apparel,2,105.0,2023-03-10,Philadelphia,15,Debit Card
+CUST-74416,Mia Miller,mia.miller@yahoo.com,+1-493-994-4770,Jacket,Outerwear,3,360.0,2023-06-03,San Antonio,0,Cash
+CUST-11226,Ava Johnson,ava.johnson@yahoo.com,+1-821-560-4588,T-Shirt,Apparel,1,15.0,2023-08-15,San Diego,10,Debit Card
+CUST-42140,James Gonzalez,james.gonzalez@yahoo.com,+1-851-394-5106,Sneakers,Footwear,2,170.0,2023-06-14,Philadelphia,0,Cash
+CUST-53613,Olivia Wilson,olivia.wilson@company.org,+1-894-973-3240,Jacket,Outerwear,4,475.0,2023-05-18,Los Angeles,5,Credit Card
+CUST-13840,Emma Taylor,emma.taylor@outlook.com,+1-843-299-1645,Jacket,Outerwear,3,350.0,2023-08-02,San Antonio,10,PayPal
+CUST-65363,Emma Rodriguez,emma.rodriguez@gmail.com,+1-516-651-1546,T-Shirt,Apparel,3,60.0,2023-11-06,Phoenix,15,Gift Card
+CUST-51168,Elijah Taylor,elijah.taylor@company.org,+1-793-573-3153,Sneakers,Footwear,3,255.0,2023-11-27,Houston,0,Credit Card
+CUST-51973,William Davis,william.davis@company.org,+1-292-502-6352,T-Shirt,Apparel,3,75.0,2023-02-15,Houston,0,Gift Card
+CUST-52143,Mia Johnson,mia.johnson@gmail.com,+1-965-625-3877,Jeans,Apparel,4,240.0,2023-04-07,Phoenix,0,Cash
+CUST-42140,James Gonzalez,james.gonzalez@yahoo.com,+1-405-335-9837,Jeans,Apparel,1,60.0,2023-08-15,Phoenix,0,PayPal
+CUST-42450,Charlotte Williams,charlotte.williams@icloud.com,+1-574-743-9221,Scarf,Accessories,3,60.0,2023-04-19,Phoenix,0,PayPal
+CUST-40181,James Thomas,james.thomas@gmail.com,+1-479-368-5210,Dress,Apparel,2,150.0,2023-07-28,Chicago,0,Cash
+CUST-71105,Benjamin Garcia,benjamin.garcia@outlook.com,+1-693-502-6549,Scarf,Accessories,1,20.0,2023-09-06,San Antonio,0,Cash
+CUST-07407,Liam Jackson,liam.jackson@hotmail.com,+1-317-679-2233,Jacket,Outerwear,3,350.0,2023-09-22,Houston,10,Debit Card
+CUST-52536,Evelyn Miller,evelyn.miller@hotmail.com,+1-344-972-4696,Scarf,Accessories,1,20.0,2023-07-11,San Antonio,0,Cash
+CUST-10558,Henry Martinez,henry.martinez@company.org,+1-892-941-7511,Dress,Apparel,2,150.0,2023-01-29,Philadelphia,0,Apple Pay
+CUST-51302,Olivia Rodriguez,olivia.rodriguez@hotmail.com,+1-770-574-2479,Scarf,Accessories,3,60.0,2023-09-21,Houston,0,Cash
+CUST-13755,Harper Johnson,harper.johnson@icloud.com,+1-604-214-5332,Sneakers,Footwear,2,160.0,2023-03-23,Chicago,10,Apple Pay
+CUST-51466,Elijah Anderson,elijah.anderson@yahoo.com,+1-749-326-8451,Jeans,Apparel,4,225.0,2023-02-03,Phoenix,15,Cash
+CUST-98162,William Jones,william.jones@outlook.com,+1-577-888-5295,Dress,Apparel,3,220.0,2023-06-09,Los Angeles,5,Debit Card
+CUST-24074,Liam Brown,liam.brown@icloud.com,+1-798-590-7086,Jeans,Apparel,3,170.0,2023-12-30,Phoenix,10,Apple Pay
+CUST-67340,Evelyn Martin,evelyn.martin@outlook.com,+1-310-891-4830,Jeans,Apparel,3,180.0,2023-09-17,San Diego,0,Credit Card
+CUST-67305,Sophia Brown,sophia.brown@outlook.com,+1-682-225-6374,Jeans,Apparel,3,175.0,2023-07-26,Phoenix,5,Apple Pay
+CUST-45311,Isabella Moore,isabella.moore@yahoo.com,+1-824-426-2035,T-Shirt,Apparel,4,100.0,2023-03-11,Chicago,0,Debit Card
+CUST-87330,Noah Brown,noah.brown@company.org,+1-850-675-5951,Dress,Apparel,3,225.0,2023-09-26,San Antonio,0,Gift Card
+CUST-30988,Henry Taylor,henry.taylor@hotmail.com,+1-864-618-2911,Jacket,Outerwear,1,110.0,2023-10-19,Houston,10,Apple Pay
+CUST-53708,Charlotte Lopez,charlotte.lopez@yahoo.com,+1-343-246-1609,Dress,Apparel,3,210.0,2023-01-15,Phoenix,15,Cash
+CUST-07491,Mia Taylor,mia.taylor@icloud.com,+1-511-704-2902,Jacket,Outerwear,4,480.0,2023-03-30,Houston,0,Cash
+CUST-93360,Noah Martinez,noah.martinez@company.org,+1-299-440-9807,Dress,Apparel,3,220.0,2023-04-09,New York,5,Gift Card
+CUST-87203,Noah Smith,noah.smith@icloud.com,+1-338-597-8432,Dress,Apparel,1,70.0,2023-04-13,Philadelphia,5,Debit Card
+CUST-99236,William Moore,william.moore@company.org,+1-579-886-9850,Jeans,Apparel,4,240.0,2023-01-30,San Antonio,0,PayPal
+CUST-55696,Ava Moore,ava.moore@icloud.com,+1-629-801-3531,Jacket,Outerwear,4,480.0,2023-05-08,Houston,0,Cash
+CUST-33258,Sophia Wilson,sophia.wilson@yahoo.com,+1-624-870-2622,Scarf,Accessories,1,20.0,2023-01-17,Los Angeles,0,Credit Card
+CUST-31198,Olivia Anderson,olivia.anderson@company.org,+1-701-830-7686,Jacket,Outerwear,1,120.0,2023-08-22,Philadelphia,0,Debit Card
+CUST-39435,Harper Lopez,harper.lopez@company.org,+1-486-233-7070,Jacket,Outerwear,1,120.0,2023-01-26,San Diego,0,Apple Pay
+CUST-80422,Olivia Brown,olivia.brown@outlook.com,+1-422-654-8285,Dress,Apparel,1,75.0,2023-07-04,San Diego,0,Apple Pay
+CUST-02606,Lucas Williams,lucas.williams@outlook.com,+1-441-571-2627,Jacket,Outerwear,1,120.0,2023-12-27,Los Angeles,0,Credit Card
+CUST-09718,Noah Martin,noah.martin@gmail.com,+1-902-576-9920,Dress,Apparel,4,290.0,2023-04-12,Phoenix,10,Cash
+CUST-75020,Henry Lopez,henry.lopez@icloud.com,+1-860-567-1992,Scarf,Accessories,4,75.0,2023-05-21,Philadelphia,5,Debit Card
+CUST-10538,Harper Miller,harper.miller@outlook.com,+1-607-482-4109,T-Shirt,Apparel,3,55.0,2023-07-08,Houston,20,Credit Card
+CUST-08092,Isabella Hernandez,isabella.hernandez@gmail.com,+1-325-665-2501,Jeans,Apparel,3,180.0,2023-08-26,Philadelphia,0,Cash
+CUST-40550,Ava Smith,ava.smith@outlook.com,+1-878-417-1349,Sneakers,Footwear,2,160.0,2023-09-16,Phoenix,10,Debit Card
+CUST-25989,James Garcia,james.garcia@icloud.com,+1-251-541-4990,T-Shirt,Apparel,3,60.0,2023-07-23,Chicago,15,Apple Pay
+CUST-55516,Harper Anderson,harper.anderson@company.org,+1-328-778-4362,Jacket,Outerwear,3,355.0,2023-11-22,San Antonio,5,Debit Card
+CUST-04563,Charlotte Anderson,charlotte.anderson@hotmail.com,+1-270-983-4394,Scarf,Accessories,1,20.0,2023-03-05,Los Angeles,0,Gift Card
+CUST-23241,Olivia Jackson,olivia.jackson@icloud.com,+1-800-421-4817,Jeans,Apparel,1,50.0,2023-12-15,Phoenix,10,PayPal
+CUST-16554,Sophia Hernandez,sophia.hernandez@yahoo.com,+1-536-992-3417,Scarf,Accessories,3,60.0,2023-01-16,Chicago,0,Debit Card
+CUST-32036,Harper Johnson,harper.johnson@outlook.com,+1-810-202-5542,Jeans,Apparel,2,120.0,2023-05-04,Philadelphia,0,PayPal
+CUST-13575,Harper Wilson,harper.wilson@outlook.com,+1-348-333-9850,Jeans,Apparel,1,55.0,2023-07-10,Philadelphia,5,Debit Card
+CUST-59064,Alexander Johnson,alexander.johnson@company.org,+1-456-378-2801,Jeans,Apparel,3,175.0,2023-09-08,Phoenix,5,PayPal
+CUST-57790,Lucas Brown,lucas.brown@yahoo.com,+1-876-226-3159,Scarf,Accessories,3,60.0,2023-11-01,Houston,0,Gift Card
+CUST-30014,Charlotte Taylor,charlotte.taylor@company.org,+1-215-566-4898,Jacket,Outerwear,4,465.0,2023-08-17,Philadelphia,15,Apple Pay
+CUST-18121,Evelyn Williams,evelyn.williams@yahoo.com,+1-802-531-1258,Jeans,Apparel,2,115.0,2023-04-01,Houston,5,Cash
+CUST-22651,Harper Gonzalez,harper.gonzalez@hotmail.com,+1-378-471-1858,Scarf,Accessories,4,80.0,2023-08-31,Houston,0,PayPal
+CUST-46512,Noah Rodriguez,noah.rodriguez@outlook.com,+1-329-959-7897,Sneakers,Footwear,2,155.0,2023-10-28,San Antonio,15,Gift Card
+CUST-06858,James Miller,james.miller@outlook.com,+1-738-316-2041,Sneakers,Footwear,1,85.0,2023-10-10,Houston,0,PayPal
+CUST-48060,Sophia Anderson,sophia.anderson@hotmail.com,+1-687-659-6931,Jeans,Apparel,2,100.0,2023-06-29,New York,20,Apple Pay
+CUST-31833,Evelyn Hernandez,evelyn.hernandez@gmail.com,+1-725-807-2786,Dress,Apparel,3,220.0,2023-06-26,San Antonio,5,PayPal
+CUST-86706,James Martin,james.martin@company.org,+1-662-715-4629,Scarf,Accessories,3,60.0,2023-03-25,Chicago,0,Gift Card
+CUST-33125,Sophia Johnson,sophia.johnson@hotmail.com,+1-829-244-9543,Jacket,Outerwear,2,230.0,2023-05-13,Chicago,10,Gift Card
+CUST-56351,Isabella Anderson,isabella.anderson@company.org,+1-508-669-1510,Scarf,Accessories,2,35.0,2023-12-19,Philadelphia,5,Credit Card
+CUST-47195,Benjamin Wilson,benjamin.wilson@icloud.com,+1-262-690-7580,Sneakers,Footwear,2,160.0,2023-02-16,Philadelphia,10,Apple Pay
+CUST-71786,Alexander Martin,alexander.martin@outlook.com,+1-636-902-2768,Sneakers,Footwear,4,320.0,2023-05-26,Houston,20,Credit Card
+CUST-65328,Evelyn Hernandez,evelyn.hernandez@company.org,+1-702-929-8267,Sneakers,Footwear,2,160.0,2023-01-15,San Antonio,10,Apple Pay
+CUST-63979,Amelia Williams,amelia.williams@yahoo.com,+1-275-282-6277,T-Shirt,Apparel,1,20.0,2023-07-17,San Antonio,5,PayPal
+CUST-17350,Lucas Taylor,lucas.taylor@company.org,+1-822-351-2076,Scarf,Accessories,4,65.0,2023-01-26,New York,15,Gift Card
+CUST-97769,Ava Lopez,ava.lopez@icloud.com,+1-329-481-9984,T-Shirt,Apparel,4,95.0,2023-03-25,Houston,5,Credit Card
+CUST-62687,Olivia Anderson,olivia.anderson@outlook.com,+1-929-532-7240,Sneakers,Footwear,2,170.0,2023-10-20,New York,0,PayPal
+CUST-97307,James Thomas,james.thomas@hotmail.com,+1-811-743-5831,Dress,Apparel,1,60.0,2023-04-20,San Diego,15,Gift Card
+CUST-46340,Alexander Jones,alexander.jones@icloud.com,+1-664-717-8048,Scarf,Accessories,4,80.0,2023-04-24,Houston,0,Apple Pay
+CUST-18959,Noah Martin,noah.martin@outlook.com,+1-301-918-2874,Jacket,Outerwear,3,350.0,2023-11-28,Los Angeles,10,Gift Card
+CUST-45443,Lucas Garcia,lucas.garcia@company.org,+1-870-866-4522,Scarf,Accessories,4,65.0,2023-04-26,Los Angeles,15,PayPal
+CUST-82056,Isabella Jackson,isabella.jackson@gmail.com,+1-640-662-4743,Jacket,Outerwear,2,230.0,2023-12-13,Phoenix,10,Credit Card
+CUST-90153,Charlotte Jones,charlotte.jones@gmail.com,+1-623-547-8430,Sneakers,Footwear,1,80.0,2023-04-16,Houston,5,Credit Card
+CUST-96653,William Williams,william.williams@yahoo.com,+1-608-625-2557,Sneakers,Footwear,2,160.0,2023-05-18,San Antonio,10,Gift Card
+CUST-57139,Isabella Smith,isabella.smith@outlook.com,+1-520-637-6120,Jacket,Outerwear,3,360.0,2023-11-30,Philadelphia,0,PayPal
+CUST-58103,Benjamin Garcia,benjamin.garcia@gmail.com,+1-881-461-7132,Dress,Apparel,3,210.0,2023-07-29,Chicago,15,Debit Card
+CUST-71963,Ava Anderson,ava.anderson@hotmail.com,+1-356-903-8770,T-Shirt,Apparel,3,75.0,2023-09-20,Phoenix,0,Apple Pay
+CUST-58604,Olivia Johnson,olivia.johnson@outlook.com,+1-268-293-2398,Scarf,Accessories,2,40.0,2023-01-11,Philadelphia,0,Apple Pay
+CUST-52048,Mia Williams,mia.williams@hotmail.com,+1-295-642-2582,T-Shirt,Apparel,4,100.0,2023-12-16,Los Angeles,0,PayPal
+CUST-28657,Mia Taylor,mia.taylor@hotmail.com,+1-962-956-7105,Scarf,Accessories,2,35.0,2023-01-05,Houston,5,Debit Card
+CUST-44582,Henry Lopez,henry.lopez@gmail.com,+1-333-769-1982,Sneakers,Footwear,1,80.0,2023-08-31,Phoenix,5,Credit Card
+CUST-93320,Amelia Moore,amelia.moore@outlook.com,+1-800-775-6400,Scarf,Accessories,4,70.0,2023-03-09,Houston,10,Cash
+CUST-60747,James Anderson,james.anderson@company.org,+1-886-325-7730,Scarf,Accessories,3,60.0,2023-11-28,Los Angeles,0,Cash
+CUST-77138,Sophia Lopez,sophia.lopez@icloud.com,+1-562-881-7929,Scarf,Accessories,2,40.0,2023-03-30,Phoenix,0,PayPal
+CUST-78253,William Thomas,william.thomas@gmail.com,+1-938-252-5712,Jacket,Outerwear,3,360.0,2023-11-04,Los Angeles,0,Debit Card
+CUST-12238,James Davis,james.davis@gmail.com,+1-814-519-6761,T-Shirt,Apparel,3,75.0,2023-01-05,New York,0,Debit Card
+CUST-27907,Harper Wilson,harper.wilson@company.org,+1-306-791-9313,Dress,Apparel,1,70.0,2023-04-25,Los Angeles,5,Apple Pay
+CUST-12619,Oliver Taylor,oliver.taylor@outlook.com,+1-417-358-8900,Sneakers,Footwear,4,340.0,2023-05-10,San Antonio,0,Credit Card
+CUST-53137,Isabella Davis,isabella.davis@outlook.com,+1-429-310-6736,Jeans,Apparel,1,60.0,2023-11-08,San Antonio,0,Gift Card
+CUST-47519,Benjamin Anderson,benjamin.anderson@hotmail.com,+1-769-576-2882,Sneakers,Footwear,1,85.0,2023-06-06,Houston,0,Debit Card
+CUST-08707,Charlotte Wilson,charlotte.wilson@company.org,+1-980-485-4705,Jeans,Apparel,1,60.0,2023-12-31,Chicago,0,Gift Card
+CUST-97724,Elijah Moore,elijah.moore@company.org,+1-639-774-1430,Sneakers,Footwear,3,255.0,2023-12-30,Los Angeles,0,Cash
+CUST-50235,William Martin,william.martin@outlook.com,+1-823-873-5381,Jacket,Outerwear,1,120.0,2023-11-26,Philadelphia,0,Gift Card
+CUST-04231,Sophia Miller,sophia.miller@hotmail.com,+1-229-384-5477,Jacket,Outerwear,1,110.0,2023-05-21,San Antonio,10,Credit Card
+CUST-84056,Henry Williams,henry.williams@gmail.com,+1-919-980-6062,Jacket,Outerwear,4,470.0,2023-08-05,San Diego,10,Credit Card
+CUST-64372,Liam Lopez,liam.lopez@yahoo.com,+1-547-559-1100,Jacket,Outerwear,4,475.0,2023-07-12,Chicago,5,Gift Card
+CUST-24788,Ava Williams,ava.williams@icloud.com,+1-385-346-7566,Dress,Apparel,1,55.0,2023-06-28,New York,20,PayPal
+CUST-44243,Ava Martin,ava.martin@gmail.com,+1-271-345-1502,Dress,Apparel,4,300.0,2023-08-24,Phoenix,0,Debit Card
+CUST-94663,Oliver Wilson,oliver.wilson@outlook.com,+1-293-964-9691,Jeans,Apparel,4,235.0,2023-05-10,Phoenix,5,PayPal
+CUST-16561,Evelyn Anderson,evelyn.anderson@icloud.com,+1-420-585-7878,Dress,Apparel,1,55.0,2023-04-22,San Antonio,20,Gift Card
+CUST-47802,Elijah Wilson,elijah.wilson@yahoo.com,+1-664-549-3578,Sneakers,Footwear,3,255.0,2023-08-27,Chicago,0,Debit Card
+CUST-91834,Lucas Miller,lucas.miller@yahoo.com,+1-578-519-6314,Jacket,Outerwear,1,105.0,2023-06-04,San Antonio,15,Apple Pay
+CUST-17573,Charlotte Taylor,charlotte.taylor@hotmail.com,+1-995-781-2391,Scarf,Accessories,4,80.0,2023-12-13,Phoenix,0,PayPal
+CUST-67689,Emma Lopez,emma.lopez@icloud.com,+1-253-359-3579,T-Shirt,Apparel,3,75.0,2023-09-24,San Diego,0,PayPal
+CUST-16512,Alexander Martin,alexander.martin@hotmail.com,+1-972-832-1815,T-Shirt,Apparel,2,50.0,2023-11-16,Los Angeles,0,Gift Card
+CUST-43099,Harper Brown,harper.brown@gmail.com,+1-890-283-5458,T-Shirt,Apparel,3,65.0,2023-07-23,Chicago,10,Cash
+CUST-95815,Isabella Rodriguez,isabella.rodriguez@company.org,+1-653-877-7947,Scarf,Accessories,4,75.0,2023-10-27,Houston,5,Gift Card
+CUST-86057,Charlotte Garcia,charlotte.garcia@company.org,+1-697-821-8242,Sneakers,Footwear,3,245.0,2023-02-22,Los Angeles,10,PayPal
+CUST-09889,Noah Thomas,noah.thomas@company.org,+1-624-479-4531,T-Shirt,Apparel,1,25.0,2023-01-04,Los Angeles,0,Debit Card
+CUST-08947,Noah Johnson,noah.johnson@icloud.com,+1-973-724-2864,T-Shirt,Apparel,2,50.0,2023-09-19,Los Angeles,0,Cash
+CUST-32072,Oliver Davis,oliver.davis@company.org,+1-553-640-2816,Jeans,Apparel,2,120.0,2023-12-06,Houston,0,Gift Card
+CUST-31833,Evelyn Hernandez,evelyn.hernandez@gmail.com,+1-490-894-8972,Sneakers,Footwear,2,170.0,2023-07-11,San Diego,0,Gift Card
+CUST-71021,James Gonzalez,james.gonzalez@hotmail.com,+1-739-883-6053,Sneakers,Footwear,4,325.0,2023-10-15,New York,15,PayPal
+CUST-09870,Isabella Taylor,isabella.taylor@icloud.com,+1-246-425-7475,T-Shirt,Apparel,4,100.0,2023-11-28,San Diego,0,PayPal
+CUST-93279,William Davis,william.davis@hotmail.com,+1-813-256-1125,Sneakers,Footwear,2,160.0,2023-11-01,San Diego,10,Apple Pay
+CUST-01905,Evelyn Moore,evelyn.moore@icloud.com,+1-409-508-4460,Jeans,Apparel,3,170.0,2023-11-08,San Diego,10,Gift Card
+CUST-77751,Isabella Moore,isabella.moore@hotmail.com,+1-985-340-5186,Scarf,Accessories,2,40.0,2023-05-25,Philadelphia,0,PayPal
+CUST-18105,Olivia Wilson,olivia.wilson@yahoo.com,+1-496-535-2965,Jeans,Apparel,3,175.0,2023-06-02,San Antonio,5,Credit Card
+CUST-04563,Charlotte Anderson,charlotte.anderson@hotmail.com,+1-207-709-8055,Scarf,Accessories,3,60.0,2023-12-17,Phoenix,0,Cash
+CUST-86057,Charlotte Garcia,charlotte.garcia@company.org,+1-379-332-7229,Jacket,Outerwear,4,480.0,2023-02-25,San Antonio,0,Credit Card
+CUST-27266,Henry Hernandez,henry.hernandez@yahoo.com,+1-745-920-4770,Jeans,Apparel,3,180.0,2023-09-04,Chicago,0,Cash
+CUST-98166,Alexander Gonzalez,alexander.gonzalez@hotmail.com,+1-712-772-6802,Jacket,Outerwear,2,235.0,2023-02-02,San Diego,5,Gift Card
+CUST-61750,Elijah Smith,elijah.smith@icloud.com,+1-273-606-1693,T-Shirt,Apparel,4,100.0,2023-06-22,New York,0,Apple Pay
+CUST-12508,Sophia Garcia,sophia.garcia@icloud.com,+1-646-219-8532,Scarf,Accessories,1,15.0,2023-05-22,Chicago,5,PayPal
+CUST-07965,Isabella Rodriguez,isabella.rodriguez@icloud.com,+1-279-520-8033,Jacket,Outerwear,1,115.0,2023-11-24,San Antonio,5,PayPal
+CUST-14478,Emma Davis,emma.davis@outlook.com,+1-787-614-7843,Jacket,Outerwear,4,480.0,2023-06-16,Phoenix,0,PayPal
+CUST-34089,Olivia Hernandez,olivia.hernandez@gmail.com,+1-496-317-7636,T-Shirt,Apparel,2,45.0,2023-05-22,Houston,5,Gift Card
+CUST-71418,Charlotte Jackson,charlotte.jackson@icloud.com,+1-221-532-3815,Jacket,Outerwear,1,110.0,2023-05-14,San Antonio,10,Cash
+CUST-66282,Harper Rodriguez,harper.rodriguez@yahoo.com,+1-832-671-6928,Scarf,Accessories,1,20.0,2023-12-02,Los Angeles,0,PayPal
+CUST-88373,Emma Taylor,emma.taylor@icloud.com,+1-290-647-2734,Scarf,Accessories,3,60.0,2023-12-31,San Antonio,0,Credit Card
+CUST-30645,Oliver Lopez,oliver.lopez@outlook.com,+1-449-646-7560,Jeans,Apparel,3,170.0,2023-11-30,Los Angeles,10,PayPal
+CUST-76594,Oliver Wilson,oliver.wilson@company.org,+1-736-280-7484,T-Shirt,Apparel,2,50.0,2023-06-02,Houston,0,Gift Card
+CUST-64847,James Anderson,james.anderson@yahoo.com,+1-517-963-6562,Sneakers,Footwear,4,335.0,2023-04-07,San Antonio,5,Apple Pay
+CUST-66060,Charlotte Thomas,charlotte.thomas@outlook.com,+1-426-541-3754,Scarf,Accessories,2,40.0,2023-03-18,New York,0,Credit Card
+CUST-09481,Charlotte Martin,charlotte.martin@company.org,+1-278-722-2868,Jacket,Outerwear,4,480.0,2023-09-22,New York,0,PayPal
+CUST-93225,Amelia Smith,amelia.smith@yahoo.com,+1-743-722-4176,Scarf,Accessories,1,20.0,2023-05-04,Chicago,0,PayPal
+CUST-34776,Lucas Martinez,lucas.martinez@hotmail.com,+1-994-557-6752,Scarf,Accessories,3,60.0,2023-01-30,Houston,0,Debit Card
+CUST-85701,Mia Davis,mia.davis@gmail.com,+1-944-860-3419,Jeans,Apparel,2,115.0,2023-11-04,San Diego,5,Cash
+CUST-17456,Ava Moore,ava.moore@gmail.com,+1-441-305-3399,Sneakers,Footwear,2,170.0,2023-07-26,New York,0,Credit Card
+CUST-64164,Noah Smith,noah.smith@outlook.com,+1-462-402-3842,Scarf,Accessories,4,70.0,2023-12-05,San Antonio,10,Debit Card
+CUST-31686,Olivia Johnson,olivia.johnson@company.org,+1-816-356-2234,T-Shirt,Apparel,4,85.0,2023-06-13,Houston,15,Apple Pay
+CUST-20752,Evelyn Smith,evelyn.smith@gmail.com,+1-381-991-9095,Scarf,Accessories,2,35.0,2023-12-15,Phoenix,5,Cash
+CUST-68244,Alexander Smith,alexander.smith@company.org,+1-675-972-8354,T-Shirt,Apparel,4,90.0,2023-03-13,Los Angeles,10,Credit Card
+CUST-88485,Henry Rodriguez,henry.rodriguez@company.org,+1-897-778-6295,T-Shirt,Apparel,2,50.0,2023-01-14,San Antonio,0,PayPal
+CUST-23427,Amelia Gonzalez,amelia.gonzalez@outlook.com,+1-842-523-3473,Jeans,Apparel,2,120.0,2023-12-02,Los Angeles,0,Credit Card
+CUST-56441,Sophia Smith,sophia.smith@outlook.com,+1-650-269-8682,Sneakers,Footwear,2,160.0,2023-09-12,Los Angeles,10,PayPal
+CUST-63523,Harper Gonzalez,harper.gonzalez@outlook.com,+1-652-846-5961,T-Shirt,Apparel,1,25.0,2023-06-01,San Diego,0,Cash
+CUST-76040,Benjamin Martin,benjamin.martin@gmail.com,+1-481-805-1920,Jeans,Apparel,4,235.0,2023-05-13,Houston,5,PayPal
+CUST-03892,Amelia Miller,amelia.miller@outlook.com,+1-560-719-2215,Dress,Apparel,3,225.0,2023-08-03,Houston,0,Apple Pay
+CUST-74532,Emma Johnson,emma.johnson@gmail.com,+1-517-672-8404,Jeans,Apparel,3,175.0,2023-07-27,Chicago,5,Gift Card
+CUST-03500,Olivia Garcia,olivia.garcia@outlook.com,+1-238-258-7041,Dress,Apparel,4,285.0,2023-07-18,Los Angeles,15,PayPal
+CUST-47813,Lucas Miller,lucas.miller@icloud.com,+1-493-278-2479,Scarf,Accessories,2,25.0,2023-01-19,Chicago,15,Apple Pay
+CUST-89059,Mia Wilson,mia.wilson@company.org,+1-829-808-9307,Sneakers,Footwear,3,245.0,2023-10-26,San Diego,10,Gift Card
+CUST-96745,James Moore,james.moore@outlook.com,+1-593-673-1672,T-Shirt,Apparel,3,65.0,2023-12-29,Los Angeles,10,Cash
+CUST-34730,William Anderson,william.anderson@yahoo.com,+1-660-785-4084,T-Shirt,Apparel,4,95.0,2023-10-20,Chicago,5,Cash
+CUST-96638,Lucas Johnson,lucas.johnson@company.org,+1-529-819-8792,Scarf,Accessories,3,55.0,2023-04-08,Chicago,5,Credit Card
+CUST-25305,Elijah Martinez,elijah.martinez@company.org,+1-713-354-2013,Jacket,Outerwear,2,240.0,2023-06-25,Phoenix,0,Apple Pay
+CUST-30645,Oliver Lopez,oliver.lopez@outlook.com,+1-661-305-6626,T-Shirt,Apparel,4,100.0,2023-04-24,Chicago,0,Apple Pay
+CUST-98956,James Taylor,james.taylor@hotmail.com,+1-931-286-9266,Sneakers,Footwear,2,170.0,2023-12-18,Houston,0,Debit Card
+CUST-92510,Elijah Davis,elijah.davis@outlook.com,+1-861-376-1641,Scarf,Accessories,3,40.0,2023-10-01,Chicago,20,Debit Card
+CUST-24243,Noah Hernandez,noah.hernandez@company.org,+1-453-924-8172,Jeans,Apparel,3,180.0,2023-11-23,Los Angeles,0,Gift Card
+CUST-68418,Elijah Williams,elijah.williams@yahoo.com,+1-649-736-9564,Sneakers,Footwear,2,165.0,2023-09-01,Chicago,5,Gift Card
+CUST-82279,Henry Garcia,henry.garcia@company.org,+1-824-362-6962,T-Shirt,Apparel,1,20.0,2023-12-10,New York,5,Debit Card
+CUST-39924,Ava Rodriguez,ava.rodriguez@yahoo.com,+1-581-489-7347,Jeans,Apparel,3,175.0,2023-07-03,Philadelphia,5,Gift Card
+CUST-64240,Sophia Garcia,sophia.garcia@gmail.com,+1-618-993-6543,Sneakers,Footwear,1,75.0,2023-09-17,Los Angeles,10,PayPal
+CUST-28340,Noah Rodriguez,noah.rodriguez@icloud.com,+1-895-812-1857,T-Shirt,Apparel,3,75.0,2023-06-03,New York,0,Debit Card
+CUST-01947,Harper Miller,harper.miller@company.org,+1-846-862-6482,Scarf,Accessories,1,15.0,2023-03-29,San Diego,5,Apple Pay
+CUST-56486,Sophia Rodriguez,sophia.rodriguez@outlook.com,+1-267-537-2548,T-Shirt,Apparel,1,15.0,2023-12-03,Los Angeles,10,PayPal
+CUST-22551,Emma Moore,emma.moore@gmail.com,+1-771-894-7333,T-Shirt,Apparel,1,25.0,2023-10-13,Houston,0,Gift Card
+CUST-81728,Alexander Lopez,alexander.lopez@icloud.com,+1-490-458-3463,Jacket,Outerwear,2,240.0,2023-04-03,Philadelphia,0,Cash
+CUST-17167,Charlotte Davis,charlotte.davis@outlook.com,+1-541-283-3317,Jacket,Outerwear,1,115.0,2023-05-31,Philadelphia,5,Credit Card
+CUST-74212,Lucas Davis,lucas.davis@hotmail.com,+1-558-517-7421,Jacket,Outerwear,1,110.0,2023-02-19,Houston,10,Debit Card
+CUST-37859,Charlotte Moore,charlotte.moore@outlook.com,+1-332-809-2388,Jeans,Apparel,1,60.0,2023-08-30,Philadelphia,0,Cash
+CUST-02310,Benjamin Martin,benjamin.martin@yahoo.com,+1-517-772-7171,Sneakers,Footwear,3,245.0,2023-03-07,Houston,10,Gift Card
+CUST-58329,Olivia Anderson,olivia.anderson@yahoo.com,+1-858-536-3093,Jeans,Apparel,1,50.0,2023-05-13,New York,10,Apple Pay
+CUST-87305,Oliver Miller,oliver.miller@hotmail.com,+1-886-919-9624,Scarf,Accessories,3,60.0,2023-10-14,San Diego,0,Credit Card
+CUST-19735,Henry Hernandez,henry.hernandez@gmail.com,+1-295-861-7937,Scarf,Accessories,1,0.0,2023-04-04,Phoenix,20,Cash
+CUST-48939,Evelyn Martin,evelyn.martin@icloud.com,+1-720-570-1298,Jeans,Apparel,1,50.0,2023-12-15,Los Angeles,10,Credit Card
+CUST-61439,Ava Thomas,ava.thomas@outlook.com,+1-571-516-3953,T-Shirt,Apparel,2,40.0,2023-06-21,Houston,10,Debit Card
+CUST-53856,Amelia Brown,amelia.brown@yahoo.com,+1-419-549-8967,Dress,Apparel,3,215.0,2023-12-02,Los Angeles,10,Gift Card
+CUST-55449,Liam Garcia,liam.garcia@gmail.com,+1-396-431-3253,Dress,Apparel,1,75.0,2023-02-15,San Diego,0,Apple Pay
+CUST-38222,William Williams,william.williams@hotmail.com,+1-358-279-5846,T-Shirt,Apparel,3,75.0,2023-04-24,New York,0,Gift Card
+CUST-88485,Henry Rodriguez,henry.rodriguez@company.org,+1-303-719-9843,Dress,Apparel,3,225.0,2023-07-01,Phoenix,0,Credit Card
+CUST-11052,Charlotte Martinez,charlotte.martinez@yahoo.com,+1-956-739-1618,Scarf,Accessories,4,80.0,2023-04-25,San Diego,0,Cash
+CUST-27327,Ava Wilson,ava.wilson@hotmail.com,+1-877-544-3147,Jeans,Apparel,2,120.0,2023-06-07,New York,0,Debit Card
+CUST-26564,Emma Hernandez,emma.hernandez@outlook.com,+1-811-585-3527,Sneakers,Footwear,2,155.0,2023-08-04,Philadelphia,15,Debit Card
+CUST-22571,Emma Moore,emma.moore@icloud.com,+1-366-385-3712,Jacket,Outerwear,2,230.0,2023-06-19,Los Angeles,10,Gift Card
+CUST-36828,Henry Lopez,henry.lopez@yahoo.com,+1-938-648-1715,Scarf,Accessories,4,75.0,2023-07-10,San Antonio,5,Cash
+CUST-94106,Amelia Lopez,amelia.lopez@yahoo.com,+1-620-573-4891,Jeans,Apparel,4,225.0,2023-05-14,Phoenix,15,Cash
+CUST-63523,Harper Gonzalez,harper.gonzalez@outlook.com,+1-654-825-5668,Scarf,Accessories,2,30.0,2023-10-27,Philadelphia,10,Credit Card
+CUST-71460,Mia Gonzalez,mia.gonzalez@company.org,+1-970-966-8355,Scarf,Accessories,4,80.0,2023-05-31,San Diego,0,Gift Card
+CUST-96719,Harper Jackson,harper.jackson@gmail.com,+1-439-746-4918,Jeans,Apparel,4,240.0,2023-08-26,Phoenix,0,Gift Card
+CUST-71418,Charlotte Jackson,charlotte.jackson@icloud.com,+1-516-680-4178,Sneakers,Footwear,4,335.0,2023-03-02,Philadelphia,5,PayPal
+CUST-35500,Emma Wilson,emma.wilson@yahoo.com,+1-576-894-8218,Dress,Apparel,2,140.0,2023-08-29,New York,10,Gift Card
+CUST-24074,Liam Brown,liam.brown@icloud.com,+1-672-987-5616,Scarf,Accessories,2,40.0,2023-01-28,Houston,0,Debit Card
+CUST-27281,Sophia Gonzalez,sophia.gonzalez@yahoo.com,+1-996-591-9239,Sneakers,Footwear,2,165.0,2023-11-21,Los Angeles,5,Credit Card
+CUST-39170,Olivia Davis,olivia.davis@icloud.com,+1-740-628-3655,Jeans,Apparel,4,240.0,2023-10-26,Chicago,0,Cash
+CUST-60746,Emma Jackson,emma.jackson@hotmail.com,+1-404-819-3267,T-Shirt,Apparel,2,40.0,2023-10-25,Chicago,10,Gift Card
+CUST-53956,Lucas Lopez,lucas.lopez@yahoo.com,+1-456-253-8873,T-Shirt,Apparel,4,90.0,2023-11-14,New York,10,Credit Card
+CUST-30702,Oliver Moore,oliver.moore@icloud.com,+1-580-767-2680,Jeans,Apparel,1,50.0,2023-02-06,San Diego,10,Gift Card
+CUST-92491,Harper Garcia,harper.garcia@gmail.com,+1-928-728-3042,T-Shirt,Apparel,4,80.0,2023-08-30,Los Angeles,20,Cash
+CUST-07427,Ava Moore,ava.moore@hotmail.com,+1-491-285-3626,Dress,Apparel,3,215.0,2023-04-10,San Diego,10,Apple Pay
+CUST-26916,Ava Jackson,ava.jackson@hotmail.com,+1-479-660-9410,Scarf,Accessories,2,25.0,2023-09-14,Los Angeles,15,Cash
+CUST-45992,Oliver Jones,oliver.jones@gmail.com,+1-350-647-2502,Sneakers,Footwear,2,155.0,2023-03-03,New York,15,Cash
+CUST-45548,Olivia Rodriguez,olivia.rodriguez@icloud.com,+1-427-661-6727,Jacket,Outerwear,3,350.0,2023-12-15,Los Angeles,10,Cash
+CUST-18063,Ava Williams,ava.williams@outlook.com,+1-227-624-1872,Sneakers,Footwear,4,335.0,2023-07-15,Houston,5,Gift Card
+CUST-42366,Ava Martinez,ava.martinez@gmail.com,+1-605-714-7126,Jacket,Outerwear,1,120.0,2023-09-29,San Diego,0,PayPal
+CUST-94743,William Jackson,william.jackson@icloud.com,+1-441-595-2337,Jeans,Apparel,3,180.0,2023-06-02,New York,0,Cash
+CUST-00031,William Williams,william.williams@gmail.com,+1-583-429-1461,Jeans,Apparel,3,175.0,2023-07-31,Houston,5,Debit Card
+CUST-53897,Evelyn Anderson,evelyn.anderson@gmail.com,+1-526-301-6493,Jacket,Outerwear,4,480.0,2023-01-28,Los Angeles,0,Debit Card
+CUST-22847,Harper Smith,harper.smith@yahoo.com,+1-349-340-1627,Scarf,Accessories,2,40.0,2023-03-19,New York,0,Credit Card
+CUST-65312,Benjamin Miller,benjamin.miller@icloud.com,+1-493-683-3273,T-Shirt,Apparel,4,80.0,2023-03-12,Los Angeles,20,PayPal
+CUST-38600,Sophia Lopez,sophia.lopez@outlook.com,+1-977-922-8685,Jeans,Apparel,3,165.0,2023-04-13,San Diego,15,Credit Card
+CUST-08762,Benjamin Taylor,benjamin.taylor@yahoo.com,+1-659-830-1086,Dress,Apparel,3,215.0,2023-06-25,New York,10,Debit Card
+CUST-19241,Emma Martin,emma.martin@gmail.com,+1-281-219-5193,Dress,Apparel,2,150.0,2023-07-29,Los Angeles,0,Debit Card
+CUST-39441,Evelyn Jones,evelyn.jones@company.org,+1-420-353-9991,Dress,Apparel,2,150.0,2023-10-19,San Diego,0,Apple Pay
+CUST-68841,Charlotte Brown,charlotte.brown@gmail.com,+1-944-823-9647,Scarf,Accessories,2,40.0,2023-08-23,Houston,0,Cash
+CUST-00860,Charlotte Lopez,charlotte.lopez@gmail.com,+1-633-313-5720,Dress,Apparel,4,300.0,2023-03-15,San Antonio,0,Debit Card
+CUST-74925,Noah Martin,noah.martin@icloud.com,+1-443-508-2996,Jacket,Outerwear,2,240.0,2023-06-11,Houston,0,Gift Card
+CUST-22571,Emma Moore,emma.moore@icloud.com,+1-248-444-7878,Scarf,Accessories,3,60.0,2023-04-03,Los Angeles,0,Gift Card
+CUST-50996,Harper Taylor,harper.taylor@yahoo.com,+1-854-837-8489,T-Shirt,Apparel,3,60.0,2023-02-11,New York,15,Credit Card
+CUST-46842,Elijah Jackson,elijah.jackson@outlook.com,+1-264-313-9189,Scarf,Accessories,1,10.0,2023-09-07,Chicago,10,Credit Card
+CUST-68072,Liam Rodriguez,liam.rodriguez@yahoo.com,+1-811-748-1269,Jacket,Outerwear,4,480.0,2023-06-20,Houston,0,Cash
+CUST-55953,Elijah Brown,elijah.brown@hotmail.com,+1-847-727-4963,Jeans,Apparel,1,60.0,2023-11-20,Houston,0,Cash
+CUST-19627,Isabella Johnson,isabella.johnson@gmail.com,+1-935-347-5772,Dress,Apparel,3,220.0,2023-04-01,San Diego,5,Apple Pay
+CUST-15099,Liam Brown,liam.brown@company.org,+1-639-201-6780,Dress,Apparel,1,75.0,2023-06-10,Philadelphia,0,PayPal
+CUST-66278,Olivia Johnson,olivia.johnson@gmail.com,+1-446-784-7825,Dress,Apparel,3,210.0,2023-11-21,Chicago,15,Credit Card
+CUST-90875,Henry Anderson,henry.anderson@gmail.com,+1-391-880-2402,Jeans,Apparel,1,60.0,2023-01-30,Los Angeles,0,Cash
+CUST-54601,James Johnson,james.johnson@yahoo.com,+1-736-569-2108,Scarf,Accessories,2,40.0,2023-01-03,San Antonio,0,Credit Card
+CUST-50570,Emma Brown,emma.brown@company.org,+1-738-757-9312,Sneakers,Footwear,1,85.0,2023-08-20,New York,0,Cash
+CUST-84109,James Garcia,james.garcia@company.org,+1-719-767-1333,Jacket,Outerwear,2,240.0,2023-05-21,Philadelphia,0,Debit Card
+CUST-62438,Ava Miller,ava.miller@company.org,+1-599-681-1713,Scarf,Accessories,2,35.0,2023-04-18,Los Angeles,5,Credit Card
+CUST-22246,Harper Martinez,harper.martinez@yahoo.com,+1-850-596-7116,T-Shirt,Apparel,4,90.0,2023-03-28,Phoenix,10,Debit Card
+CUST-16889,Lucas Jackson,lucas.jackson@gmail.com,+1-459-965-1266,Jeans,Apparel,2,115.0,2023-10-23,San Antonio,5,Credit Card
+CUST-58437,Amelia Jackson,amelia.jackson@yahoo.com,+1-565-269-6649,Sneakers,Footwear,2,170.0,2023-03-23,Houston,0,PayPal
+CUST-82623,Amelia Lopez,amelia.lopez@icloud.com,+1-446-950-2698,Sneakers,Footwear,1,80.0,2023-09-08,Phoenix,5,Apple Pay
+CUST-24788,Ava Williams,ava.williams@icloud.com,+1-990-795-6447,T-Shirt,Apparel,3,70.0,2023-02-15,Houston,5,Gift Card
+CUST-20428,Benjamin Gonzalez,benjamin.gonzalez@yahoo.com,+1-336-245-6772,Jeans,Apparel,4,225.0,2023-03-08,Houston,15,Gift Card
+CUST-79940,Liam Moore,liam.moore@company.org,+1-759-546-3868,Sneakers,Footwear,2,170.0,2023-11-11,Phoenix,0,Gift Card
+CUST-85701,Mia Davis,mia.davis@gmail.com,+1-997-901-8612,Scarf,Accessories,4,80.0,2023-08-11,San Antonio,0,Debit Card
+CUST-18531,Evelyn Anderson,evelyn.anderson@yahoo.com,+1-912-690-3986,Dress,Apparel,1,70.0,2023-11-21,San Diego,5,Cash
+CUST-72401,Isabella Smith,isabella.smith@yahoo.com,+1-338-264-8498,T-Shirt,Apparel,2,45.0,2023-08-08,Phoenix,5,Gift Card
+CUST-05999,Oliver Williams,oliver.williams@yahoo.com,+1-237-500-4302,Dress,Apparel,1,75.0,2023-07-26,Los Angeles,0,PayPal
+CUST-81850,Liam Davis,liam.davis@hotmail.com,+1-244-404-1686,T-Shirt,Apparel,4,100.0,2023-08-08,Philadelphia,0,Gift Card
+CUST-58699,Oliver Brown,oliver.brown@icloud.com,+1-523-517-9444,Jacket,Outerwear,1,120.0,2023-09-02,Philadelphia,0,Credit Card
+CUST-84603,Henry Thomas,henry.thomas@company.org,+1-607-756-8756,Jacket,Outerwear,4,465.0,2023-07-16,Phoenix,15,Debit Card
+CUST-42032,Liam Martinez,liam.martinez@outlook.com,+1-459-237-4131,Jeans,Apparel,1,60.0,2023-01-03,Los Angeles,0,Credit Card
+CUST-11022,Henry Lopez,henry.lopez@company.org,+1-492-565-1783,Sneakers,Footwear,4,325.0,2023-01-20,San Diego,15,Credit Card
+CUST-10238,Amelia Wilson,amelia.wilson@outlook.com,+1-871-539-5476,Dress,Apparel,3,220.0,2023-10-01,Philadelphia,5,Credit Card
+CUST-48928,Evelyn Wilson,evelyn.wilson@hotmail.com,+1-327-576-8159,Sneakers,Footwear,1,70.0,2023-04-13,Los Angeles,15,Apple Pay
+CUST-57587,Liam Johnson,liam.johnson@yahoo.com,+1-609-961-8204,Jacket,Outerwear,1,110.0,2023-07-11,San Diego,10,Apple Pay
+CUST-83095,Alexander Jones,alexander.jones@hotmail.com,+1-595-547-4060,Dress,Apparel,3,225.0,2023-01-08,Los Angeles,0,Cash
+CUST-54587,Oliver Jones,oliver.jones@hotmail.com,+1-708-908-9151,Scarf,Accessories,3,45.0,2023-06-14,Houston,15,Debit Card
+CUST-17240,Emma Garcia,emma.garcia@gmail.com,+1-576-731-5369,Jeans,Apparel,1,60.0,2023-09-29,Philadelphia,0,PayPal
+CUST-91486,Amelia Gonzalez,amelia.gonzalez@icloud.com,+1-284-944-7955,Sneakers,Footwear,3,240.0,2023-04-08,San Diego,15,PayPal
+CUST-82133,William Rodriguez,william.rodriguez@outlook.com,+1-280-640-3956,T-Shirt,Apparel,2,45.0,2023-01-10,Philadelphia,5,PayPal
+CUST-18531,Evelyn Anderson,evelyn.anderson@yahoo.com,+1-758-500-6262,T-Shirt,Apparel,4,100.0,2023-12-13,Houston,0,Credit Card
+CUST-13575,Harper Wilson,harper.wilson@outlook.com,+1-305-281-6372,Dress,Apparel,4,295.0,2023-01-03,Phoenix,5,Apple Pay
+CUST-62438,Ava Miller,ava.miller@company.org,+1-876-502-6021,T-Shirt,Apparel,4,80.0,2023-11-17,Houston,20,Debit Card
+CUST-18959,Noah Martin,noah.martin@outlook.com,+1-656-817-7981,T-Shirt,Apparel,2,50.0,2023-05-08,Philadelphia,0,Credit Card
+CUST-50048,William Johnson,william.johnson@company.org,+1-370-906-8272,Jacket,Outerwear,3,355.0,2023-04-26,Philadelphia,5,Apple Pay
+CUST-48578,Harper Miller,harper.miller@icloud.com,+1-559-657-1693,Jeans,Apparel,3,170.0,2023-12-22,San Antonio,10,Apple Pay
+CUST-22551,William Garcia,william.garcia@company.org,+1-944-561-8126,T-Shirt,Apparel,1,15.0,2023-06-26,San Diego,10,Gift Card
+CUST-49189,Harper Taylor,harper.taylor@outlook.com,+1-481-854-1939,T-Shirt,Apparel,3,75.0,2023-06-09,Phoenix,0,Gift Card
+CUST-65729,Alexander Johnson,alexander.johnson@outlook.com,+1-276-887-7655,Sneakers,Footwear,1,85.0,2023-03-08,Houston,0,Debit Card
+CUST-52703,Ava Williams,ava.williams@company.org,+1-572-725-3621,Dress,Apparel,2,150.0,2023-02-22,San Diego,0,Debit Card
+CUST-59092,Liam Jones,liam.jones@hotmail.com,+1-231-346-8179,Jacket,Outerwear,4,475.0,2023-07-16,New York,5,Debit Card
+CUST-00889,Oliver Jones,oliver.jones@icloud.com,+1-235-329-2101,Scarf,Accessories,4,80.0,2023-09-15,San Diego,0,Credit Card
+CUST-32286,Liam Smith,liam.smith@gmail.com,+1-441-997-7001,Scarf,Accessories,4,65.0,2023-10-29,New York,15,Cash
+CUST-64385,Charlotte Davis,charlotte.davis@yahoo.com,+1-570-592-1530,Dress,Apparel,3,225.0,2023-06-06,Phoenix,0,Debit Card
+CUST-70982,Mia Lopez,mia.lopez@outlook.com,+1-819-357-8371,Sneakers,Footwear,1,80.0,2023-03-27,Houston,5,Gift Card
+CUST-80341,Mia Brown,mia.brown@yahoo.com,+1-579-580-8273,Sneakers,Footwear,1,85.0,2023-02-03,Houston,0,Cash
+CUST-03578,Lucas Gonzalez,lucas.gonzalez@gmail.com,+1-981-278-3255,Scarf,Accessories,2,40.0,2023-01-24,Los Angeles,0,Credit Card
+CUST-96077,Mia Anderson,mia.anderson@yahoo.com,+1-742-575-7521,Sneakers,Footwear,3,255.0,2023-06-02,Philadelphia,0,Cash
+CUST-31833,Evelyn Hernandez,evelyn.hernandez@gmail.com,+1-521-865-5566,T-Shirt,Apparel,2,50.0,2023-05-29,Chicago,0,PayPal
+CUST-55933,Amelia Martinez,amelia.martinez@company.org,+1-455-316-1424,Scarf,Accessories,1,15.0,2023-08-22,San Antonio,5,Cash
+CUST-56935,Lucas Williams,lucas.williams@hotmail.com,+1-953-390-9176,Dress,Apparel,1,60.0,2023-09-24,San Diego,15,Debit Card
+CUST-56148,Mia Wilson,mia.wilson@outlook.com,+1-730-596-2929,Dress,Apparel,4,295.0,2023-11-02,Phoenix,5,Credit Card
+CUST-89654,Lucas Thomas,lucas.thomas@gmail.com,+1-468-993-5264,Dress,Apparel,3,205.0,2023-09-26,Chicago,20,Debit Card
+CUST-09787,Elijah Martinez,elijah.martinez@yahoo.com,+1-920-656-4515,Jeans,Apparel,1,45.0,2023-06-22,San Diego,15,Gift Card
+CUST-62387,Noah Martinez,noah.martinez@outlook.com,+1-826-492-9047,Jacket,Outerwear,4,475.0,2023-08-11,Chicago,5,PayPal
+CUST-84073,Elijah Lopez,elijah.lopez@hotmail.com,+1-404-325-3223,T-Shirt,Apparel,3,65.0,2023-12-18,Phoenix,10,Gift Card
+CUST-62464,Noah Rodriguez,noah.rodriguez@company.org,+1-275-662-3828,Jacket,Outerwear,2,235.0,2023-03-10,Houston,5,Debit Card
+CUST-68968,Olivia Smith,olivia.smith@outlook.com,+1-930-655-2438,T-Shirt,Apparel,3,75.0,2023-06-25,Phoenix,0,Debit Card
+CUST-83005,Olivia Jones,olivia.jones@gmail.com,+1-898-527-6692,Dress,Apparel,3,215.0,2023-09-08,San Diego,10,Debit Card
+CUST-68682,Henry Martin,henry.martin@hotmail.com,+1-926-266-9882,Jeans,Apparel,1,60.0,2023-07-03,Chicago,0,Apple Pay
+CUST-68468,Evelyn Davis,evelyn.davis@yahoo.com,+1-497-507-3580,Jeans,Apparel,1,55.0,2023-04-07,Philadelphia,5,PayPal
+CUST-20633,Evelyn Hernandez,evelyn.hernandez@hotmail.com,+1-928-926-3852,Dress,Apparel,3,215.0,2023-03-26,San Antonio,10,Debit Card
+CUST-42153,Ava Lopez,ava.lopez@hotmail.com,+1-570-720-4673,Jacket,Outerwear,1,120.0,2023-07-26,San Antonio,0,Debit Card
+CUST-28929,Henry Smith,henry.smith@icloud.com,+1-324-405-3275,Sneakers,Footwear,1,85.0,2023-01-10,Philadelphia,0,Gift Card
+CUST-48654,William Martin,william.martin@hotmail.com,+1-442-705-1430,Dress,Apparel,1,60.0,2023-04-27,Philadelphia,15,Gift Card
+CUST-83106,Oliver Hernandez,oliver.hernandez@hotmail.com,+1-569-767-7044,Scarf,Accessories,4,75.0,2023-04-25,Houston,5,Debit Card
+CUST-70568,Emma Jones,emma.jones@outlook.com,+1-678-764-3126,Scarf,Accessories,4,80.0,2023-03-09,San Diego,0,Credit Card
+CUST-47733,Ava Anderson,ava.anderson@yahoo.com,+1-826-288-2077,Scarf,Accessories,3,55.0,2023-04-19,New York,5,Apple Pay
+CUST-43740,Sophia Jones,sophia.jones@outlook.com,+1-516-607-8842,Scarf,Accessories,1,15.0,2023-01-12,Phoenix,5,Gift Card
+CUST-31337,James Lopez,james.lopez@outlook.com,+1-738-620-7708,T-Shirt,Apparel,4,95.0,2023-10-29,San Antonio,5,Credit Card
+CUST-01975,Benjamin Jones,benjamin.jones@gmail.com,+1-788-275-3053,Jacket,Outerwear,3,340.0,2023-09-16,Philadelphia,20,Apple Pay
+CUST-07566,Liam Taylor,liam.taylor@outlook.com,+1-524-857-2215,Scarf,Accessories,1,15.0,2023-03-28,Phoenix,5,Debit Card
+CUST-06256,Harper Taylor,harper.taylor@icloud.com,+1-660-677-9476,Sneakers,Footwear,2,170.0,2023-03-05,San Antonio,0,PayPal
+CUST-12665,Benjamin Lopez,benjamin.lopez@icloud.com,+1-552-331-3981,Scarf,Accessories,1,10.0,2023-07-07,Philadelphia,10,Cash
+CUST-23064,Charlotte Anderson,charlotte.anderson@gmail.com,+1-986-332-8088,Jeans,Apparel,1,45.0,2023-12-31,San Diego,15,Cash
+CUST-50484,Sophia Anderson,sophia.anderson@company.org,+1-714-256-3034,T-Shirt,Apparel,4,100.0,2023-11-30,San Antonio,0,Debit Card
+CUST-68557,Amelia Garcia,amelia.garcia@yahoo.com,+1-730-356-5982,Jeans,Apparel,3,180.0,2023-01-20,Houston,0,Gift Card
+CUST-94106,Amelia Lopez,amelia.lopez@yahoo.com,+1-368-365-6286,T-Shirt,Apparel,3,75.0,2023-07-12,New York,0,Credit Card
+CUST-57731,Mia Martin,mia.martin@outlook.com,+1-926-430-6669,Sneakers,Footwear,4,335.0,2023-11-24,New York,5,PayPal
+CUST-03095,Lucas Moore,lucas.moore@outlook.com,+1-731-490-2292,T-Shirt,Apparel,1,20.0,2023-05-11,Philadelphia,5,Apple Pay
+CUST-27907,Harper Wilson,harper.wilson@company.org,+1-456-401-5496,Sneakers,Footwear,2,165.0,2023-10-01,San Antonio,5,Debit Card
+CUST-64703,Noah Johnson,noah.johnson@outlook.com,+1-328-840-5961,Dress,Apparel,1,60.0,2023-11-16,Houston,15,PayPal
+CUST-09984,Emma Rodriguez,emma.rodriguez@yahoo.com,+1-829-746-2530,Dress,Apparel,1,65.0,2023-01-25,Los Angeles,10,PayPal
+CUST-19987,Elijah Jones,elijah.jones@hotmail.com,+1-714-856-3762,T-Shirt,Apparel,2,50.0,2023-11-01,Phoenix,0,Gift Card
+CUST-69630,Harper Martin,harper.martin@icloud.com,+1-806-794-3526,Jacket,Outerwear,4,480.0,2023-01-25,Phoenix,0,Apple Pay
+CUST-44270,Olivia Smith,olivia.smith@hotmail.com,+1-375-874-6531,Scarf,Accessories,3,60.0,2023-12-05,Chicago,0,PayPal
+CUST-88295,Alexander Williams,alexander.williams@hotmail.com,+1-777-242-1464,Scarf,Accessories,4,80.0,2023-02-25,Houston,0,Gift Card
+CUST-68557,Amelia Garcia,amelia.garcia@yahoo.com,+1-283-246-5336,Scarf,Accessories,4,75.0,2023-12-01,San Antonio,5,Credit Card
+CUST-27309,Amelia Jones,amelia.jones@hotmail.com,+1-866-415-7825,Scarf,Accessories,1,5.0,2023-01-11,San Diego,15,Gift Card
+CUST-99922,Benjamin Jones,benjamin.jones@company.org,+1-832-854-1496,Jeans,Apparel,3,180.0,2023-01-25,San Diego,0,Credit Card
+CUST-04088,Benjamin Smith,benjamin.smith@gmail.com,+1-709-842-9938,T-Shirt,Apparel,3,70.0,2023-12-20,Chicago,5,Credit Card
+CUST-07566,Liam Taylor,liam.taylor@outlook.com,+1-496-857-5949,T-Shirt,Apparel,4,90.0,2023-03-01,Philadelphia,10,PayPal
+CUST-98877,Charlotte Jackson,charlotte.jackson@gmail.com,+1-694-450-7653,Scarf,Accessories,2,40.0,2023-08-02,San Antonio,0,Gift Card
+CUST-47195,Benjamin Wilson,benjamin.wilson@icloud.com,+1-504-664-2195,Jeans,Apparel,4,240.0,2023-08-16,Chicago,0,Credit Card
+CUST-71222,Evelyn Lopez,evelyn.lopez@outlook.com,+1-905-261-3589,Scarf,Accessories,2,40.0,2023-07-14,New York,0,Apple Pay
+CUST-52435,Isabella Martinez,isabella.martinez@hotmail.com,+1-650-625-8933,T-Shirt,Apparel,3,75.0,2023-03-05,Phoenix,0,PayPal
+CUST-04504,Olivia Martin,olivia.martin@icloud.com,+1-675-408-6573,Jeans,Apparel,4,225.0,2023-10-08,San Antonio,15,Gift Card
+CUST-93320,Amelia Moore,amelia.moore@outlook.com,+1-821-347-6121,Sneakers,Footwear,1,85.0,2023-05-10,Chicago,0,Gift Card
+CUST-84259,Benjamin Hernandez,benjamin.hernandez@company.org,+1-935-526-6658,Jacket,Outerwear,4,480.0,2023-08-31,New York,0,Cash
+CUST-53128,Mia Johnson,mia.johnson@company.org,+1-608-333-7070,Dress,Apparel,3,220.0,2023-12-26,Houston,5,Gift Card
+CUST-82919,Amelia Moore,amelia.moore@company.org,+1-727-775-2739,Dress,Apparel,1,55.0,2023-03-20,Chicago,20,PayPal
+CUST-83251,Charlotte Miller,charlotte.miller@company.org,+1-526-447-8642,Scarf,Accessories,1,20.0,2023-04-16,Philadelphia,0,Apple Pay
+CUST-07238,Henry Anderson,henry.anderson@hotmail.com,+1-325-473-8366,Jacket,Outerwear,2,240.0,2023-12-22,Philadelphia,0,Gift Card
+CUST-93137,Oliver Hernandez,oliver.hernandez@gmail.com,+1-453-344-2586,Jeans,Apparel,1,60.0,2023-12-18,Philadelphia,0,Cash
+CUST-76772,Olivia Moore,olivia.moore@outlook.com,+1-251-497-7293,Jacket,Outerwear,1,120.0,2023-11-19,San Antonio,0,PayPal
+CUST-28646,Evelyn Lopez,evelyn.lopez@hotmail.com,+1-830-628-5067,Jeans,Apparel,4,240.0,2023-01-05,San Diego,0,Credit Card
+CUST-78128,Amelia Garcia,amelia.garcia@company.org,+1-363-535-6123,Scarf,Accessories,3,55.0,2023-06-04,San Diego,5,Debit Card
+CUST-44243,Ava Martin,ava.martin@gmail.com,+1-394-981-3610,Jacket,Outerwear,2,240.0,2023-08-04,Phoenix,0,Debit Card
+CUST-01254,William Gonzalez,william.gonzalez@icloud.com,+1-710-727-8648,Scarf,Accessories,4,80.0,2023-12-05,Chicago,0,Credit Card
+CUST-85836,Isabella Martin,isabella.martin@icloud.com,+1-710-515-9148,T-Shirt,Apparel,1,15.0,2023-02-21,Houston,10,Gift Card
+CUST-56550,Harper Thomas,harper.thomas@icloud.com,+1-223-292-7442,T-Shirt,Apparel,1,25.0,2023-12-06,Chicago,0,Debit Card
+CUST-41871,Isabella Moore,isabella.moore@company.org,+1-717-668-4944,Jacket,Outerwear,2,240.0,2023-09-24,Phoenix,0,Debit Card
+CUST-86460,James Martinez,james.martinez@icloud.com,+1-420-797-6781,Sneakers,Footwear,3,255.0,2023-05-19,New York,0,Credit Card
+CUST-40163,Harper Davis,harper.davis@yahoo.com,+1-249-251-5609,Jacket,Outerwear,2,220.0,2023-11-15,Phoenix,20,Gift Card
+CUST-37859,Charlotte Moore,charlotte.moore@outlook.com,+1-706-811-8710,Dress,Apparel,4,300.0,2023-11-07,Philadelphia,0,Gift Card
+CUST-23136,Alexander Smith,alexander.smith@outlook.com,+1-492-749-1133,T-Shirt,Apparel,2,35.0,2023-12-25,San Antonio,15,Credit Card
+CUST-96052,Noah Davis,noah.davis@company.org,+1-310-641-3194,Jacket,Outerwear,1,110.0,2023-03-12,New York,10,Gift Card
+CUST-98453,William Garcia,william.garcia@yahoo.com,+1-470-944-6992,Scarf,Accessories,4,80.0,2023-08-03,San Antonio,0,Gift Card
+CUST-66758,Olivia Jones,olivia.jones@hotmail.com,+1-982-612-6995,Dress,Apparel,1,55.0,2023-02-23,Philadelphia,20,PayPal
+CUST-48060,Sophia Anderson,sophia.anderson@hotmail.com,+1-246-610-1838,Scarf,Accessories,3,60.0,2023-09-19,Los Angeles,0,PayPal
+CUST-17081,Charlotte Anderson,charlotte.anderson@icloud.com,+1-783-775-4189,T-Shirt,Apparel,1,25.0,2023-11-13,Phoenix,0,Credit Card
+CUST-44874,Henry Johnson,henry.johnson@gmail.com,+1-571-766-5728,Sneakers,Footwear,1,75.0,2023-03-02,Phoenix,10,Apple Pay
+CUST-13767,Amelia Smith,amelia.smith@hotmail.com,+1-275-595-9261,Sneakers,Footwear,2,160.0,2023-05-25,Houston,10,Debit Card
+CUST-24465,Noah Hernandez,noah.hernandez@gmail.com,+1-661-982-5582,Dress,Apparel,1,70.0,2023-02-28,Chicago,5,PayPal
+CUST-70226,Amelia Martinez,amelia.martinez@outlook.com,+1-838-896-2946,Jacket,Outerwear,4,480.0,2023-02-24,New York,0,Debit Card
+CUST-45196,Liam Moore,liam.moore@gmail.com,+1-331-299-7453,T-Shirt,Apparel,4,100.0,2023-09-12,San Diego,0,Cash
+CUST-93320,Amelia Moore,amelia.moore@outlook.com,+1-582-547-6990,Sneakers,Footwear,3,245.0,2023-04-12,San Antonio,10,Credit Card
+CUST-40436,Elijah Taylor,elijah.taylor@yahoo.com,+1-973-347-4261,Dress,Apparel,4,300.0,2023-11-08,New York,0,Apple Pay
+CUST-70320,Elijah Davis,elijah.davis@yahoo.com,+1-816-721-7576,Jeans,Apparel,2,120.0,2023-04-13,Houston,0,Cash
+CUST-55516,Harper Anderson,harper.anderson@company.org,+1-712-241-1742,Jacket,Outerwear,3,360.0,2023-05-15,Houston,0,Cash
+CUST-42169,James Davis,james.davis@company.org,+1-239-340-6456,Jeans,Apparel,4,240.0,2023-09-25,San Antonio,0,Gift Card
+CUST-96472,Evelyn Taylor,evelyn.taylor@icloud.com,+1-685-731-8487,Jacket,Outerwear,2,225.0,2023-04-14,San Diego,15,Cash
+CUST-34454,William Lopez,william.lopez@hotmail.com,+1-352-820-9446,T-Shirt,Apparel,4,100.0,2023-07-03,Chicago,0,Credit Card
+CUST-44047,Sophia Davis,sophia.davis@icloud.com,+1-343-535-6218,Dress,Apparel,4,280.0,2023-12-27,San Antonio,20,PayPal
+CUST-11720,Ava Wilson,ava.wilson@outlook.com,+1-366-602-5902,Scarf,Accessories,1,20.0,2023-07-29,San Antonio,0,Credit Card
+CUST-58699,Oliver Brown,oliver.brown@icloud.com,+1-807-544-9311,Scarf,Accessories,4,70.0,2023-06-01,Philadelphia,10,PayPal
+CUST-19740,Alexander Smith,alexander.smith@gmail.com,+1-721-745-9025,T-Shirt,Apparel,4,100.0,2023-03-24,San Diego,0,Cash
+CUST-99385,Liam Smith,liam.smith@outlook.com,+1-925-776-5911,Jeans,Apparel,2,120.0,2023-01-21,Chicago,0,Cash
+CUST-31851,Charlotte Jackson,charlotte.jackson@company.org,+1-686-217-7035,Scarf,Accessories,2,40.0,2023-10-08,Phoenix,0,Apple Pay
+CUST-36882,Oliver Thomas,oliver.thomas@yahoo.com,+1-539-889-2795,Dress,Apparel,1,75.0,2023-09-12,Philadelphia,0,PayPal
+CUST-90126,Ava Wilson,ava.wilson@company.org,+1-626-797-6040,T-Shirt,Apparel,4,95.0,2023-04-17,Los Angeles,5,Cash
+CUST-49219,Emma Thomas,emma.thomas@hotmail.com,+1-942-904-1436,T-Shirt,Apparel,1,5.0,2023-12-19,San Diego,20,Gift Card
+CUST-07677,Oliver Jones,oliver.jones@outlook.com,+1-811-685-5350,T-Shirt,Apparel,4,95.0,2023-09-04,Chicago,5,Debit Card
+CUST-22089,Oliver Rodriguez,oliver.rodriguez@outlook.com,+1-871-994-4728,Jeans,Apparel,3,180.0,2023-06-19,Houston,0,Apple Pay
+CUST-09923,Lucas Johnson,lucas.johnson@gmail.com,+1-938-252-8871,T-Shirt,Apparel,3,75.0,2023-05-01,Philadelphia,0,Credit Card
+CUST-89998,Noah Moore,noah.moore@hotmail.com,+1-374-736-7229,Sneakers,Footwear,1,85.0,2023-01-02,Chicago,0,Apple Pay
+CUST-11180,Mia Garcia,mia.garcia@yahoo.com,+1-351-897-4968,Jacket,Outerwear,1,115.0,2023-01-07,New York,5,Debit Card
+CUST-56486,Sophia Rodriguez,sophia.rodriguez@outlook.com,+1-232-786-2800,Sneakers,Footwear,1,75.0,2023-12-10,San Antonio,10,PayPal
+CUST-68968,Olivia Smith,olivia.smith@outlook.com,+1-395-219-8225,Jeans,Apparel,2,105.0,2023-02-15,Los Angeles,15,Credit Card
+CUST-29464,Evelyn Rodriguez,evelyn.rodriguez@gmail.com,+1-521-628-3481,Jeans,Apparel,2,120.0,2023-02-26,Phoenix,0,Credit Card
+CUST-25679,Elijah Thomas,elijah.thomas@icloud.com,+1-622-907-4340,T-Shirt,Apparel,2,45.0,2023-10-21,San Antonio,5,PayPal
+CUST-43362,Ava Gonzalez,ava.gonzalez@yahoo.com,+1-620-713-8726,Dress,Apparel,1,75.0,2023-12-09,New York,0,Apple Pay
+CUST-62464,Noah Rodriguez,noah.rodriguez@company.org,+1-953-944-2020,Scarf,Accessories,4,75.0,2023-09-10,New York,5,Cash
+CUST-50879,Oliver Gonzalez,oliver.gonzalez@hotmail.com,+1-922-341-9498,Scarf,Accessories,3,55.0,2023-03-18,Los Angeles,5,Apple Pay
+CUST-81925,Liam Rodriguez,liam.rodriguez@outlook.com,+1-412-774-6325,Scarf,Accessories,1,15.0,2023-02-16,Phoenix,5,Debit Card
+CUST-39155,Alexander Hernandez,alexander.hernandez@outlook.com,+1-878-689-9609,Sneakers,Footwear,2,165.0,2023-09-19,Houston,5,Gift Card
+CUST-62365,Mia Brown,mia.brown@company.org,+1-585-521-3837,Jeans,Apparel,2,120.0,2023-02-08,Philadelphia,0,Cash
+CUST-24874,Noah Johnson,noah.johnson@yahoo.com,+1-670-745-6608,Jacket,Outerwear,1,110.0,2023-02-21,San Diego,10,Apple Pay
+CUST-90907,Amelia Garcia,amelia.garcia@icloud.com,+1-759-562-5331,Jeans,Apparel,1,60.0,2023-05-12,Phoenix,0,Gift Card
+CUST-94663,Oliver Wilson,oliver.wilson@outlook.com,+1-824-695-4150,Sneakers,Footwear,2,165.0,2023-11-26,San Diego,5,Gift Card
+CUST-18037,Harper Brown,harper.brown@yahoo.com,+1-452-485-5890,Scarf,Accessories,4,80.0,2023-04-29,Chicago,0,PayPal
+CUST-19572,Oliver Garcia,oliver.garcia@company.org,+1-430-504-5735,Jacket,Outerwear,2,235.0,2023-08-22,New York,5,Debit Card
+CUST-89765,Evelyn Jackson,evelyn.jackson@gmail.com,+1-921-412-9011,Jacket,Outerwear,2,225.0,2023-06-01,Chicago,15,Debit Card
+CUST-02544,Liam Garcia,liam.garcia@icloud.com,+1-524-691-6714,T-Shirt,Apparel,1,10.0,2023-05-16,Houston,15,Debit Card
+CUST-32303,Amelia Johnson,amelia.johnson@hotmail.com,+1-773-938-5480,Dress,Apparel,4,290.0,2023-08-26,Chicago,10,Cash
+CUST-35430,Mia Moore,mia.moore@outlook.com,+1-494-324-9899,Jacket,Outerwear,2,235.0,2023-01-26,Phoenix,5,Credit Card
+CUST-88094,Elijah Gonzalez,elijah.gonzalez@yahoo.com,+1-588-604-6654,T-Shirt,Apparel,2,40.0,2023-02-21,Chicago,10,Cash
+CUST-29464,Evelyn Rodriguez,evelyn.rodriguez@gmail.com,+1-991-349-5758,Dress,Apparel,3,220.0,2023-03-31,Houston,5,Apple Pay
+CUST-20471,Charlotte Jackson,charlotte.jackson@hotmail.com,+1-243-494-2294,Scarf,Accessories,1,5.0,2023-01-21,Houston,15,Gift Card
+CUST-42140,James Gonzalez,james.gonzalez@yahoo.com,+1-554-652-5201,T-Shirt,Apparel,3,75.0,2023-05-29,Houston,0,Gift Card
+CUST-10987,Ava Hernandez,ava.hernandez@yahoo.com,+1-965-690-4505,Jeans,Apparel,3,160.0,2023-07-04,Phoenix,20,Credit Card
+CUST-30424,Oliver Smith,oliver.smith@hotmail.com,+1-406-751-5442,Jeans,Apparel,2,105.0,2023-12-13,Houston,15,Apple Pay
+CUST-79555,Noah Miller,noah.miller@gmail.com,+1-775-912-5450,Dress,Apparel,1,65.0,2023-06-10,New York,10,Credit Card
+CUST-43046,Evelyn Anderson,evelyn.anderson@company.org,+1-340-311-4920,T-Shirt,Apparel,4,100.0,2023-08-07,San Antonio,0,Gift Card
+CUST-19740,Alexander Smith,alexander.smith@gmail.com,+1-448-251-9700,Sneakers,Footwear,2,170.0,2023-03-01,Houston,0,Cash
+CUST-67689,Emma Lopez,emma.lopez@icloud.com,+1-431-853-4814,T-Shirt,Apparel,4,85.0,2023-02-18,Chicago,15,Debit Card
+CUST-23872,Alexander Miller,alexander.miller@outlook.com,+1-253-302-7771,Sneakers,Footwear,4,340.0,2023-01-24,Philadelphia,0,Gift Card
+CUST-87482,Harper Anderson,harper.anderson@hotmail.com,+1-538-934-8739,Jacket,Outerwear,1,105.0,2023-01-05,Chicago,15,PayPal
+CUST-35902,James Jackson,james.jackson@company.org,+1-302-897-3252,Jacket,Outerwear,3,360.0,2023-03-12,Philadelphia,0,Debit Card
+CUST-13767,Amelia Smith,amelia.smith@hotmail.com,+1-205-763-3587,Jacket,Outerwear,1,120.0,2023-12-06,Chicago,0,Gift Card
+CUST-35040,Emma Taylor,emma.taylor@hotmail.com,+1-616-868-8793,T-Shirt,Apparel,4,85.0,2023-11-28,Phoenix,15,Cash
+CUST-51240,Benjamin Taylor,benjamin.taylor@gmail.com,+1-688-866-4267,Dress,Apparel,2,145.0,2023-03-29,Chicago,5,Credit Card
+CUST-42219,Oliver Williams,oliver.williams@outlook.com,+1-974-494-6262,Sneakers,Footwear,4,335.0,2023-06-18,Phoenix,5,Debit Card
+CUST-97769,Ava Lopez,ava.lopez@icloud.com,+1-492-861-1969,T-Shirt,Apparel,2,45.0,2023-07-03,Phoenix,5,Cash
+CUST-11180,Mia Garcia,mia.garcia@yahoo.com,+1-987-291-4804,Jacket,Outerwear,2,240.0,2023-08-13,Houston,0,Apple Pay
+CUST-57788,Noah Hernandez,noah.hernandez@yahoo.com,+1-747-956-1611,Jeans,Apparel,1,50.0,2023-11-15,New York,10,PayPal
+CUST-78264,Charlotte Williams,charlotte.williams@hotmail.com,+1-379-627-3880,Jacket,Outerwear,4,480.0,2023-05-18,Philadelphia,0,Debit Card
+CUST-25635,Mia Davis,mia.davis@outlook.com,+1-237-606-9116,Dress,Apparel,3,210.0,2023-02-17,Houston,15,Credit Card
+CUST-53613,Olivia Wilson,olivia.wilson@company.org,+1-390-966-5742,Jacket,Outerwear,4,465.0,2023-07-10,Houston,15,Apple Pay
+CUST-48333,Emma Wilson,emma.wilson@gmail.com,+1-238-209-5888,Scarf,Accessories,4,80.0,2023-06-25,San Antonio,0,Cash
+CUST-14396,Oliver Martinez,oliver.martinez@outlook.com,+1-781-817-2758,Dress,Apparel,3,215.0,2023-04-04,Phoenix,10,PayPal
+CUST-18768,Henry Johnson,henry.johnson@outlook.com,+1-543-491-8444,Jeans,Apparel,1,55.0,2023-02-28,Phoenix,5,Credit Card
+CUST-97778,William Wilson,william.wilson@gmail.com,+1-856-756-9590,Sneakers,Footwear,4,340.0,2023-07-25,Philadelphia,0,Cash
+CUST-78112,Ava Rodriguez,ava.rodriguez@hotmail.com,+1-705-337-9261,Jacket,Outerwear,4,460.0,2023-07-24,Chicago,20,Cash
+CUST-28675,William Williams,william.williams@outlook.com,+1-679-479-4159,Dress,Apparel,2,150.0,2023-08-22,Chicago,0,Debit Card
+CUST-48893,James Davis,james.davis@yahoo.com,+1-315-538-3662,Sneakers,Footwear,4,340.0,2023-05-20,San Diego,0,Debit Card
+CUST-25600,Liam Thomas,liam.thomas@gmail.com,+1-948-669-5215,Jeans,Apparel,3,175.0,2023-07-17,Houston,5,Credit Card
+CUST-20407,Charlotte Johnson,charlotte.johnson@company.org,+1-935-390-1230,Scarf,Accessories,2,35.0,2023-12-20,San Diego,5,Gift Card
+CUST-77776,Elijah Garcia,elijah.garcia@icloud.com,+1-954-545-5833,Dress,Apparel,1,70.0,2023-09-02,Los Angeles,5,Gift Card
+CUST-04904,Liam Lopez,liam.lopez@hotmail.com,+1-781-890-4164,Jeans,Apparel,2,110.0,2023-08-04,Los Angeles,10,Cash
+CUST-95364,Alexander Jones,alexander.jones@gmail.com,+1-379-825-7643,Jeans,Apparel,3,175.0,2023-11-29,San Diego,5,Debit Card
+CUST-29221,Emma Johnson,emma.johnson@icloud.com,+1-637-727-6372,T-Shirt,Apparel,3,70.0,2023-03-27,Chicago,5,PayPal
+CUST-33219,Ava Thomas,ava.thomas@icloud.com,+1-288-610-2562,Sneakers,Footwear,2,170.0,2023-02-27,Los Angeles,0,PayPal
+CUST-96056,Sophia Jones,sophia.jones@company.org,+1-389-343-8822,T-Shirt,Apparel,1,25.0,2023-03-09,San Antonio,0,Cash
+CUST-22691,Harper Anderson,harper.anderson@outlook.com,+1-531-454-1111,Jeans,Apparel,2,120.0,2023-12-23,Chicago,0,Debit Card
+CUST-19922,Sophia Lopez,sophia.lopez@company.org,+1-467-592-4858,Dress,Apparel,1,75.0,2023-01-31,Phoenix,0,Credit Card
+CUST-93420,Mia Brown,mia.brown@outlook.com,+1-657-971-5374,Jacket,Outerwear,2,235.0,2023-03-23,Houston,5,Credit Card
+CUST-72295,Amelia Anderson,amelia.anderson@outlook.com,+1-537-509-1187,Scarf,Accessories,3,60.0,2023-02-23,New York,0,Credit Card
+CUST-93137,Oliver Hernandez,oliver.hernandez@gmail.com,+1-467-869-6890,Scarf,Accessories,4,80.0,2023-08-02,Houston,0,PayPal
+CUST-65636,Olivia Thomas,olivia.thomas@gmail.com,+1-909-441-2017,T-Shirt,Apparel,4,100.0,2023-10-30,San Diego,0,Debit Card
+CUST-57002,Harper Garcia,harper.garcia@hotmail.com,+1-883-321-8625,Jacket,Outerwear,1,105.0,2023-09-05,Chicago,15,Debit Card
+CUST-11720,Ava Wilson,ava.wilson@outlook.com,+1-514-363-7642,T-Shirt,Apparel,1,10.0,2023-10-19,San Diego,15,PayPal
+CUST-14906,James Moore,james.moore@icloud.com,+1-902-714-6095,Scarf,Accessories,1,15.0,2023-12-14,San Antonio,5,Credit Card
+CUST-36828,Henry Lopez,henry.lopez@yahoo.com,+1-906-320-5833,Sneakers,Footwear,3,240.0,2023-08-13,Chicago,15,Credit Card
+CUST-62485,Benjamin Hernandez,benjamin.hernandez@hotmail.com,+1-576-829-4618,Scarf,Accessories,2,30.0,2023-04-03,Houston,10,Cash
+CUST-96311,Mia Gonzalez,mia.gonzalez@gmail.com,+1-424-336-8834,Scarf,Accessories,3,55.0,2023-11-09,San Antonio,5,Gift Card
+CUST-14895,Sophia Hernandez,sophia.hernandez@company.org,+1-356-665-7121,Jacket,Outerwear,4,480.0,2023-07-14,San Antonio,0,Apple Pay
+CUST-54749,Liam Thomas,liam.thomas@hotmail.com,+1-625-918-9998,T-Shirt,Apparel,1,15.0,2023-07-03,San Antonio,10,Gift Card
+CUST-17482,James Anderson,james.anderson@hotmail.com,+1-682-975-9806,Jeans,Apparel,2,110.0,2023-11-10,Philadelphia,10,Debit Card
+CUST-89072,Olivia Anderson,olivia.anderson@hotmail.com,+1-880-423-5054,Dress,Apparel,4,295.0,2023-01-15,Chicago,5,Debit Card
+CUST-35674,Olivia Brown,olivia.brown@hotmail.com,+1-896-972-2341,Jeans,Apparel,4,230.0,2023-12-17,Los Angeles,10,Debit Card
+CUST-03635,Emma Hernandez,emma.hernandez@yahoo.com,+1-738-657-9653,Sneakers,Footwear,4,335.0,2023-03-08,Los Angeles,5,Gift Card
+CUST-80858,Elijah Jackson,elijah.jackson@company.org,+1-920-570-2279,Sneakers,Footwear,3,245.0,2023-09-05,Chicago,10,Apple Pay
+CUST-17428,Elijah Anderson,elijah.anderson@company.org,+1-777-314-2011,T-Shirt,Apparel,1,10.0,2023-09-07,Chicago,15,Cash
+CUST-62365,Mia Brown,mia.brown@company.org,+1-760-717-4312,Jeans,Apparel,4,240.0,2023-02-27,Philadelphia,0,Gift Card
+CUST-02336,Sophia Gonzalez,sophia.gonzalez@outlook.com,+1-786-749-3455,Scarf,Accessories,1,10.0,2023-07-30,Los Angeles,10,Apple Pay
+CUST-83752,Ava Jackson,ava.jackson@icloud.com,+1-368-535-9525,Jacket,Outerwear,3,360.0,2023-08-14,Chicago,0,Credit Card
+CUST-58583,Benjamin Johnson,benjamin.johnson@company.org,+1-652-319-4365,T-Shirt,Apparel,4,95.0,2023-01-24,Chicago,5,Credit Card
+CUST-84413,Olivia Wilson,olivia.wilson@hotmail.com,+1-934-797-9008,T-Shirt,Apparel,3,65.0,2023-02-02,San Diego,10,Debit Card
+CUST-42521,Ava Brown,ava.brown@hotmail.com,+1-293-722-8298,Jeans,Apparel,3,180.0,2023-05-14,Philadelphia,0,PayPal
+CUST-32459,Ava Thomas,ava.thomas@company.org,+1-256-664-3161,Dress,Apparel,1,70.0,2023-12-02,Philadelphia,5,Debit Card
+CUST-16930,Evelyn Martin,evelyn.martin@company.org,+1-725-625-8484,Sneakers,Footwear,4,340.0,2023-06-10,Houston,0,PayPal
+CUST-19625,Benjamin Wilson,benjamin.wilson@hotmail.com,+1-777-259-8575,Scarf,Accessories,3,55.0,2023-01-07,Philadelphia,5,Apple Pay
+CUST-34365,Noah Anderson,noah.anderson@outlook.com,+1-888-515-1356,Jacket,Outerwear,4,480.0,2023-12-27,New York,0,Credit Card
+CUST-02886,Charlotte Williams,charlotte.williams@gmail.com,+1-605-460-1049,Sneakers,Footwear,1,75.0,2023-12-14,Los Angeles,10,Gift Card
+CUST-20703,William Davis,william.davis@gmail.com,+1-963-423-2196,Scarf,Accessories,3,60.0,2023-09-26,Houston,0,PayPal
+CUST-84603,Henry Thomas,henry.thomas@company.org,+1-246-633-6644,T-Shirt,Apparel,1,20.0,2023-10-23,New York,5,Apple Pay
+CUST-09787,Elijah Martinez,elijah.martinez@yahoo.com,+1-917-265-9866,Dress,Apparel,4,300.0,2023-10-17,Chicago,0,Credit Card
+CUST-61540,Elijah Brown,elijah.brown@company.org,+1-261-270-8734,T-Shirt,Apparel,4,85.0,2023-04-25,San Diego,15,Gift Card
+CUST-41871,Isabella Moore,isabella.moore@company.org,+1-232-493-7698,Dress,Apparel,1,60.0,2023-12-09,San Diego,15,PayPal
+CUST-97229,Elijah Johnson,elijah.johnson@gmail.com,+1-384-987-3218,Jeans,Apparel,2,100.0,2023-06-23,Chicago,20,Debit Card
+CUST-53070,Benjamin Taylor,benjamin.taylor@hotmail.com,+1-984-856-7887,Scarf,Accessories,3,50.0,2023-09-23,Houston,10,Debit Card
+CUST-26114,Evelyn Gonzalez,evelyn.gonzalez@company.org,+1-583-591-8348,Sneakers,Footwear,4,330.0,2023-09-25,Philadelphia,10,Debit Card
+CUST-79514,Oliver Brown,oliver.brown@hotmail.com,+1-586-584-2314,T-Shirt,Apparel,4,100.0,2023-12-19,San Antonio,0,Apple Pay
+CUST-71843,Emma Hernandez,emma.hernandez@hotmail.com,+1-899-877-9835,Dress,Apparel,3,225.0,2023-12-25,San Diego,0,Debit Card
+CUST-94530,Amelia Miller,amelia.miller@yahoo.com,+1-336-869-6697,Dress,Apparel,1,75.0,2023-11-13,San Antonio,0,Cash
+CUST-66467,Emma Lopez,emma.lopez@hotmail.com,+1-321-382-9802,T-Shirt,Apparel,1,15.0,2023-02-18,Chicago,10,Credit Card
+CUST-51844,Harper Martinez,harper.martinez@gmail.com,+1-602-741-3086,Sneakers,Footwear,1,70.0,2023-08-10,San Antonio,15,Apple Pay
+CUST-78419,Emma Miller,emma.miller@outlook.com,+1-945-428-1056,Scarf,Accessories,2,40.0,2023-12-05,Phoenix,0,Gift Card
+CUST-23427,Amelia Gonzalez,amelia.gonzalez@outlook.com,+1-974-223-5888,Jeans,Apparel,2,105.0,2023-05-08,Houston,15,Debit Card
+CUST-21237,Liam Miller,liam.miller@icloud.com,+1-674-889-9920,Jeans,Apparel,4,235.0,2023-09-04,New York,5,Credit Card
+CUST-49045,Benjamin Taylor,benjamin.taylor@company.org,+1-634-744-7214,Jacket,Outerwear,1,115.0,2023-06-27,Houston,5,PayPal
+CUST-01026,Elijah Martinez,elijah.martinez@gmail.com,+1-435-453-8546,Jacket,Outerwear,3,360.0,2023-12-06,Los Angeles,0,Debit Card
+CUST-02448,Elijah Martinez,elijah.martinez@hotmail.com,+1-554-358-5516,Jacket,Outerwear,4,480.0,2023-12-13,Philadelphia,0,Credit Card
+CUST-29664,Evelyn Brown,evelyn.brown@outlook.com,+1-393-942-2848,Sneakers,Footwear,3,250.0,2023-11-25,Philadelphia,5,Cash
+CUST-97400,Isabella Martin,isabella.martin@gmail.com,+1-232-876-7868,Scarf,Accessories,4,75.0,2023-07-17,Houston,5,PayPal
+CUST-29664,Evelyn Brown,evelyn.brown@outlook.com,+1-829-984-1256,Scarf,Accessories,2,40.0,2023-03-18,Chicago,0,Cash
+CUST-87305,Oliver Miller,oliver.miller@hotmail.com,+1-446-411-2102,Jacket,Outerwear,4,475.0,2023-10-13,Chicago,5,Gift Card
+CUST-52279,Oliver Smith,oliver.smith@outlook.com,+1-303-808-1550,Jacket,Outerwear,2,225.0,2023-11-10,Phoenix,15,Credit Card
+CUST-07938,Olivia Lopez,olivia.lopez@company.org,+1-657-812-1797,Sneakers,Footwear,4,330.0,2023-01-28,Phoenix,10,Cash
+CUST-82431,Isabella Gonzalez,isabella.gonzalez@company.org,+1-450-958-1724,Jacket,Outerwear,1,105.0,2023-01-06,Philadelphia,15,Gift Card
+CUST-19082,Evelyn Martinez,evelyn.martinez@icloud.com,+1-611-649-4839,Jeans,Apparel,3,180.0,2023-11-26,Phoenix,0,Credit Card
+CUST-25127,Elijah Anderson,elijah.anderson@icloud.com,+1-752-422-1924,T-Shirt,Apparel,1,25.0,2023-03-22,San Diego,0,Credit Card
+CUST-53872,William Gonzalez,william.gonzalez@outlook.com,+1-343-715-5739,Jeans,Apparel,4,230.0,2023-09-16,San Diego,10,Cash
+CUST-68857,Alexander Rodriguez,alexander.rodriguez@gmail.com,+1-439-949-6224,Jeans,Apparel,4,240.0,2023-08-29,New York,0,Credit Card
+CUST-44498,Amelia Rodriguez,amelia.rodriguez@company.org,+1-791-812-6253,Dress,Apparel,4,300.0,2023-09-11,Phoenix,0,Debit Card
+CUST-42912,Amelia Anderson,amelia.anderson@gmail.com,+1-442-509-3347,T-Shirt,Apparel,2,50.0,2023-03-26,New York,0,Credit Card
+CUST-01302,Emma Martinez,emma.martinez@gmail.com,+1-876-733-4621,Jeans,Apparel,3,180.0,2023-02-08,Phoenix,0,Apple Pay
+CUST-20192,Alexander Martinez,alexander.martinez@outlook.com,+1-623-507-5508,T-Shirt,Apparel,3,75.0,2023-09-09,Philadelphia,0,Gift Card
+CUST-89828,Isabella Davis,isabella.davis@gmail.com,+1-262-770-3869,Jeans,Apparel,4,240.0,2023-06-14,Philadelphia,0,Credit Card
+CUST-09889,Noah Thomas,noah.thomas@company.org,+1-841-895-7999,Sneakers,Footwear,4,340.0,2023-05-04,New York,0,Apple Pay
+CUST-57622,Oliver Taylor,oliver.taylor@hotmail.com,+1-769-707-1768,Sneakers,Footwear,2,170.0,2023-06-19,Houston,0,Credit Card
+CUST-72964,Emma Jones,emma.jones@icloud.com,+1-552-858-7244,Jacket,Outerwear,1,115.0,2023-05-23,Philadelphia,5,Credit Card
+CUST-42521,Ava Brown,ava.brown@hotmail.com,+1-737-526-7821,Sneakers,Footwear,1,80.0,2023-01-26,Houston,5,Cash
+CUST-22551,Emma Moore,emma.moore@gmail.com,+1-618-352-5913,T-Shirt,Apparel,3,70.0,2023-09-17,Chicago,5,Debit Card
+CUST-30492,Noah Jackson,noah.jackson@hotmail.com,+1-585-388-9813,Dress,Apparel,2,150.0,2023-04-25,San Diego,0,Gift Card
+CUST-15099,Liam Brown,liam.brown@company.org,+1-684-446-4692,Jacket,Outerwear,4,480.0,2023-10-09,New York,0,Debit Card
+CUST-51408,William Miller,william.miller@company.org,+1-507-924-3365,Jeans,Apparel,3,175.0,2023-11-26,San Antonio,5,PayPal
+CUST-42366,Ava Martinez,ava.martinez@gmail.com,+1-674-259-7761,Sneakers,Footwear,2,165.0,2023-07-13,Philadelphia,5,Cash
+CUST-05952,William Moore,william.moore@outlook.com,+1-626-770-9683,Jacket,Outerwear,1,115.0,2023-07-26,Los Angeles,5,Cash
+CUST-60746,Emma Jackson,emma.jackson@hotmail.com,+1-337-597-4978,Sneakers,Footwear,2,170.0,2023-05-01,Chicago,0,Debit Card
+CUST-39386,Oliver Brown,oliver.brown@outlook.com,+1-461-408-6411,Jacket,Outerwear,1,105.0,2023-02-10,Houston,15,Cash
+CUST-51963,Charlotte Martinez,charlotte.martinez@outlook.com,+1-862-280-8369,T-Shirt,Apparel,2,50.0,2023-08-24,Philadelphia,0,Debit Card
+CUST-93225,Amelia Smith,amelia.smith@yahoo.com,+1-579-294-9775,T-Shirt,Apparel,3,75.0,2023-08-16,New York,0,Cash
+CUST-72617,Noah Moore,noah.moore@gmail.com,+1-941-395-1844,Jeans,Apparel,1,55.0,2023-10-21,San Antonio,5,Credit Card
+CUST-62543,Charlotte Jones,charlotte.jones@icloud.com,+1-474-586-1647,Scarf,Accessories,3,55.0,2023-08-18,Phoenix,5,Debit Card
+CUST-68772,Alexander Anderson,alexander.anderson@company.org,+1-274-392-4555,Jacket,Outerwear,3,360.0,2023-02-15,San Antonio,0,Debit Card
+CUST-36718,Amelia Taylor,amelia.taylor@company.org,+1-690-413-6455,Scarf,Accessories,1,20.0,2023-09-13,Los Angeles,0,Apple Pay
+CUST-85061,Elijah Williams,elijah.williams@gmail.com,+1-510-215-4470,Scarf,Accessories,1,10.0,2023-08-17,Houston,10,Cash
+CUST-97769,Ava Lopez,ava.lopez@icloud.com,+1-394-959-2922,Dress,Apparel,4,300.0,2023-06-11,Chicago,0,Cash
+CUST-52195,Amelia Johnson,amelia.johnson@company.org,+1-964-972-8846,T-Shirt,Apparel,4,100.0,2023-03-02,San Antonio,0,Debit Card
+CUST-93364,Noah Smith,noah.smith@gmail.com,+1-448-912-4350,Jeans,Apparel,4,240.0,2023-09-12,New York,0,Credit Card
+CUST-93819,James Taylor,james.taylor@company.org,+1-606-445-6269,Jacket,Outerwear,3,350.0,2023-12-01,Los Angeles,10,Credit Card
+CUST-66060,Charlotte Thomas,charlotte.thomas@outlook.com,+1-994-489-7236,Jeans,Apparel,3,180.0,2023-01-10,New York,0,Gift Card
+CUST-59092,Liam Jones,liam.jones@hotmail.com,+1-677-746-6886,T-Shirt,Apparel,4,80.0,2023-02-22,Philadelphia,20,Credit Card
+CUST-60788,Evelyn Anderson,evelyn.anderson@hotmail.com,+1-515-467-6892,Scarf,Accessories,3,55.0,2023-07-26,Phoenix,5,Cash
+CUST-00974,Evelyn Williams,evelyn.williams@company.org,+1-725-709-8635,Jeans,Apparel,3,160.0,2023-07-31,Chicago,20,Apple Pay
+CUST-49191,Noah Miller,noah.miller@yahoo.com,+1-300-939-8692,Jacket,Outerwear,1,105.0,2023-01-19,New York,15,Debit Card
+CUST-01190,Noah Hernandez,noah.hernandez@icloud.com,+1-979-527-4328,Sneakers,Footwear,1,85.0,2023-10-13,Houston,0,PayPal
+CUST-21302,Mia Martinez,mia.martinez@icloud.com,+1-579-520-7781,Dress,Apparel,3,225.0,2023-10-09,Philadelphia,0,Apple Pay
+CUST-99629,Ava Rodriguez,ava.rodriguez@icloud.com,+1-246-776-4625,T-Shirt,Apparel,4,100.0,2023-01-01,Philadelphia,0,PayPal
+CUST-85539,Alexander Wilson,alexander.wilson@outlook.com,+1-959-349-1265,Scarf,Accessories,2,40.0,2023-02-16,Chicago,0,Apple Pay
+CUST-85614,Mia Gonzalez,mia.gonzalez@icloud.com,+1-467-766-7841,Jacket,Outerwear,4,470.0,2023-11-06,Philadelphia,10,Credit Card
+CUST-15174,William Johnson,william.johnson@hotmail.com,+1-502-356-4214,Jacket,Outerwear,2,240.0,2023-11-13,Houston,0,Cash
+CUST-15220,Elijah Williams,elijah.williams@outlook.com,+1-537-435-7223,Jeans,Apparel,4,240.0,2023-11-23,New York,0,PayPal
+CUST-89771,Oliver Miller,oliver.miller@gmail.com,+1-783-451-9180,T-Shirt,Apparel,1,25.0,2023-06-05,Chicago,0,Apple Pay
+CUST-30702,Oliver Moore,oliver.moore@icloud.com,+1-763-870-6530,Sneakers,Footwear,3,240.0,2023-09-18,San Diego,15,Cash
+CUST-00770,Elijah Williams,elijah.williams@icloud.com,+1-463-981-9005,Sneakers,Footwear,3,255.0,2023-10-15,Philadelphia,0,PayPal
+CUST-48050,Amelia Martinez,amelia.martinez@gmail.com,+1-940-857-9037,Dress,Apparel,1,75.0,2023-04-16,Philadelphia,0,Debit Card
+CUST-65312,Benjamin Miller,benjamin.miller@icloud.com,+1-671-372-6770,Scarf,Accessories,2,40.0,2023-12-02,Houston,0,Apple Pay
+CUST-79532,Mia Rodriguez,mia.rodriguez@gmail.com,+1-373-343-9954,Dress,Apparel,2,135.0,2023-12-10,Phoenix,15,Debit Card
+CUST-88693,James Taylor,james.taylor@outlook.com,+1-700-388-9882,Jeans,Apparel,2,115.0,2023-08-22,Phoenix,5,Credit Card
+CUST-21212,Charlotte Hernandez,charlotte.hernandez@hotmail.com,+1-857-260-9584,T-Shirt,Apparel,1,25.0,2023-06-24,San Antonio,0,Debit Card
+CUST-03272,Elijah Miller,elijah.miller@gmail.com,+1-234-276-1794,Sneakers,Footwear,2,170.0,2023-07-06,Philadelphia,0,Debit Card
+CUST-96102,Henry Wilson,henry.wilson@yahoo.com,+1-982-206-7756,T-Shirt,Apparel,1,25.0,2023-01-28,San Diego,0,Gift Card
+CUST-14780,Emma Jackson,emma.jackson@gmail.com,+1-340-845-4791,Jeans,Apparel,4,240.0,2023-04-25,New York,0,Apple Pay
+CUST-60329,Amelia Brown,amelia.brown@icloud.com,+1-269-924-3474,T-Shirt,Apparel,4,85.0,2023-08-21,Chicago,15,Credit Card
+CUST-32971,Elijah Garcia,elijah.garcia@outlook.com,+1-209-423-9285,T-Shirt,Apparel,1,15.0,2023-06-19,Philadelphia,10,Debit Card
+CUST-85716,Mia Martinez,mia.martinez@company.org,+1-666-582-1990,T-Shirt,Apparel,3,75.0,2023-10-14,Los Angeles,0,Cash
+CUST-06858,James Miller,james.miller@outlook.com,+1-832-853-8916,Jeans,Apparel,4,225.0,2023-11-14,Chicago,15,PayPal
+CUST-38959,James Gonzalez,james.gonzalez@company.org,+1-875-699-1257,Jeans,Apparel,2,120.0,2023-11-04,San Antonio,0,Debit Card
+CUST-19110,Noah Wilson,noah.wilson@gmail.com,+1-206-744-7739,Jeans,Apparel,1,50.0,2023-08-31,Phoenix,10,Credit Card
+CUST-74953,Lucas Brown,lucas.brown@hotmail.com,+1-212-217-9673,Sneakers,Footwear,2,155.0,2023-12-03,San Diego,15,Debit Card
+CUST-87644,Noah Davis,noah.davis@yahoo.com,+1-939-481-9777,Jacket,Outerwear,2,240.0,2023-07-06,Philadelphia,0,PayPal
+CUST-89508,Ava Jones,ava.jones@outlook.com,+1-493-217-9228,Scarf,Accessories,3,50.0,2023-08-20,Houston,10,Credit Card
+CUST-79210,Ava Smith,ava.smith@icloud.com,+1-914-890-8054,Scarf,Accessories,2,40.0,2023-02-28,Los Angeles,0,Apple Pay
+CUST-61540,Elijah Brown,elijah.brown@company.org,+1-383-309-2578,Scarf,Accessories,3,60.0,2023-02-19,Philadelphia,0,Credit Card
+CUST-79689,William Williams,william.williams@icloud.com,+1-736-352-4948,T-Shirt,Apparel,4,100.0,2023-12-04,San Diego,0,Apple Pay
+CUST-33321,Harper Rodriguez,harper.rodriguez@hotmail.com,+1-396-834-9625,Dress,Apparel,1,75.0,2023-04-24,San Antonio,0,Credit Card
+CUST-44983,Sophia Davis,sophia.davis@company.org,+1-458-562-5379,Dress,Apparel,2,140.0,2023-01-02,New York,10,PayPal
+CUST-62705,Evelyn Smith,evelyn.smith@outlook.com,+1-606-280-7112,Jacket,Outerwear,1,105.0,2023-06-24,Los Angeles,15,PayPal
+CUST-58103,Benjamin Garcia,benjamin.garcia@gmail.com,+1-615-670-4984,T-Shirt,Apparel,2,45.0,2023-07-01,San Antonio,5,Credit Card
+CUST-35235,Elijah Rodriguez,elijah.rodriguez@icloud.com,+1-913-431-5914,T-Shirt,Apparel,1,10.0,2023-11-21,Philadelphia,15,Debit Card
+CUST-04231,Sophia Miller,sophia.miller@hotmail.com,+1-900-282-1519,T-Shirt,Apparel,2,40.0,2023-05-30,New York,10,PayPal
+CUST-93420,Mia Brown,mia.brown@outlook.com,+1-295-615-7213,Jeans,Apparel,2,120.0,2023-10-08,Los Angeles,0,Apple Pay
+CUST-90445,Emma Gonzalez,emma.gonzalez@outlook.com,+1-586-765-8798,Scarf,Accessories,2,40.0,2023-09-25,New York,0,Apple Pay
+CUST-75717,Benjamin Taylor,benjamin.taylor@outlook.com,+1-257-852-1154,Sneakers,Footwear,2,170.0,2023-07-11,New York,0,Cash
+CUST-82609,Ava Johnson,ava.johnson@outlook.com,+1-919-375-2354,Jeans,Apparel,2,115.0,2023-12-26,Los Angeles,5,Gift Card
+CUST-99922,Benjamin Jones,benjamin.jones@company.org,+1-711-644-6427,T-Shirt,Apparel,2,35.0,2023-02-24,Los Angeles,15,Gift Card
+CUST-16417,Noah Lopez,noah.lopez@outlook.com,+1-779-297-9653,Jacket,Outerwear,2,240.0,2023-01-24,New York,0,Gift Card
+CUST-71487,Emma Davis,emma.davis@icloud.com,+1-243-435-4463,T-Shirt,Apparel,2,40.0,2023-03-26,San Antonio,10,Apple Pay
+CUST-57353,Evelyn Garcia,evelyn.garcia@hotmail.com,+1-908-780-8790,T-Shirt,Apparel,2,45.0,2023-09-10,San Diego,5,Cash
+CUST-49585,Elijah Davis,elijah.davis@company.org,+1-477-247-2218,Sneakers,Footwear,1,80.0,2023-03-13,Phoenix,5,Gift Card
+CUST-93320,Amelia Moore,amelia.moore@outlook.com,+1-900-487-9897,T-Shirt,Apparel,3,75.0,2023-07-29,Los Angeles,0,Gift Card
+CUST-63979,Amelia Williams,amelia.williams@yahoo.com,+1-777-873-1539,Jeans,Apparel,2,120.0,2023-02-24,Philadelphia,0,Credit Card
+CUST-90438,Sophia Lopez,sophia.lopez@yahoo.com,+1-383-522-1256,Dress,Apparel,3,225.0,2023-05-11,Chicago,0,Credit Card
+CUST-78328,Sophia Williams,sophia.williams@hotmail.com,+1-412-801-3362,Sneakers,Footwear,2,170.0,2023-11-09,Houston,0,Credit Card
+CUST-44276,William Garcia,william.garcia@gmail.com,+1-970-929-7525,Scarf,Accessories,2,40.0,2023-04-11,New York,0,Debit Card
+CUST-99125,Alexander Johnson,alexander.johnson@gmail.com,+1-278-506-3661,Sneakers,Footwear,1,80.0,2023-04-07,New York,5,Gift Card
+CUST-19922,Sophia Lopez,sophia.lopez@company.org,+1-777-446-7375,Sneakers,Footwear,4,340.0,2023-03-03,Houston,0,Debit Card
+CUST-31686,Olivia Johnson,olivia.johnson@company.org,+1-893-753-6435,T-Shirt,Apparel,4,85.0,2023-07-21,Phoenix,15,Cash
+CUST-67059,Alexander Garcia,alexander.garcia@company.org,+1-593-973-3292,Sneakers,Footwear,1,80.0,2023-04-21,Houston,5,Apple Pay
+CUST-45928,Mia Taylor,mia.taylor@gmail.com,+1-905-941-2284,Scarf,Accessories,3,55.0,2023-08-23,Los Angeles,5,Gift Card
+CUST-05999,Oliver Williams,oliver.williams@yahoo.com,+1-712-963-6666,Sneakers,Footwear,4,340.0,2023-04-08,Houston,0,Apple Pay
+CUST-60456,Liam Johnson,liam.johnson@gmail.com,+1-254-300-8161,Jeans,Apparel,1,55.0,2023-06-23,New York,5,Credit Card

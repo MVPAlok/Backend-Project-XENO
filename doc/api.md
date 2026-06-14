@@ -663,7 +663,13 @@ Content-Type: application/json
       "identifier": "nike@buyer.com",
       "strategy": "UPDATE_EXISTING"
     }
-  ]
+  ],
+  "fixedRows": {
+    "4": {
+      "Email": "john@corrected-domain.com"
+    }
+  },
+  "skippedRows": [12, 18]
 }
 ```
 
@@ -760,6 +766,46 @@ Retrieves details and preview parameters of a specific import job.
   "resolutionStrategy": "KEEP_EXISTING",
   "confirmedAt": "2026-06-13T10:01:30.000Z",
   "confirmedBy": "a67e42d2-8b43-4a11-bc66-3d234a921d7b"
+}
+```
+
+---
+
+## 17. Delete Ingestion Audit Run
+
+Deletes a specific import job log from the database completely.
+
+- **Method**: `DELETE`
+- **Path**: `/workspaces/:workspaceId/imports/:importId`
+- **Authentication**: `Private` (Requires valid Access JWT Bearer Token & Workspace Membership)
+
+### Response Specs
+- **Status**: `200 OK`
+- **Body**:
+```json
+{
+  "success": true,
+  "message": "Import job deleted successfully."
+}
+```
+
+---
+
+## 18. Clear Ingestion History
+
+Deletes all import job logs for the workspace from the database.
+
+- **Method**: `DELETE`
+- **Path**: `/workspaces/:workspaceId/imports`
+- **Authentication**: `Private` (Requires valid Access JWT Bearer Token & Workspace Membership)
+
+### Response Specs
+- **Status**: `200 OK`
+- **Body**:
+```json
+{
+  "success": true,
+  "message": "Import history cleared successfully."
 }
 ```
 
@@ -1002,4 +1048,180 @@ Evaluates a saved segment configuration against active database records to previ
   ]
 }
 ```
+
+---
+
+## 18. Create Campaign
+
+Creates a new marketing campaign targeting a saved audience segment. If marked as `SENT`, delivery and performance rates are calculated and stored.
+
+- **Method**: `POST`
+- **Path**: `/workspaces/:workspaceId/campaigns`
+- **Authentication**: `Private` (Requires Access Token & Workspace Membership)
+
+### Request Payload Fields
+| Name | Type | Rules / Constraints |
+| :--- | :--- | :--- |
+| `name` | String | Trimmed, min 1, max 100 characters. |
+| `segmentId` | String | Valid UUID format. Must belong to the workspace. |
+| `channel` | String | Choice of `EMAIL`, `SMS`, `WHATSAPP`. |
+| `messageSubject` | String | Optional. Subject line (mainly for EMAIL). |
+| `messageBody` | String | Trimmed, min 1 character. |
+| `status` | String | Choice of `DRAFT`, `SENT`, `SCHEDULED` (defaults to `DRAFT`). |
+
+#### Example Request
+```http
+POST /workspaces/e6de27a4-d9bc-4df1-85b2-32a51241512f/campaigns HTTP/1.1
+Host: api.xeno.com
+Content-Type: application/json
+
+{
+  "name": "Mid-Summer Skincare Promo",
+  "segmentId": "522197fb-ee0b-4eb8-b996-bf753fb16277",
+  "channel": "EMAIL",
+  "messageSubject": "Refresh your skin this summer! ☀️",
+  "messageBody": "Dear Valued Customer, Enjoy 25% off skincare product lines.",
+  "status": "SENT"
+}
+```
+
+### Response Specs
+
+#### Success Response
+- **Status**: `201 Created`
+- **Body**:
+```json
+{
+  "id": "b3394a11-bc66-3d23-bf75-27a4d9bc4df1",
+  "workspaceId": "e6de27a4-d9bc-4df1-85b2-32a51241512f",
+  "segmentId": "522197fb-ee0b-4eb8-b996-bf753fb16277",
+  "segmentName": "Mumbai Skincare Spenders",
+  "name": "Mid-Summer Skincare Promo",
+  "channel": "EMAIL",
+  "messageSubject": "Refresh your skin this summer! ☀️",
+  "messageBody": "Dear Valued Customer, Enjoy 25% off skincare product lines.",
+  "status": "SENT",
+  "sentCount": 142,
+  "openRate": 56.4,
+  "clickRate": 15.8,
+  "conversionRate": 3.8,
+  "createdAt": "2026-06-14T20:25:00.000Z",
+  "updatedAt": "2026-06-14T20:25:00.000Z"
+}
+```
+
+---
+
+## 19. List Campaigns
+
+Lists all campaign runs triggered within the workspace scope.
+
+- **Method**: `GET`
+- **Path**: `/workspaces/:workspaceId/campaigns`
+- **Authentication**: `Private` (Requires Access Token & Workspace Membership)
+
+### Response Specs
+
+#### Success Response
+- **Status**: `200 OK`
+- **Body**:
+```json
+[
+  {
+    "id": "b3394a11-bc66-3d23-bf75-27a4d9bc4df1",
+    "workspaceId": "e6de27a4-d9bc-4df1-85b2-32a51241512f",
+    "segmentId": "522197fb-ee0b-4eb8-b996-bf753fb16277",
+    "segmentName": "Mumbai Skincare Spenders",
+    "name": "Mid-Summer Skincare Promo",
+    "channel": "EMAIL",
+    "messageSubject": "Refresh your skin this summer! ☀️",
+    "messageBody": "Dear Valued Customer, Enjoy 25% off skincare product lines.",
+    "status": "SENT",
+    "sentCount": 142,
+    "openRate": 56.4,
+    "clickRate": 15.8,
+    "conversionRate": 3.8,
+    "createdAt": "2026-06-14T20:25:00.000Z"
+  }
+]
+```
+
+---
+
+## 20. Get Campaign Funnel
+
+Retrieves aggregated global campaign funnel statistics (sent, delivered, opened, read, clicked, and converted steps).
+
+- **Method**: `GET`
+- **Path**: `/workspaces/:workspaceId/analytics/funnel`
+- **Authentication**: `Private` (Requires Access Token & Workspace Membership)
+
+### Response Specs
+
+#### Success Response
+- **Status**: `200 OK`
+- **Body**:
+```json
+[
+  { "name": "Sent", "count": 10240, "percentage": 100 },
+  { "name": "Delivered", "count": 10035, "percentage": 98 },
+  { "name": "Opened", "count": 5324, "percentage": 52 },
+  { "name": "Read", "count": 4505, "percentage": 44 },
+  { "name": "Clicked", "count": 1228, "percentage": 12 },
+  { "name": "Converted", "count": 225, "percentage": 2.2 }
+]
+```
+
+---
+
+## 21. Get Channel Performance
+
+Retrieves channel benchmarks comparing EMAIL, SMS, and WHATSAPP delivery, opens, clicks, and conversions.
+
+- **Method**: `GET`
+- **Path**: `/workspaces/:workspaceId/analytics/channels`
+- **Authentication**: `Private` (Requires Access Token & Workspace Membership)
+
+### Response Specs
+
+#### Success Response
+- **Status**: `200 OK`
+- **Body**:
+```json
+[
+  { "channel": "EMAIL", "sent": 5000, "opened": 1500, "clicked": 400, "converted": 80 },
+  { "channel": "WHATSAPP", "sent": 3200, "opened": 3100, "clicked": 1100, "converted": 310 },
+  { "channel": "SMS", "sent": 4500, "opened": 3900, "clicked": 350, "converted": 45 }
+]
+```
+
+---
+
+## 22. Get Workspace Insights
+
+Scans CRM tables (customers, orders) and generates actionable AI CRM behavioral suggestions with matching target suggestions.
+
+- **Method**: `GET`
+- **Path**: `/workspaces/:workspaceId/analytics/insights`
+- **Authentication**: `Private` (Requires Access Token & Workspace Membership)
+
+### Response Specs
+
+#### Success Response
+- **Status**: `200 OK`
+- **Body**:
+```json
+[
+  {
+    "id": "ins-1",
+    "title": "High-Value Shopper Churn Alert",
+    "description": "A cohort of 142 skincare buyers from Mumbai spending > INR 3,000 have not made a purchase in 60+ days.",
+    "category": "RETENTION",
+    "evidence": "Average lifetime spend for this cohort is INR 5,420. Last activity registered was over 60 days ago.",
+    "actionText": "Launch Retargeting Campaign",
+    "suggestedPrompt": "Find customers from Mumbai who bought skincare products but have not purchased in the last 60 days"
+  }
+]
+```
+
 

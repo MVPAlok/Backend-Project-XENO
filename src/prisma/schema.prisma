@@ -68,6 +68,8 @@ model Workspace {
   customers   Customer[]
   orders      Order[]
   segments    Segment[]
+  campaigns   Campaign[]
+  campaignDeliveries CampaignDelivery[]
 
   @@map("workspaces")
 }
@@ -145,6 +147,7 @@ model Customer {
 
   workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   orders    Order[]
+  deliveries CampaignDelivery[]
 
   @@unique([workspaceId, email])
   @@unique([workspaceId, phone])
@@ -186,6 +189,7 @@ model Segment {
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
   rules       SegmentRule[]
+  campaigns   Campaign[]
 
   workspace   Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   user        User          @relation("CreatedSegments", fields: [createdBy], references: [id], onDelete: Cascade)
@@ -208,3 +212,58 @@ model SegmentRule {
   @@map("segment_rules")
 }
 
+model Campaign {
+  id              String    @id @default(uuid()) @db.Uuid
+  workspaceId     String    @db.Uuid
+  segmentId       String    @db.Uuid
+  name            String
+  channel         String    // EMAIL, SMS, WHATSAPP
+  messageSubject  String?
+  messageBody     String
+  status          String    @default("DRAFT") // DRAFT, SENT, SCHEDULED
+  sentCount       Int?
+  openRate        Decimal?  @db.Decimal(5, 2)
+  clickRate       Decimal?  @db.Decimal(5, 2)
+  conversionRate  Decimal?  @db.Decimal(5, 2)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  workspace       Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  segment         Segment   @relation(fields: [segmentId], references: [id], onDelete: Cascade)
+  deliveries      CampaignDelivery[]
+
+  @@index([workspaceId])
+  @@index([segmentId])
+  @@map("campaigns")
+}
+
+enum DeliveryStatus {
+  SENT
+  DELIVERED
+  OPENED
+  CLICKED
+  CONVERTED
+  FAILED
+}
+
+model CampaignDelivery {
+  id             String         @id @default(uuid()) @db.Uuid
+  workspaceId    String         @db.Uuid
+  campaignId     String         @db.Uuid
+  customerId     String         @db.Uuid
+  status         DeliveryStatus @default(SENT)
+  messageSubject String?
+  messageBody    String
+  sentAt         DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  workspace    Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  campaign     Campaign  @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  customer     Customer  @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId])
+  @@index([campaignId])
+  @@index([customerId])
+  @@index([status])
+  @@map("campaign_deliveries")
+}

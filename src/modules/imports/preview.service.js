@@ -36,7 +36,10 @@ export async function generateImportPreview(workspaceId, userId, file) {
     const aiAdvisor = getAdvisorSuggestions(headers);
 
     // Run clean step on all raw rows based on AI suggested mappings
-    const cleanedRows = rawRows.map(row => cleanRow(row, aiAdvisor.mappings));
+    const cleanedRows = rawRows.map((row, idx) => ({
+      ...cleanRow(row, aiAdvisor.mappings),
+      rowIndex: idx
+    }));
 
     // Detect in-file duplicates
     const inFileDuplicates = detectInFileDuplicates(rawRows, cleanedRows);
@@ -54,9 +57,19 @@ export async function generateImportPreview(workspaceId, userId, file) {
 
     // Sample cleaned records for preview display (up to 10 rows)
     const sampleTransformedRecords = cleanedRows.slice(0, 10).map(r => ({
+      rowIndex: r.rowIndex,
       isValid: r.isValid,
       errors: r.errors,
-      data: r.data
+      data: r.data,
+      raw: r.raw
+    }));
+
+    // Extract up to 50 invalid records for manual inline fixing/skipping
+    const invalidRows = cleanedRows.filter(r => !r.isValid).slice(0, 50).map(r => ({
+      rowIndex: r.rowIndex,
+      errors: r.errors,
+      data: r.data,
+      raw: r.raw
     }));
 
     const preview = buildPreview({
@@ -71,6 +84,7 @@ export async function generateImportPreview(workspaceId, userId, file) {
       suggestedStrategy: aiAdvisor.suggestedStrategy,
       strategyExplanation: aiAdvisor.strategyExplanation,
       sampleTransformedRecords,
+      invalidRows,
       conflicts
     });
 
@@ -80,7 +94,8 @@ export async function generateImportPreview(workspaceId, userId, file) {
       totalRows,
       previewData: {
         rawRows, // Persist raw parsed rows so we don't require file re-upload on confirm
-        sampleTransformedRecords
+        sampleTransformedRecords,
+        invalidRows
       },
       detectedMappings: aiAdvisor.mappings,
       conflictSummary: conflicts

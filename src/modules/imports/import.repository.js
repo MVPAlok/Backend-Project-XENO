@@ -47,3 +47,21 @@ export async function listJobs(workspaceId) {
     orderBy: { createdAt: 'desc' }
   });
 }
+
+/**
+ * Deletes a specific job.
+ */
+export async function deleteJob(id) {
+  return prisma.importJob.delete({
+    where: { id }
+  });
+}
+
+/**
+ * Deletes all jobs for a workspace.
+ */
+export async function deleteJobsByWorkspace(workspaceId) {
+  return prisma.importJob.deleteMany({
+    where: { workspaceId }
+  });
+}

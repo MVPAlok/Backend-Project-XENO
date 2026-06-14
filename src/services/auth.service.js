@@ -79,9 +79,6 @@ export async function signUp(userData, origin) {
   }
 
   const pwdHash = await hashPassword(userData.password);
-  const rawVerificationToken = generateRandomToken();
-  const verificationTokenHash = hashToken(rawVerificationToken);
-
   const newUser = await prisma.user.create({
     data: {
       email: normalizedEmail,
@@ -90,16 +87,13 @@ export async function signUp(userData, origin) {
       lastName: userData.lastName,
       avatarUrl: userData.avatarUrl || null,
       status: 'ACTIVE',
-      emailVerificationToken: verificationTokenHash,
-      emailVerificationExpiry: new Date(Date.now() + VERIFICATION_TOKEN_EXPIRY)
+      isEmailVerified: true // Automatically verified
     }
   });
 
   logger.info({ userId: newUser.id, email: newUser.email }, 'User signed up successfully');
 
-  // Dispatch verification email in the background (prevent blocking the response)
-  sendVerificationEmail(newUser.email, newUser.firstName, rawVerificationToken, origin)
-    .catch((err) => logger.error({ err, userId: newUser.id }, 'Failed to send verification email'));
+  // Dispatch verification email removed for simplified auth flow
 
   // Return sanitized user response
   return {
@@ -173,10 +167,7 @@ export async function login({ email, password, deviceInfo, userAgent, ipAddress 
     throw new AuthenticationError('Invalid email or password.');
   }
 
-  if (!user.isEmailVerified) {
-    logger.warn({ userId: user.id }, 'Login blocked: email not verified');
-    throw new AuthenticationError('Please verify your email address before logging in.');
-  }
+  // Email verification check removed for simplified auth flow
 
   if (user.status === 'SUSPENDED') {
     logger.warn({ userId: user.id }, 'Login blocked: account suspended');

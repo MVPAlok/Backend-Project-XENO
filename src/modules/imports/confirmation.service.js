@@ -5,7 +5,7 @@ import { ValidationError, NotFoundError } from '../../utils/errors.js';
 /**
  * Handles confirmation of import job by applying selected mapping and strategy.
  */
-export async function confirmImport(workspaceId, jobId, userId, { mappings, resolutionStrategy, overrides }) {
+export async function confirmImport(workspaceId, jobId, userId, { mappings, resolutionStrategy, overrides, fixedRows, skippedRows }) {
   if (!mappings || typeof mappings !== 'object') {
     throw new ValidationError('Mappings object is required.');
   }
@@ -22,5 +22,5 @@ export async function confirmImport(workspaceId, jobId, userId, { mappings, reso
     throw new ValidationError(`Job status must be PREVIEW_READY to confirm. Current status: ${job.status}`);
   }
 
-  return persistImport(workspaceId, jobId, userId, { mappings, resolutionStrategy, overrides });
+  return persistImport(workspaceId, jobId, userId, { mappings, resolutionStrategy, overrides, fixedRows, skippedRows });
 }

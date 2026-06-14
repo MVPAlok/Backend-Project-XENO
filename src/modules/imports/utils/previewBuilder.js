@@ -13,6 +13,7 @@ export function buildPreview({
   suggestedStrategy,
   strategyExplanation,
   sampleTransformedRecords,
+  invalidRows,
   conflicts
 }) {
   return {
@@ -29,6 +30,7 @@ export function buildPreview({
     conflicts,
     suggestedStrategy,
     strategyExplanation,
-    sampleTransformedRecords
+    sampleTransformedRecords,
+    invalidRows
   };
 }

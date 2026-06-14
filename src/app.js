@@ -31,8 +31,8 @@ app.use((req, res, next) => {
 });
 
 // 5. Mount API Routes
-app.use('/auth', authRoutes);
-app.use('/workspaces', workspaceRoutes);
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/workspaces', workspaceRoutes);
 
 // 6. Catch-all 404 Handler
 app.use((req, res) => {

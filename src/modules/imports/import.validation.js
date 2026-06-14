@@ -23,7 +23,9 @@ export const confirmImportBodySchema = z.object({
         identifier: z.string(),
         strategy: z.enum(['KEEP_EXISTING', 'UPDATE_EXISTING', 'SKIP'])
       })
-    ).optional()
+    ).optional(),
+    fixedRows: z.record(z.string(), z.record(z.string(), z.any())).optional(),
+    skippedRows: z.array(z.union([z.number(), z.string()])).optional()
   })
 });
 

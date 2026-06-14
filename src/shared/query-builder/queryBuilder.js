@@ -64,11 +64,11 @@ export function compileRulesToSql(workspaceId, rules, now = new Date()) {
     }
 
     if (field === 'totalSpend') {
-      havingClauses.push(`COALESCE(SUM(o.amount), 0) ${operator} ${paramPlaceholder}`);
+      havingClauses.push(`COALESCE(SUM(o.amount), 0) ${operator} (${paramPlaceholder})::numeric`);
     } else if (field === 'orderCount' || field === 'purchaseFrequency') {
-      havingClauses.push(`COUNT(o.id) ${operator} ${paramPlaceholder}`);
+      havingClauses.push(`COUNT(o.id) ${operator} (${paramPlaceholder})::integer`);
     } else if (field === 'averageOrderValue') {
-      havingClauses.push(`COALESCE(AVG(o.amount), 0) ${operator} ${paramPlaceholder}`);
+      havingClauses.push(`COALESCE(AVG(o.amount), 0) ${operator} (${paramPlaceholder})::numeric`);
     } else if (field === 'city') {
       if (operator === 'IN') {
         havingClauses.push(`LOWER(MAX(c.city)) IN ${paramPlaceholder}`);
@@ -85,9 +85,9 @@ export function compileRulesToSql(workspaceId, rules, now = new Date()) {
       const valBool = value === true || value === 'true' || value === '1' || value === 1;
       havingClauses.push(`SUM(CASE WHEN o."discountUsage" = ${addParam(valBool)} THEN 1 ELSE 0 END) ${valBool ? '>' : '='} 0`);
     } else if (field === 'lastPurchaseDays') {
-      havingClauses.push(`(EXTRACT(EPOCH FROM ($2::timestamp - MAX(o."purchaseDate"))) / 86400) ${operator} ${paramPlaceholder}`);
+      havingClauses.push(`(EXTRACT(EPOCH FROM ($2::timestamp - MAX(o."purchaseDate")::timestamp)) / 86400) ${operator} (${paramPlaceholder})::numeric`);
     } else if (field === 'firstPurchaseDays') {
-      havingClauses.push(`(EXTRACT(EPOCH FROM ($2::timestamp - MIN(o."purchaseDate"))) / 86400) ${operator} ${paramPlaceholder}`);
+      havingClauses.push(`(EXTRACT(EPOCH FROM ($2::timestamp - MIN(o."purchaseDate")::timestamp)) / 86400) ${operator} (${paramPlaceholder})::numeric`);
     }
   }
 

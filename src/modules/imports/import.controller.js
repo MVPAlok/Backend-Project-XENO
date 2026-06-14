@@ -25,12 +25,14 @@ export async function confirmImport(req, res, next) {
   try {
     const { workspaceId } = req.params;
     const userId = req.user.id;
-    const { importJobId, mappings, resolutionStrategy, overrides = [] } = req.body;
+    const { importJobId, mappings, resolutionStrategy, overrides = [], fixedRows, skippedRows } = req.body;
 
     const job = await service.confirmImport(workspaceId, importJobId, userId, {
       mappings,
       resolutionStrategy,
-      overrides
+      overrides,
+      fixedRows,
+      skippedRows
     });
 
     return res.status(200).json(buildImportSummary(job));
@@ -64,6 +66,34 @@ export async function getImportDetails(req, res, next) {
     const job = await service.getImportDetails(workspaceId, importId);
 
     return res.status(200).json(buildImportSummary(job));
+  } catch (error) {
+    return next(error);
+  }
+}
+
+/**
+ * Handle DELETE /workspaces/:workspaceId/imports/:importId
+ */
+export async function deleteImportJob(req, res, next) {
+  try {
+    const { workspaceId, importId } = req.params;
+    await service.deleteImportJob(workspaceId, importId);
+
+    return res.status(200).json({ success: true, message: 'Import job deleted successfully.' });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+/**
+ * Handle DELETE /workspaces/:workspaceId/imports
+ */
+export async function clearImportHistory(req, res, next) {
+  try {
+    const { workspaceId } = req.params;
+    await service.clearImportHistory(workspaceId);
+
+    return res.status(200).json({ success: true, message: 'Import history cleared successfully.' });
   } catch (error) {
     return next(error);
   }

@@ -74,4 +74,17 @@ router.get(
   controller.getImportDetails
 );
 
+// DELETE /workspaces/:workspaceId/imports
+router.delete(
+  '/',
+  controller.clearImportHistory
+);
+
+// DELETE /workspaces/:workspaceId/imports/:importId
+router.delete(
+  '/:importId',
+  validate(importDetailParamSchema),
+  controller.deleteImportJob
+);
+
 export default router;

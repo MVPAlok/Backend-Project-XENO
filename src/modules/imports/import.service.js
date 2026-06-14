@@ -21,3 +21,21 @@ export async function getImportDetails(workspaceId, importId) {
   }
   return job;
 }
+
+/**
+ * Delete a single import job.
+ */
+export async function deleteImportJob(workspaceId, importId) {
+  const job = await repository.findById(importId);
+  if (!job || job.workspaceId !== workspaceId) {
+    throw new NotFoundError('Import job not found.');
+  }
+  return repository.deleteJob(importId);
+}
+
+/**
+ * Clear all import history for a workspace.
+ */
+export async function clearImportHistory(workspaceId) {
+  return repository.deleteJobsByWorkspace(workspaceId);
+}

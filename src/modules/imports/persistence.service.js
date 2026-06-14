@@ -8,7 +8,7 @@ import logger from '../../utils/logger.js';
 /**
  * Persists preview data after user confirmation.
  */
-export async function persistImport(workspaceId, jobId, userId, { mappings, resolutionStrategy, overrides = [] }) {
+export async function persistImport(workspaceId, jobId, userId, { mappings, resolutionStrategy, overrides = [], fixedRows, skippedRows }) {
   const job = await repository.findById(jobId);
   if (!job || job.workspaceId !== workspaceId) {
     throw new Error('Import job not found.');
@@ -82,7 +82,17 @@ export async function persistImport(workspaceId, jobId, userId, { mappings, reso
 
     const seenRawRows = new Set();
 
-    for (const rawRow of rawRows) {
+    for (let i = 0; i < rawRows.length; i++) {
+      let rawRow = rawRows[i];
+      if (skippedRows && (skippedRows.includes(i) || skippedRows.includes(String(i)))) {
+        processedRows++;
+        continue;
+      }
+      if (fixedRows && (fixedRows[i] !== undefined || fixedRows[String(i)] !== undefined)) {
+        const fixes = fixedRows[i] || fixedRows[String(i)];
+        rawRow = { ...rawRow, ...fixes };
+      }
+
       try {
         const rawStr = JSON.stringify(Object.keys(rawRow).sort().reduce((acc, key) => {
           acc[key] = rawRow[key] !== undefined && rawRow[key] !== null ? rawRow[key].toString().trim() : '';

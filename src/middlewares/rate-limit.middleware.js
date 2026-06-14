@@ -56,7 +56,7 @@ export const refreshTokenLimiter = createLimiter(
 
 export const audienceGenLimiter = createLimiter(
   15 * 60 * 1000, // 15 minutes
-  5, // Limit to 5 requests in tests if enabled
+  process.env.NODE_ENV === 'test' ? 5 : 1000,
   'Too many audience generation requests. Please try again after 15 minutes.'
 );
 

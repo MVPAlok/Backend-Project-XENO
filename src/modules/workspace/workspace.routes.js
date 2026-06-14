@@ -7,6 +7,8 @@ import * as controller from './workspace.controller.js';
 
 import importRoutes from '../imports/import.routes.js';
 import audienceRoutes from '../audience/audience.routes.js';
+import campaignRoutes from '../campaign/campaign.routes.js';
+import analyticsRoutes from '../analytics/analytics.routes.js';
 
 const router = Router();
 
@@ -15,6 +17,12 @@ router.use(requireAuth);
 
 // Nest import routes
 router.use('/:workspaceId/imports', validate(workspaceIdParamSchema), requireWorkspaceMember, importRoutes);
+
+// Nest campaign routes
+router.use('/:workspaceId/campaigns', validate(workspaceIdParamSchema), requireWorkspaceMember, campaignRoutes);
+
+// Nest analytics routes
+router.use('/:workspaceId/analytics', validate(workspaceIdParamSchema), requireWorkspaceMember, analyticsRoutes);
 
 // Nest audience and segment routes
 router.use('/:workspaceId', validate(workspaceIdParamSchema), audienceRoutes);
