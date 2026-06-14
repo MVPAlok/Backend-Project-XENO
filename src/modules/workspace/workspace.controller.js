@@ -45,3 +45,19 @@ export async function getWorkspace(req, res, next) {
     return next(error);
   }
 }
+
+/**
+ * Handle DELETE /workspaces/:workspaceId
+ */
+export async function deleteWorkspace(req, res, next) {
+  try {
+    const userId = req.user.id;
+    const { workspaceId } = req.params;
+
+    await service.deleteWorkspace(workspaceId, userId);
+
+    return res.status(200).json({ message: 'Workspace deleted successfully' });
+  } catch (error) {
+    return next(error);
+  }
+}

@@ -6,7 +6,8 @@ import * as service from './analytics.service.js';
 export async function getCampaignFunnel(req, res, next) {
   try {
     const { workspaceId } = req.params;
-    const funnel = await service.getCampaignFunnel(workspaceId);
+    const { campaignId } = req.query;
+    const funnel = await service.getCampaignFunnel(workspaceId, campaignId);
     return res.status(200).json(funnel);
   } catch (error) {
     return next(error);
@@ -32,7 +33,8 @@ export async function getChannelPerformance(req, res, next) {
 export async function getWorkspaceInsights(req, res, next) {
   try {
     const { workspaceId } = req.params;
-    const insights = await service.getWorkspaceInsights(workspaceId);
+    const { campaignId } = req.query;
+    const insights = await service.getWorkspaceInsights(workspaceId, campaignId);
     return res.status(200).json(insights);
   } catch (error) {
     return next(error);

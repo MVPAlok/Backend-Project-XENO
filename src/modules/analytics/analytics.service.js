@@ -3,11 +3,16 @@ import prisma from '../../config/database.js';
 /**
  * Calculates global campaign funnel performance based on sent campaigns, falling back to realistic aggregates if no data is found.
  */
-export async function getCampaignFunnel(workspaceId) {
+export async function getCampaignFunnel(workspaceId, campaignId) {
   const customerCount = await prisma.customer.count({ where: { workspaceId } });
 
+  const whereClause = { workspaceId };
+  if (campaignId) {
+    whereClause.campaignId = campaignId;
+  }
+
   const statusList = await prisma.campaignDelivery.findMany({
-    where: { workspaceId },
+    where: whereClause,
     select: { status: true }
   });
 
@@ -41,25 +46,15 @@ export async function getCampaignFunnel(workspaceId) {
   let clicked = counts.CLICKED;
   let converted = counts.CONVERTED;
 
-  // Fallback if no campaign data exists yet
-  if (sent === 0) {
-    const seed = workspaceId.charCodeAt(0) || 100;
-    sent = (customerCount > 0 ? customerCount * 5 : 10000) + (seed % 5000);
-    delivered = Math.round(sent * 0.98);
-    opened = Math.round(sent * 0.52);
-    clicked = Math.round(opened * 0.28);
-    converted = Math.round(clicked * 0.18);
-  }
-
   const read = Math.round(opened * 0.85);
 
   return [
-    { name: 'Sent', count: sent, percentage: 100 },
-    { name: 'Delivered', count: delivered, percentage: sent > 0 ? parseFloat(((delivered / sent) * 100).toFixed(1)) : 98 },
-    { name: 'Opened', count: opened, percentage: sent > 0 ? parseFloat(((opened / sent) * 100).toFixed(1)) : 52 },
-    { name: 'Read', count: read, percentage: sent > 0 ? parseFloat(((read / sent) * 100).toFixed(1)) : 44 },
-    { name: 'Clicked', count: clicked, percentage: sent > 0 ? parseFloat(((clicked / sent) * 100).toFixed(1)) : 14 },
-    { name: 'Converted', count: converted, percentage: sent > 0 ? parseFloat(((converted / sent) * 100).toFixed(1)) : 3 }
+    { name: 'Sent', count: sent, percentage: sent > 0 ? 100 : 0 },
+    { name: 'Delivered', count: delivered, percentage: sent > 0 ? parseFloat(((delivered / sent) * 100).toFixed(1)) : 0 },
+    { name: 'Opened', count: opened, percentage: sent > 0 ? parseFloat(((opened / sent) * 100).toFixed(1)) : 0 },
+    { name: 'Read', count: read, percentage: sent > 0 ? parseFloat(((read / sent) * 100).toFixed(1)) : 0 },
+    { name: 'Clicked', count: clicked, percentage: sent > 0 ? parseFloat(((clicked / sent) * 100).toFixed(1)) : 0 },
+    { name: 'Converted', count: converted, percentage: sent > 0 ? parseFloat(((converted / sent) * 100).toFixed(1)) : 0 }
   ];
 }
 
@@ -105,24 +100,13 @@ export async function getChannelPerformance(workspaceId) {
   
   channels.forEach(ch => {
     const data = channelsMap[ch];
-    if (data.sent > 0) {
-      result.push({
-        channel: ch,
-        sent: data.sent,
-        opened: data.opened,
-        clicked: data.clicked,
-        converted: data.converted
-      });
-    } else {
-      // Return high-fidelity defaults
-      if (ch === 'EMAIL') {
-        result.push({ channel: 'EMAIL', sent: 5000, opened: 1500, clicked: 400, converted: 80 });
-      } else if (ch === 'WHATSAPP') {
-        result.push({ channel: 'WHATSAPP', sent: 3200, opened: 3100, clicked: 1100, converted: 310 });
-      } else {
-        result.push({ channel: 'SMS', sent: 4500, opened: 3900, clicked: 350, converted: 45 });
-      }
-    }
+    result.push({
+      channel: ch,
+      sent: data.sent,
+      opened: data.opened,
+      clicked: data.clicked,
+      converted: data.converted
+    });
   });
 
   return result;
@@ -131,122 +115,223 @@ export async function getChannelPerformance(workspaceId) {
 /**
  * Scans customers and orders to construct dynamic, evidence-backed marketing CRM insights.
  */
-export async function getWorkspaceInsights(workspaceId) {
-  // 1. Churn alert queries (60+ days inactive)
-  const sixtyDaysAgo = new Date();
-  sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60);
-
-  const inactiveCustomers = await prisma.customer.findMany({
-    where: {
-      workspaceId,
-      orders: {
-        some: {}, // has orders
-        none: {
-          purchaseDate: {
-            gte: sixtyDaysAgo
-          }
-        }
-      }
-    },
-    include: {
-      orders: true
+export async function getWorkspaceInsights(workspaceId, campaignId) {
+  // Delete existing insights for this workspace/campaign to ensure they remain fresh and synchronized
+  await prisma.insight.deleteMany({
+    where: { 
+      workspaceId, 
+      campaignId: campaignId || null 
     }
   });
 
-  const highValueInactive = inactiveCustomers.filter(c => {
-    const sum = c.orders.reduce((acc, o) => acc + Number(o.amount), 0);
-    return sum > 3000;
-  });
+  let generatedInsights = [];
 
-  const churnCount = highValueInactive.length;
-  
-  // Extract category and city dynamically from the cohort
-  const categories = {};
-  const cities = {};
-  highValueInactive.forEach(c => {
-    if (c.city) cities[c.city] = (cities[c.city] || 0) + 1;
-    c.orders.forEach(o => {
-      if (o.category) {
-        categories[o.category] = (categories[o.category] || 0) + 1;
+  if (campaignId) {
+    const campaign = await prisma.campaign.findUnique({
+      where: { id: campaignId }
+    });
+    if (!campaign) {
+      throw new NotFoundError('Campaign not found');
+    }
+
+    // Calculate delivery metrics
+    const deliveries = await prisma.campaignDelivery.findMany({
+      where: { campaignId }
+    });
+
+    const sentCount = deliveries.length;
+    const openedCount = deliveries.filter(d => ['OPENED', 'CLICKED', 'CONVERTED'].includes(d.status)).length;
+    const clickedCount = deliveries.filter(d => ['CLICKED', 'CONVERTED'].includes(d.status)).length;
+    const convertedCount = deliveries.filter(d => d.status === 'CONVERTED').length;
+
+    const openRate = sentCount > 0 ? Math.round((openedCount / sentCount) * 100) : 0;
+    const clickRate = sentCount > 0 ? Math.round((clickedCount / sentCount) * 100) : 0;
+    const conversionRate = sentCount > 0 ? Math.round((convertedCount / sentCount) * 100) : 0;
+
+    const convertedCustomerIds = deliveries.filter(d => d.status === 'CONVERTED').map(d => d.customerId);
+    const convertedOrders = await prisma.order.findMany({
+      where: { customerId: { in: convertedCustomerIds } }
+    });
+    const totalConvertedSpend = convertedOrders.reduce((sum, o) => sum + Number(o.amount), 0);
+    const avgConvertedSpend = convertedCustomerIds.length > 0 ? Math.round(totalConvertedSpend / convertedCustomerIds.length) : 0;
+
+    generatedInsights = [
+      {
+        title: 'Campaign Engagement Health',
+        description: `The campaign "${campaign.name}" launched via ${campaign.channel} achieved an open rate of ${openRate}% with ${openedCount} total opens.`,
+        category: 'ENGAGEMENT',
+        evidence: `Out of ${sentCount} sent messages, ${openedCount} were opened and ${clickedCount} were clicked, yielding a click-through rate of ${clickRate}%.`,
+        actionText: 'Optimize Delivery Time',
+        suggestedPrompt: `Find customers targeted in campaign ${campaignId} who opened the message but did not click`
+      },
+      {
+        title: 'Revenue Attribution Briefing',
+        description: `This campaign drove ${convertedCount} customer conversions, representing a conversion rate of ${conversionRate}%.`,
+        category: 'REVENUE',
+        evidence: `Converted shoppers generated an average transaction value of INR ${avgConvertedSpend.toLocaleString()} per profile.`,
+        actionText: 'Target High-Value Converted Shoppers',
+        suggestedPrompt: `Find customers who converted in campaign ${campaignId} with total spend greater than 3000`
+      },
+      {
+        title: 'Retargeting Opportunity',
+        description: `There is an opportunity to re-engage the ${openedCount - clickedCount} recipients who opened the message but did not click.`,
+        category: 'RETENTION',
+        evidence: `Open to click drop-off rate is ${openedCount > 0 ? Math.round(((openedCount - clickedCount) / openedCount) * 100) : 0}%. Follow-up offers are highly recommended.`,
+        actionText: 'Launch Follow-up Campaign',
+        suggestedPrompt: `Find customers targeted in campaign ${campaignId} who opened but did not buy`
+      }
+    ];
+  } else {
+    // 1. Churn alert queries (60+ days inactive)
+    const sixtyDaysAgo = new Date();
+    sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60);
+
+    const inactiveCustomers = await prisma.customer.findMany({
+      where: {
+        workspaceId,
+        orders: {
+          some: {}, // has orders
+          none: {
+            purchaseDate: {
+              gte: sixtyDaysAgo
+            }
+          }
+        }
+      },
+      include: {
+        orders: true
       }
     });
-  });
 
-  const topCategory = Object.keys(categories).sort((a, b) => categories[b] - categories[a])[0] || 'skincare';
-  const topCity = Object.keys(cities).sort((a, b) => cities[b] - cities[a])[0] || 'Mumbai';
-  const avgChurnSpend = churnCount > 0 
-    ? (highValueInactive.reduce((acc, c) => acc + c.orders.reduce((sum, o) => sum + Number(o.amount), 0), 0) / churnCount)
-    : 5000;
+    const highValueInactive = inactiveCustomers.filter(c => {
+      const sum = c.orders.reduce((acc, o) => acc + Number(o.amount), 0);
+      return sum > 3000;
+    });
 
-  // 2. Discount Sensitivity Queries
-  const discountOrders = await prisma.order.findMany({
-    where: {
-      workspaceId,
-      discountUsage: true
-    }
-  });
-  const totalOrders = await prisma.order.count({ where: { workspaceId } });
-  const discountCount = discountOrders.length;
-  const discountPercent = totalOrders > 0 ? Math.round((discountCount / totalOrders) * 100) : 15;
-  const avgDiscountSpend = discountCount > 0
-    ? (discountOrders.reduce((acc, o) => acc + Number(o.amount), 0) / discountCount)
-    : 3000;
+    const churnCount = highValueInactive.length;
+    
+    // Extract category and city dynamically from the cohort
+    const categories = {};
+    const cities = {};
+    highValueInactive.forEach(c => {
+      if (c.city) cities[c.city] = (cities[c.city] || 0) + 1;
+      c.orders.forEach(o => {
+        if (o.category) {
+          categories[o.category] = (categories[o.category] || 0) + 1;
+        }
+      });
+    });
 
-  // 3. Dormant Value Queries (90+ days inactive)
-  const ninetyDaysAgo = new Date();
-  ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 90);
+    const topCategory = Object.keys(categories).sort((a, b) => categories[b] - categories[a])[0] || 'skincare';
+    const topCity = Object.keys(cities).sort((a, b) => cities[b] - cities[a])[0] || 'Mumbai';
+    const avgChurnSpend = churnCount > 0 
+      ? (highValueInactive.reduce((acc, c) => acc + c.orders.reduce((sum, o) => sum + Number(o.amount), 0), 0) / churnCount)
+      : 5000;
 
-  const dormantCustomers = await prisma.customer.findMany({
-    where: {
-      workspaceId,
-      orders: {
-        some: {},
-        none: {
-          purchaseDate: {
-            gte: ninetyDaysAgo
+    // 2. Discount Sensitivity Queries
+    const discountOrders = await prisma.order.findMany({
+      where: {
+        workspaceId,
+        discountUsage: true
+      }
+    });
+    const totalOrders = await prisma.order.count({ where: { workspaceId } });
+    const discountCount = discountOrders.length;
+    const discountPercent = totalOrders > 0 ? Math.round((discountCount / totalOrders) * 100) : 15;
+    const avgDiscountSpend = discountCount > 0
+      ? (discountOrders.reduce((acc, o) => acc + Number(o.amount), 0) / discountCount)
+      : 3000;
+
+    // 3. Dormant Value Queries (90+ days inactive)
+    const ninetyDaysAgo = new Date();
+    ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 90);
+
+    const dormantCustomers = await prisma.customer.findMany({
+      where: {
+        workspaceId,
+        orders: {
+          some: {},
+          none: {
+            purchaseDate: {
+              gte: ninetyDaysAgo
+            }
           }
         }
+      },
+      include: {
+        orders: true
       }
-    },
-    include: {
-      orders: true
-    }
+    });
+
+    const dormantCount = dormantCustomers.length;
+    const avgDormantValue = dormantCount > 0
+      ? (dormantCustomers.reduce((acc, c) => acc + c.orders.reduce((sum, o) => sum + Number(o.amount), 0), 0) / dormantCount)
+      : 4200;
+
+    generatedInsights = [
+      {
+        title: 'High-Value Shopper Churn Alert',
+        description: churnCount > 0
+          ? `A cohort of ${churnCount} ${topCategory.toLowerCase()} buyers from ${topCity} spending > INR 3,000 have not made a purchase in 60+ days.`
+          : `All active shoppers spending > INR 3,000 remain active; no churn risk is currently flagged in this segment.`,
+        category: 'RETENTION',
+        evidence: churnCount > 0
+          ? `Order frequency drops drastically post-ingestion. Average lifetime spend for this cohort is INR ${Math.round(avgChurnSpend).toLocaleString()}.`
+          : `0 high-value shoppers are currently inactive for 60+ days. Workspace retention metrics are optimal.`,
+        actionText: 'Launch Retargeting Campaign',
+        suggestedPrompt: churnCount > 0
+          ? `Find customers from ${topCity} who bought ${topCategory.toLowerCase()} products but have not purchased in the last 60 days`
+          : `Find customers who have total spend greater than 3000`
+      },
+      {
+        title: 'Discount Sensitivity Opportunity',
+        description: discountCount > 0
+          ? `${discountCount} shopper profiles are showing conversion triggers when discount coupon campaigns are run.`
+          : `Discount sensitivity triggers cannot be assessed yet due to lack of historical discount code usage.`,
+        category: 'REVENUE',
+        evidence: discountCount > 0
+          ? `${discountPercent}% of purchases utilized a discount code, reaching an average discount ticket size of INR ${Math.round(avgDiscountSpend).toLocaleString()}.`
+          : `0% of uploaded historical sales records show discount usage. Promote coupon usage to unlock discount sensitivity metrics.`,
+        actionText: 'Reward Discount Users',
+        suggestedPrompt: 'Find customers who used discount code and have total spend greater than 3000'
+      },
+      {
+        title: 'Dormant Value Backfill',
+        description: dormantCount > 0
+          ? `Re-engaging ${dormantCount} inactive shoppers who have a history of premium order value is 5x cheaper than cold outreach.`
+          : `All buyers have made purchases within the last 90 days. No dormant segments are flagged for backfill campaigns.`,
+        category: 'ENGAGEMENT',
+        evidence: dormantCount > 0
+          ? `Dormant shopper segment holds an average historical order value of INR ${Math.round(avgDormantValue).toLocaleString()}.`
+          : `Dormant shoppers list count: 0. Buyer activity is healthy across all user cohorts.`,
+        actionText: 'Re-engage Dormant List',
+        suggestedPrompt: 'Target high-value customers who have not purchase in last 90 days'
+      }
+    ];
+  }
+
+  // Persist generated insights to database
+  const insightsData = generatedInsights.map(ins => ({
+    workspaceId,
+    campaignId: campaignId || null,
+    title: ins.title,
+    description: ins.description,
+    category: ins.category,
+    evidence: ins.evidence,
+    actionText: ins.actionText,
+    suggestedPrompt: ins.suggestedPrompt
+  }));
+
+  await prisma.insight.createMany({
+    data: insightsData
   });
 
-  const dormantCount = dormantCustomers.length;
-  const avgDormantValue = dormantCount > 0
-    ? (dormantCustomers.reduce((acc, c) => acc + c.orders.reduce((sum, o) => sum + Number(o.amount), 0), 0) / dormantCount)
-    : 4200;
-
-  return [
-    {
-      id: 'ins-1',
-      title: 'High-Value Shopper Churn Alert',
-      description: `A cohort of ${churnCount || 142} ${topCategory.toLowerCase()} buyers from ${topCity} spending > INR 3,000 have not made a purchase in 60+ days.`,
-      category: 'RETENTION',
-      evidence: `Order frequency drops drastically post-ingestion. Average lifetime spend for this cohort is INR ${Math.round(avgChurnSpend).toLocaleString()}.`,
-      actionText: 'Launch Retargeting Campaign',
-      suggestedPrompt: `Find customers from ${topCity} who bought ${topCategory.toLowerCase()} products but have not purchased in the last 60 days`
-    },
-    {
-      id: 'ins-2',
-      title: 'Discount Sensitivity Opportunity',
-      description: `${discountCount || 48} shopper profiles are showing conversion triggers when discount coupon campaigns are run.`,
-      category: 'REVENUE',
-      evidence: `${discountPercent}% of purchases utilized a discount code, reaching an average discount ticket size of INR ${Math.round(avgDiscountSpend).toLocaleString()}.`,
-      actionText: 'Reward Discount Users',
-      suggestedPrompt: 'Find customers who used discount code and have total spend greater than 3000'
-    },
-    {
-      id: 'ins-3',
-      title: 'Dormant Value Backfill',
-      description: `Re-engaging ${dormantCount || 85} inactive shoppers who have a history of premium order value is 5x cheaper than cold outreach.`,
-      category: 'ENGAGEMENT',
-      evidence: `Dormant shopper segment holds an average historical order value of INR ${Math.round(avgDormantValue).toLocaleString()}.`,
-      actionText: 'Re-engage Dormant List',
-      suggestedPrompt: 'Target high-value customers who have not purchase in last 90 days'
+  return prisma.insight.findMany({
+    where: { 
+      workspaceId, 
+      campaignId: campaignId || null 
     }
-  ];
+  });
 }
 
 /**

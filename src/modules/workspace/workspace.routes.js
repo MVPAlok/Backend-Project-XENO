@@ -9,6 +9,7 @@ import importRoutes from '../imports/import.routes.js';
 import audienceRoutes from '../audience/audience.routes.js';
 import campaignRoutes from '../campaign/campaign.routes.js';
 import analyticsRoutes from '../analytics/analytics.routes.js';
+import chatRoutes from '../chat/chat.routes.js';
 
 const router = Router();
 
@@ -23,6 +24,9 @@ router.use('/:workspaceId/campaigns', validate(workspaceIdParamSchema), requireW
 
 // Nest analytics routes
 router.use('/:workspaceId/analytics', validate(workspaceIdParamSchema), requireWorkspaceMember, analyticsRoutes);
+
+// Nest chat routes
+router.use('/:workspaceId/chats', validate(workspaceIdParamSchema), requireWorkspaceMember, chatRoutes);
 
 // Nest audience and segment routes
 router.use('/:workspaceId', validate(workspaceIdParamSchema), audienceRoutes);
@@ -46,6 +50,14 @@ router.get(
   validate(workspaceIdParamSchema),
   requireWorkspaceMember,
   controller.getWorkspace
+);
+
+// Delete workspace
+router.delete(
+  '/:workspaceId',
+  validate(workspaceIdParamSchema),
+  requireWorkspaceMember,
+  controller.deleteWorkspace
 );
 
 export default router;

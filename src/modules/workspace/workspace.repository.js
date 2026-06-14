@@ -68,3 +68,12 @@ export async function listUserWorkspaces(userId) {
     }
   });
 }
+
+/**
+ * Delete a workspace from the database.
+ */
+export async function deleteWorkspace(id) {
+  return prisma.workspace.delete({
+    where: { id }
+  });
+}

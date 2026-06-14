@@ -81,3 +81,21 @@ export async function getWorkspace(workspaceId, userId) {
     updatedAt: workspace.updatedAt
   };
 }
+
+/**
+ * Deletes a workspace if the user is the OWNER.
+ */
+export async function deleteWorkspace(workspaceId, userId) {
+  const membership = await repository.findMembership(workspaceId, userId);
+  if (!membership || membership.role !== 'OWNER') {
+    logger.warn({ userId, workspaceId }, 'Unauthorized workspace deletion attempt');
+    throw new AuthorizationError('Only the workspace owner can delete the workspace');
+  }
+
+  await repository.deleteWorkspace(workspaceId);
+
+  logger.info({
+    userId,
+    workspaceId
+  }, `Workspace Deleted`);
+}
