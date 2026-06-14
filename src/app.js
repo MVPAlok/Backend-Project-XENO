@@ -5,6 +5,7 @@ import authRoutes from './routes/auth.routes.js';
 import workspaceRoutes from './modules/workspace/workspace.routes.js';
 import errorMiddleware from './middlewares/error.middleware.js';
 import logger from './utils/logger.js';
+import env from './config/env.js';
 
 const app = express();
 
@@ -13,7 +14,7 @@ app.use(helmet());
 
 // 2. Cross-Origin Resource Sharing
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || '*',
+  origin: env.CORS_ORIGIN,
   credentials: true
 }));
 

@@ -19,6 +19,7 @@ const envSchema = z.object({
   SMTP_USER: z.string().optional().or(z.literal('')),
   SMTP_PASS: z.string().optional().or(z.literal('')),
   SMTP_FROM: z.string().email().default('noreply@xeno-saas.com'),
+  CORS_ORIGIN: z.string().optional().default('*'),
 });
 
 let env;
