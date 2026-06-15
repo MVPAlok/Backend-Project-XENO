@@ -4,7 +4,7 @@ FROM node:20-alpine AS builder
 WORKDIR /usr/src/app
 
 # Install build dependencies if needed (e.g. for bcrypt)
-RUN apk add --no-cache python3 make g++ 
+RUN apk add --no-cache python3 make g++ openssl
 
 COPY package*.json ./
 COPY src/prisma ./src/prisma/
@@ -24,8 +24,8 @@ ENV NODE_ENV=production
 
 COPY package*.json ./
 
-# Install only production dependencies
-RUN apk add --no-cache python3 make g++ \
+# Install only production dependencies and runtime library (openssl)
+RUN apk add --no-cache python3 make g++ openssl \
     && npm ci --only=production \
     && apk del python3 make g++
 
