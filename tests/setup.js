@@ -23,7 +23,7 @@ vi.mock('supertest', async (importOriginal) => {
   };
 
   const mockSupertest = (app) => {
-    const agent = original(app);
+    const agent = original.default(app);
     return new Proxy(agent, handler);
   };
 
